@@ -42,8 +42,30 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
       
       const currentMonthRent = currentMonthRentTransactions.reduce((sum, t) => sum + parseFloat(t.amount.toString()), 0);
       
-      // Use the actual monthly rent from property data
-      const expectedMonthlyRent = property.monthlyRent;
+      // Calculate effective monthly rent based on selected year and rent history
+      const getEffectiveRentForYear = (property: Property, year: number): number => {
+        if (!property.rentHistory || property.rentHistory.length === 0) {
+          return property.monthlyRent || 0;
+        }
+        
+        // Find the rate that was effective at the end of the selected year
+        const yearEnd = new Date(year, 11, 31); // December 31st of selected year
+        
+        // Sort rent history by effective date (newest first)
+        const sortedHistory = [...property.rentHistory].sort((a, b) => 
+          new Date(b.effectiveDate).getTime() - new Date(a.effectiveDate).getTime()
+        );
+        
+        // Find the first rate that was effective on or before December 31st of the selected year
+        const effectiveRate = sortedHistory.find(rate => {
+          const effectiveDate = new Date(rate.effectiveDate);
+          return effectiveDate <= yearEnd;
+        });
+        
+        return effectiveRate ? effectiveRate.monthlyRate : (property.monthlyRent || 0);
+      };
+      
+      const expectedMonthlyRent = getEffectiveRentForYear(property, selectedYear);
       
       return {
         propertyId: property.id,

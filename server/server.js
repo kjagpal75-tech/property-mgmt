@@ -158,6 +158,67 @@ app.delete('/api/transactions/:id', async (req, res) => {
   }
 });
 
+// Rental rate history endpoints
+app.get('/api/properties/:id/rent-history', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await db.query(
+      'SELECT * FROM rental_rate_history WHERE property_id = $1 ORDER BY effective_date ASC',
+      [id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/api/properties/:id/rent-history', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { monthly_rate, effective_date, reason } = req.body;
+    console.log('Adding rent history:', { property_id: id, monthly_rate, effective_date, reason });
+    
+    const rentId = uuidv4();
+    const result = await db.query(
+      'INSERT INTO rental_rate_history (id, property_id, monthly_rate, effective_date, reason, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [rentId, id, monthly_rate, effective_date, reason || 'Rate update', new Date().toISOString()]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.put('/api/properties/:id/rent-history/:rentId', async (req, res) => {
+  try {
+    const { id, rentId } = req.params;
+    const { monthly_rate, effective_date, reason } = req.body;
+    console.log('Updating rent history:', { property_id: id, rent_id, monthly_rate, effective_date, reason });
+    
+    const result = await db.query(
+      'UPDATE rental_rate_history SET monthly_rate = $1, effective_date = $2, reason = $3 WHERE id = $4 AND property_id = $5 RETURNING *',
+      [monthly_rate, effective_date, reason || 'Rate update', rentId, id]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.delete('/api/properties/:id/rent-history/:rentId', async (req, res) => {
+  try {
+    const { id, rentId } = req.params;
+    await db.query('DELETE FROM rental_rate_history WHERE id = $1 AND property_id = $2', [rentId, id]);
+    res.json({ message: 'Rent history deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

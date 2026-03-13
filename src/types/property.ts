@@ -4,9 +4,8 @@ export interface Property {
   address: string;
   purchasePrice: number;
   monthlyRent: number;
-  createdAt: Date;
-  updatedAt: Date;
-  rentalRateHistory?: {
+  currentRent: number;
+  rentHistory: {
     id: string;
     monthlyRate: number;
     effectiveDate: string;
@@ -14,6 +13,8 @@ export interface Property {
     reason?: string;
     createdAt: string;
   }[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Transaction {

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS properties (
     address TEXT NOT NULL,
     purchase_price DECIMAL(12,2) NOT NULL,
     monthly_rent DECIMAL(10,2) NOT NULL,
+    current_rent DECIMAL(10,2) NOT NULL DEFAULT monthly_rent,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

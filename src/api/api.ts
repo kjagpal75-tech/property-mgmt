@@ -2,6 +2,56 @@ import { Property, Transaction } from '../types/property';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
+// Rent History API
+export const rentHistoryApi = {
+  getByPropertyId: async (propertyId: string) => {
+    const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history`);
+    if (!response.ok) throw new Error('Failed to fetch rent history');
+    return response.json();
+  },
+  
+  add: async (propertyId: string, monthlyRate: number, effectiveDate: string, reason?: string) => {
+    console.log('Adding rent history via API:', { propertyId, monthlyRate, effectiveDate, reason });
+    const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        monthly_rate: monthlyRate,
+        effective_date: effectiveDate,
+        reason: reason || 'Rate update'
+      }),
+    });
+    if (!response.ok) throw new Error('Failed to add rent history');
+    return response.json();
+  },
+  
+  update: async (propertyId: string, rentId: string, monthlyRate: number, effectiveDate: string, reason?: string) => {
+    const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history/${rentId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        monthly_rate: monthlyRate,
+        effective_date: effectiveDate,
+        reason: reason || 'Rate update'
+      }),
+    });
+    if (!response.ok) throw new Error('Failed to update rent history');
+    return response.json();
+  },
+  
+  delete: async (propertyId: string, rentId: string) => {
+    const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history/${rentId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) throw new Error('Failed to delete rent history');
+    return response.json();
+  }
+};
+
 // Properties API
 export const propertiesApi = {
   getAll: async (): Promise<Property[]> => {
@@ -12,6 +62,8 @@ export const propertiesApi = {
       ...p,
       purchasePrice: p.purchase_price,
       monthlyRent: p.monthly_rent,
+      currentRent: p.current_rent || p.monthly_rent,
+      rentHistory: p.rent_history || [],
       createdAt: p.created_at,
       updatedAt: p.updated_at
     }));
@@ -25,6 +77,8 @@ export const propertiesApi = {
         ...property,
         purchase_price: property.purchasePrice,
         monthly_rent: property.monthlyRent,
+        current_rent: property.currentRent || property.monthlyRent,
+        rent_history: property.rentHistory || [],
       }),
     });
     if (!response.ok) throw new Error('Failed to create property');
@@ -33,6 +87,8 @@ export const propertiesApi = {
       ...data,
       purchasePrice: data.purchase_price,
       monthlyRent: data.monthly_rent,
+      currentRent: data.current_rent || data.monthly_rent,
+      rentHistory: data.rent_history || [],
       createdAt: data.created_at,
       updatedAt: data.updated_at
     };
@@ -46,6 +102,8 @@ export const propertiesApi = {
         ...property,
         purchase_price: property.purchasePrice,
         monthly_rent: property.monthlyRent,
+        current_rent: property.currentRent || property.monthlyRent,
+        rent_history: property.rentHistory || [],
       }),
     });
     if (!response.ok) throw new Error('Failed to update property');
@@ -54,6 +112,8 @@ export const propertiesApi = {
       ...data,
       purchasePrice: data.purchase_price,
       monthlyRent: data.monthly_rent,
+      currentRent: data.current_rent || data.monthly_rent,
+      rentHistory: data.rent_history || [],
       createdAt: data.created_at,
       updatedAt: data.updated_at
     };
