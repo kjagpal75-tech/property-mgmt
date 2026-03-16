@@ -63,7 +63,14 @@ export const propertiesApi = {
       purchasePrice: p.purchase_price,
       monthlyRent: p.monthly_rent,
       currentRent: p.current_rent || p.monthly_rent,
-      rentHistory: p.rent_history || [],
+      rentHistory: (p.rent_history || []).map((rh: any) => ({
+        id: rh.id,
+        monthlyRate: rh.monthly_rate,
+        effectiveDate: rh.effective_date,
+        endDate: rh.end_date,
+        reason: rh.reason,
+        createdAt: rh.created_at
+      })),
       createdAt: p.created_at,
       updatedAt: p.updated_at
     }));

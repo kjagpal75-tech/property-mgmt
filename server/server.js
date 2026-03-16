@@ -13,8 +13,25 @@ app.use(express.json());
 // Properties endpoints
 app.get('/api/properties', async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM properties ORDER BY created_at DESC');
-    res.json(result.rows);
+    // First get all properties
+    const propertiesResult = await db.query('SELECT * FROM properties ORDER BY created_at DESC');
+    
+    // Then get rent history for each property and add it
+    const propertiesWithHistory = await Promise.all(
+      propertiesResult.rows.map(async (property) => {
+        const rentHistoryResult = await db.query(
+          'SELECT id, monthly_rate, effective_date, end_date, reason, created_at FROM rental_rate_history WHERE property_id = $1 ORDER BY effective_date DESC',
+          [property.id]
+        );
+        
+        return {
+          ...property,
+          rent_history: rentHistoryResult.rows
+        };
+      })
+    );
+    
+    res.json(propertiesWithHistory);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });

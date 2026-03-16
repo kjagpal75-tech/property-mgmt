@@ -27,57 +27,109 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
 
   // Calculate rent tracking for each property
   const rentTracking = useMemo(() => {
-    const currentMonth = new Date().getMonth();
-    const currentYear = new Date().getFullYear();
+    // Use selected year for rent tracking, not current month
+    const selectedYearEnd = new Date(selectedYear, 11, 31); // December 31st of selected year
     
     return properties.map(property => {
-      // Get current month rent transactions only
-      const currentMonthRentTransactions = transactions.filter(t => 
+      console.log(`\n=== Processing property: ${property.name} for year ${selectedYear} ===`);
+      console.log('Property rent history raw:', property.rentHistory);
+      console.log('Property monthlyRent fallback:', property.monthlyRent);
+      
+      // Get rent transactions for the selected year only
+      const selectedYearRentTransactions = transactions.filter(t => 
         t.propertyId === property.id && 
         t.category === 'rent' && 
         t.type === 'income' &&
-        new Date(t.date).getMonth() === currentMonth &&
-        new Date(t.date).getFullYear() === currentYear
+        new Date(t.date).getFullYear() === selectedYear
       );
       
-      const currentMonthRent = currentMonthRentTransactions.reduce((sum, t) => sum + parseFloat(t.amount.toString()), 0);
+      const selectedYearRent = selectedYearRentTransactions.reduce((sum, t) => sum + parseFloat(t.amount.toString()), 0);
+      console.log('Selected year rent transactions:', selectedYearRentTransactions);
+      console.log('Selected year rent total:', selectedYearRent);
       
       // Calculate effective monthly rent based on selected year and rent history
       const getEffectiveRentForYear = (property: Property, year: number): number => {
+        console.log(`Calculating effective rent for ${property.name} for year ${year}`);
+        console.log('Property rent history:', property.rentHistory);
+        
         if (!property.rentHistory || property.rentHistory.length === 0) {
+          console.log('No rent history, using monthlyRent:', property.monthlyRent);
           return property.monthlyRent || 0;
         }
         
         // Find the rate that was effective at the end of the selected year
         const yearEnd = new Date(year, 11, 31); // December 31st of selected year
+        console.log('Year end date:', yearEnd.toISOString());
         
         // Sort rent history by effective date (newest first)
         const sortedHistory = [...property.rentHistory].sort((a, b) => 
           new Date(b.effectiveDate).getTime() - new Date(a.effectiveDate).getTime()
         );
+        console.log('Sorted rent history:', sortedHistory);
         
         // Find the first rate that was effective on or before December 31st of the selected year
         const effectiveRate = sortedHistory.find(rate => {
           const effectiveDate = new Date(rate.effectiveDate);
-          return effectiveDate <= yearEnd;
+          const isEffective = effectiveDate <= yearEnd;
+          console.log(`Rate: $${rate.monthlyRate} effective ${rate.effectiveDate} vs year end ${yearEnd.toISOString()} = ${isEffective}`);
+          return isEffective;
         });
         
+        console.log('Found effective rate:', effectiveRate);
         return effectiveRate ? effectiveRate.monthlyRate : (property.monthlyRent || 0);
       };
       
       const expectedMonthlyRent = getEffectiveRentForYear(property, selectedYear);
+      console.log(`Final expected monthly rent for ${property.name}: $${expectedMonthlyRent}`);
+      
+      // Calculate expected rent up to current month considering rent changes
+      const calculateExpectedYearToDateRent = (property: Property, currentMonth: number) => {
+        let expectedTotal = 0;
+        
+        console.log(`=== Calculating expected rent for ${property.name} ===`);
+        console.log('Current month:', currentMonth);
+        console.log('Rent history:', property.rentHistory);
+        
+        for (let month = 1; month <= currentMonth; month++) {
+          // Find effective rent for this specific month
+          const monthEnd = new Date(selectedYear, month, 0); // Last day of this month
+          const effectiveRate = property.rentHistory?.find((rate: any) => {
+            const effectiveDate = new Date(rate.effectiveDate);
+            return effectiveDate <= monthEnd;
+          });
+          
+          // If no rent history for this month, use fallback monthlyRent
+          const monthlyRent = effectiveRate ? effectiveRate.monthlyRate : (property.monthlyRent || 0);
+          expectedTotal += Number(monthlyRent) || 0;
+          
+          console.log(`Month ${month}: $${monthlyRent} (effective rate: ${effectiveRate ? effectiveRate.monthlyRate : 'fallback $' + (property.monthlyRent || 0)})`);
+        }
+        
+        console.log(`Total expected rent for ${property.name}: ${expectedTotal}`);
+        return expectedTotal;
+      };
+      
+      const expectedYearToDateRent = calculateExpectedYearToDateRent(property, new Date().getMonth() + 1);
+      const selectedYearRentNum = Number(selectedYearRent) || 0;
+      const pastDue = expectedYearToDateRent - selectedYearRentNum;
+      
+      console.log(`=== Final calculation for ${property.name} ===`);
+      console.log('Expected year-to-date rent:', expectedYearToDateRent);
+      console.log('Selected year rent total:', selectedYearRentNum);
+      console.log('Past due calculation:', expectedYearToDateRent, '-', selectedYearRentNum, '=', pastDue);
       
       return {
         propertyId: property.id,
         propertyName: property.name,
         expectedMonthlyRent,
-        currentMonthRent,
-        remainingBalance: expectedMonthlyRent - currentMonthRent,
-        rentPayments: currentMonthRentTransactions,
-        isFullyPaid: currentMonthRent >= expectedMonthlyRent
+        yearToDateCollected: selectedYearRent, // Total rent paid so far this year
+        expectedYearToDateRent, // Expected rent up to current month considering rent changes
+        pastDue, // Past due amount
+        rentPayments: selectedYearRentTransactions,
+        isFullyPaid: selectedYearRent >= expectedYearToDateRent
       };
     });
-  }, [properties, transactions]);
+  }, [properties, transactions, selectedYear]);
   const cashFlowSummaries = properties.map(property => 
     calculateCashFlow(property, filteredTransactions, selectedYear)
   );
@@ -316,10 +368,10 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
                     Expected Monthly Rent
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {new Date().toLocaleString('default', { month: 'long' })} Rent Received
+                    {selectedYear} Rent Collected
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Remaining Balance
+                    Past Due
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
@@ -329,22 +381,22 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
               <tbody className="bg-white divide-y divide-gray-200">
                 {rentTracking.map((rent) => (
                   <tr key={rent.propertyId}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {rent.propertyName}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
                       {formatCurrency(formatValue(rent.expectedMonthlyRent))}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
-                      {formatCurrency(formatValue(rent.currentMonthRent))}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      {formatCurrency(formatValue(rent.yearToDateCollected))}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <span className={rent.remainingBalance <= 0 ? 'text-green-600' : 'text-red-600'}>
-                        {formatCurrency(formatValue(rent.remainingBalance))}
+                      <span className={rent.pastDue <= 0 ? 'text-green-600' : 'text-red-600'}>
+                        {formatCurrency(formatValue(rent.pastDue))}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                         rent.isFullyPaid 
                           ? 'bg-green-100 text-green-800' 
                           : 'bg-red-100 text-red-800'
