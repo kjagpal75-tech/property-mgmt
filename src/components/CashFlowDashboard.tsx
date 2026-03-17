@@ -35,12 +35,14 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
       console.log('Property rent history raw:', property.rentHistory);
       console.log('Property monthlyRent fallback:', property.monthlyRent);
       
-      // Get rent transactions for the selected year only
+      // Get rent transactions for the selected year and current month
+      const currentMonth = new Date().getMonth() + 1;
       const selectedYearRentTransactions = transactions.filter(t => 
         t.propertyId === property.id && 
         t.category === 'rent' && 
         t.type === 'income' &&
-        new Date(t.date).getFullYear() === selectedYear
+        new Date(t.date).getFullYear() === selectedYear &&
+        (selectedYear !== new Date().getFullYear() || new Date(t.date).getMonth() + 1 <= currentMonth)
       );
       
       const selectedYearRent = selectedYearRentTransactions.reduce((sum, t) => sum + parseFloat(t.amount.toString()), 0);
@@ -82,15 +84,42 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
       const expectedMonthlyRent = getEffectiveRentForYear(property, selectedYear);
       console.log(`Final expected monthly rent for ${property.name}: $${expectedMonthlyRent}`);
       
-      // Calculate expected rent up to current month considering rent changes
+      // Calculate expected rent up to current month considering rent changes and lease start date
       const calculateExpectedYearToDateRent = (property: Property, currentMonth: number) => {
         let expectedTotal = 0;
         
         console.log(`=== Calculating expected rent for ${property.name} ===`);
         console.log('Current month:', currentMonth);
+        console.log('Lease start date:', property.leaseStartDate);
         console.log('Rent history:', property.rentHistory);
         
+        // Determine start month and day based on lease start date
+        let leaseStartMonth = 1;
+        let leaseStartDay = 1;
+        
+        if (property.leaseStartDate) {
+          const leaseDate = new Date(property.leaseStartDate);
+          const leaseYear = leaseDate.getFullYear();
+          
+          // If lease started in a previous year or same year, use the month/day
+          if (leaseYear <= selectedYear) {
+            leaseStartMonth = leaseYear === selectedYear ? 
+              Math.max(1, leaseDate.getMonth() + 1) : 1;
+            leaseStartDay = leaseYear === selectedYear ? 
+              leaseDate.getDate() : 1;
+          }
+        }
+        
+        console.log('Start month for calculations:', leaseStartMonth);
+        console.log('Start day for calculations:', leaseStartDay);
+        
         for (let month = 1; month <= currentMonth; month++) {
+          // Only calculate rent for months after lease started
+          if (month < leaseStartMonth) {
+            console.log(`Month ${month}: Skipping (lease not started yet)`);
+            continue;
+          }
+          
           // Find effective rent for this specific month
           const monthEnd = new Date(selectedYear, month, 0); // Last day of this month
           const effectiveRate = property.rentHistory?.find((rate: any) => {
@@ -100,16 +129,28 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
           
           // If no rent history for this month, use fallback monthlyRent
           const monthlyRent = effectiveRate ? effectiveRate.monthlyRate : (property.monthlyRent || 0);
-          expectedTotal += Number(monthlyRent) || 0;
           
-          console.log(`Month ${month}: $${monthlyRent} (effective rate: ${effectiveRate ? effectiveRate.monthlyRate : 'fallback $' + (property.monthlyRent || 0)})`);
+          // Calculate prorated rent for the first month if lease starts mid-month
+          let monthlyExpected = Number(monthlyRent) || 0;
+          if (month === leaseStartMonth && leaseStartDay > 1) {
+            const daysInMonth = new Date(selectedYear, month, 0).getDate();
+            const daysInLease = daysInMonth - leaseStartDay + 1;
+            monthlyExpected = (monthlyExpected / daysInMonth) * daysInLease;
+            console.log(`Month ${month}: Prorated rent - $${monthlyExpected.toFixed(2)} (${daysInLease}/${daysInMonth} days)`);
+          } else {
+            console.log(`Month ${month}: Full month rent - $${monthlyExpected}`);
+          }
+          
+          expectedTotal += monthlyExpected;
         }
         
         console.log(`Total expected rent for ${property.name}: ${expectedTotal}`);
         return expectedTotal;
       };
       
-      const expectedYearToDateRent = calculateExpectedYearToDateRent(property, new Date().getMonth() + 1);
+      const expectedYearToDateRent = calculateExpectedYearToDateRent(property, 
+  selectedYear === new Date().getFullYear() ? new Date().getMonth() + 1 : 12
+    );
       const selectedYearRentNum = Number(selectedYearRent) || 0;
       const pastDue = expectedYearToDateRent - selectedYearRentNum;
       
@@ -117,6 +158,9 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
       console.log('Expected year-to-date rent:', expectedYearToDateRent);
       console.log('Selected year rent total:', selectedYearRentNum);
       console.log('Past due calculation:', expectedYearToDateRent, '-', selectedYearRentNum, '=', pastDue);
+      console.log('Current month:', new Date().getMonth() + 1);
+      console.log('Selected year:', selectedYear);
+      console.log('Is current year:', selectedYear === new Date().getFullYear());
       
       return {
         propertyId: property.id,
@@ -391,7 +435,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
                       {formatCurrency(formatValue(rent.yearToDateCollected))}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <span className={rent.pastDue <= 0 ? 'text-green-600' : 'text-red-600'}>
+                      <span className={Math.abs(rent.pastDue) < 0.01 ? 'text-green-600' : 'text-red-600'}>
                         {formatCurrency(formatValue(rent.pastDue))}
                       </span>
                     </td>

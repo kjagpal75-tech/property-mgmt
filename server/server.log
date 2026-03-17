@@ -1,0 +1,3426 @@
+[dotenv@17.3.1] injecting env (7) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Server running on port 5000
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Jan Rent',
+  date: '2025-01-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 8b3a37a9-7bbd-4ad8-b624-4c60c1a59b7c
+Numeric amount: 2500
+DEBUG - Values array:
+id: 8b3a37a9-7bbd-4ad8-b624-4c60c1a59b7c
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Jan Rent
+date: 2025-01-01
+Final values array: [
+  '8b3a37a9-7bbd-4ad8-b624-4c60c1a59b7c',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Jan Rent',
+  '2025-01-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '8b3a37a9-7bbd-4ad8-b624-4c60c1a59b7c',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Jan Rent',
+  '2025-01-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '8b3a37a9-7bbd-4ad8-b624-4c60c1a59b7c',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Jan Rent',
+      date: 2025-01-01T08:00:00.000Z,
+      created_at: 2026-03-16T18:13:46.017Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '8b3a37a9-7bbd-4ad8-b624-4c60c1a59b7c',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Jan Rent',
+    date: 2025-01-01T08:00:00.000Z,
+    created_at: 2026-03-16T18:13:46.017Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '8b3a37a9-7bbd-4ad8-b624-4c60c1a59b7c',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Jan Rent',
+  date: 2025-01-01T08:00:00.000Z,
+  created_at: 2026-03-16T18:13:46.017Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Feb Rent',
+  date: '2025-02-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 76e1c72a-d65d-4a39-aa5d-1bacfabc8428
+Numeric amount: 2500
+DEBUG - Values array:
+id: 76e1c72a-d65d-4a39-aa5d-1bacfabc8428
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Feb Rent
+date: 2025-02-01
+Final values array: [
+  '76e1c72a-d65d-4a39-aa5d-1bacfabc8428',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Feb Rent',
+  '2025-02-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '76e1c72a-d65d-4a39-aa5d-1bacfabc8428',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Feb Rent',
+  '2025-02-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '76e1c72a-d65d-4a39-aa5d-1bacfabc8428',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Feb Rent',
+      date: 2025-02-01T08:00:00.000Z,
+      created_at: 2026-03-16T18:14:03.381Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '76e1c72a-d65d-4a39-aa5d-1bacfabc8428',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Feb Rent',
+    date: 2025-02-01T08:00:00.000Z,
+    created_at: 2026-03-16T18:14:03.381Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '76e1c72a-d65d-4a39-aa5d-1bacfabc8428',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Feb Rent',
+  date: 2025-02-01T08:00:00.000Z,
+  created_at: 2026-03-16T18:14:03.381Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Mar Rent',
+  date: '2025-03-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 7d38eb87-2d23-4dfe-8cd8-2c98ca831d2e
+Numeric amount: 2500
+DEBUG - Values array:
+id: 7d38eb87-2d23-4dfe-8cd8-2c98ca831d2e
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Mar Rent
+date: 2025-03-01
+Final values array: [
+  '7d38eb87-2d23-4dfe-8cd8-2c98ca831d2e',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Mar Rent',
+  '2025-03-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '7d38eb87-2d23-4dfe-8cd8-2c98ca831d2e',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Mar Rent',
+  '2025-03-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '7d38eb87-2d23-4dfe-8cd8-2c98ca831d2e',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Mar Rent',
+      date: 2025-03-01T08:00:00.000Z,
+      created_at: 2026-03-16T18:14:21.317Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '7d38eb87-2d23-4dfe-8cd8-2c98ca831d2e',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Mar Rent',
+    date: 2025-03-01T08:00:00.000Z,
+    created_at: 2026-03-16T18:14:21.317Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '7d38eb87-2d23-4dfe-8cd8-2c98ca831d2e',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Mar Rent',
+  date: 2025-03-01T08:00:00.000Z,
+  created_at: 2026-03-16T18:14:21.317Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Apr Rent',
+  date: '2025-04-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: e6f675ba-7886-464b-8618-17b646c310ec
+Numeric amount: 2500
+DEBUG - Values array:
+id: e6f675ba-7886-464b-8618-17b646c310ec
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Apr Rent
+date: 2025-04-01
+Final values array: [
+  'e6f675ba-7886-464b-8618-17b646c310ec',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Apr Rent',
+  '2025-04-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  'e6f675ba-7886-464b-8618-17b646c310ec',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Apr Rent',
+  '2025-04-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: 'e6f675ba-7886-464b-8618-17b646c310ec',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Apr Rent',
+      date: 2025-04-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:14:39.339Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: 'e6f675ba-7886-464b-8618-17b646c310ec',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Apr Rent',
+    date: 2025-04-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:14:39.339Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: 'e6f675ba-7886-464b-8618-17b646c310ec',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Apr Rent',
+  date: 2025-04-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:14:39.339Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'May Rent',
+  date: '2025-05-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 2d0fe394-8a9d-4c51-b657-3bbf5bdf29f3
+Numeric amount: 2500
+DEBUG - Values array:
+id: 2d0fe394-8a9d-4c51-b657-3bbf5bdf29f3
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: May Rent
+date: 2025-05-01
+Final values array: [
+  '2d0fe394-8a9d-4c51-b657-3bbf5bdf29f3',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'May Rent',
+  '2025-05-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '2d0fe394-8a9d-4c51-b657-3bbf5bdf29f3',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'May Rent',
+  '2025-05-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '2d0fe394-8a9d-4c51-b657-3bbf5bdf29f3',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'May Rent',
+      date: 2025-05-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:15:17.118Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '2d0fe394-8a9d-4c51-b657-3bbf5bdf29f3',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'May Rent',
+    date: 2025-05-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:15:17.118Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '2d0fe394-8a9d-4c51-b657-3bbf5bdf29f3',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'May Rent',
+  date: 2025-05-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:15:17.118Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'June Rent',
+  date: '2025-06-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 096d9a15-30e7-4a2d-85ab-051d12f9f8dd
+Numeric amount: 2500
+DEBUG - Values array:
+id: 096d9a15-30e7-4a2d-85ab-051d12f9f8dd
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: June Rent
+date: 2025-06-01
+Final values array: [
+  '096d9a15-30e7-4a2d-85ab-051d12f9f8dd',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'June Rent',
+  '2025-06-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '096d9a15-30e7-4a2d-85ab-051d12f9f8dd',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'June Rent',
+  '2025-06-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '096d9a15-30e7-4a2d-85ab-051d12f9f8dd',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'June Rent',
+      date: 2025-06-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:15:47.009Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '096d9a15-30e7-4a2d-85ab-051d12f9f8dd',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'June Rent',
+    date: 2025-06-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:15:47.009Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '096d9a15-30e7-4a2d-85ab-051d12f9f8dd',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'June Rent',
+  date: 2025-06-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:15:47.009Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Jul Rent',
+  date: '2025-07-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 429418b5-ef97-4290-bf65-ba0fa3ae6e2b
+Numeric amount: 2500
+DEBUG - Values array:
+id: 429418b5-ef97-4290-bf65-ba0fa3ae6e2b
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Jul Rent
+date: 2025-07-01
+Final values array: [
+  '429418b5-ef97-4290-bf65-ba0fa3ae6e2b',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Jul Rent',
+  '2025-07-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '429418b5-ef97-4290-bf65-ba0fa3ae6e2b',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Jul Rent',
+  '2025-07-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '429418b5-ef97-4290-bf65-ba0fa3ae6e2b',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Jul Rent',
+      date: 2025-07-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:16:04.014Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '429418b5-ef97-4290-bf65-ba0fa3ae6e2b',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Jul Rent',
+    date: 2025-07-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:16:04.014Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '429418b5-ef97-4290-bf65-ba0fa3ae6e2b',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Jul Rent',
+  date: 2025-07-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:16:04.014Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Aug Rent',
+  date: '2025-08-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: b6f75eb9-e65e-4c56-9ef9-ce9b88bb3058
+Numeric amount: 2500
+DEBUG - Values array:
+id: b6f75eb9-e65e-4c56-9ef9-ce9b88bb3058
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Aug Rent
+date: 2025-08-01
+Final values array: [
+  'b6f75eb9-e65e-4c56-9ef9-ce9b88bb3058',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Aug Rent',
+  '2025-08-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  'b6f75eb9-e65e-4c56-9ef9-ce9b88bb3058',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Aug Rent',
+  '2025-08-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: 'b6f75eb9-e65e-4c56-9ef9-ce9b88bb3058',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Aug Rent',
+      date: 2025-08-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:16:19.564Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: 'b6f75eb9-e65e-4c56-9ef9-ce9b88bb3058',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Aug Rent',
+    date: 2025-08-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:16:19.564Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: 'b6f75eb9-e65e-4c56-9ef9-ce9b88bb3058',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Aug Rent',
+  date: 2025-08-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:16:19.564Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Sept Rent',
+  date: '2025-09-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 590da66c-bd27-4326-80e5-1f0aa16c4653
+Numeric amount: 2500
+DEBUG - Values array:
+id: 590da66c-bd27-4326-80e5-1f0aa16c4653
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Sept Rent
+date: 2025-09-01
+Final values array: [
+  '590da66c-bd27-4326-80e5-1f0aa16c4653',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Sept Rent',
+  '2025-09-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '590da66c-bd27-4326-80e5-1f0aa16c4653',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Sept Rent',
+  '2025-09-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '590da66c-bd27-4326-80e5-1f0aa16c4653',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Sept Rent',
+      date: 2025-09-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:16:35.770Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '590da66c-bd27-4326-80e5-1f0aa16c4653',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Sept Rent',
+    date: 2025-09-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:16:35.770Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '590da66c-bd27-4326-80e5-1f0aa16c4653',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Sept Rent',
+  date: 2025-09-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:16:35.770Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Oct Rent',
+  date: '2025-10-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 91b6f4a7-16b5-4a26-a4be-24aa57057f85
+Numeric amount: 2500
+DEBUG - Values array:
+id: 91b6f4a7-16b5-4a26-a4be-24aa57057f85
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Oct Rent
+date: 2025-10-01
+Final values array: [
+  '91b6f4a7-16b5-4a26-a4be-24aa57057f85',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Oct Rent',
+  '2025-10-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '91b6f4a7-16b5-4a26-a4be-24aa57057f85',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Oct Rent',
+  '2025-10-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '91b6f4a7-16b5-4a26-a4be-24aa57057f85',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Oct Rent',
+      date: 2025-10-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:17:02.660Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '91b6f4a7-16b5-4a26-a4be-24aa57057f85',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Oct Rent',
+    date: 2025-10-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:17:02.660Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '91b6f4a7-16b5-4a26-a4be-24aa57057f85',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Oct Rent',
+  date: 2025-10-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:17:02.660Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Nov Rent',
+  date: '2025-11-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 04dacc59-b184-45e4-8ceb-c8bf19bdc266
+Numeric amount: 2500
+DEBUG - Values array:
+id: 04dacc59-b184-45e4-8ceb-c8bf19bdc266
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Nov Rent
+date: 2025-11-01
+Final values array: [
+  '04dacc59-b184-45e4-8ceb-c8bf19bdc266',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Nov Rent',
+  '2025-11-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '04dacc59-b184-45e4-8ceb-c8bf19bdc266',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Nov Rent',
+  '2025-11-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '04dacc59-b184-45e4-8ceb-c8bf19bdc266',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Nov Rent',
+      date: 2025-11-01T07:00:00.000Z,
+      created_at: 2026-03-16T18:17:18.812Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '04dacc59-b184-45e4-8ceb-c8bf19bdc266',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Nov Rent',
+    date: 2025-11-01T07:00:00.000Z,
+    created_at: 2026-03-16T18:17:18.812Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '04dacc59-b184-45e4-8ceb-c8bf19bdc266',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Nov Rent',
+  date: 2025-11-01T07:00:00.000Z,
+  created_at: 2026-03-16T18:17:18.812Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Dec Rent',
+  date: '2025-12-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: fb08a852-2127-4782-859c-7b2e316c069d
+Numeric amount: 2500
+DEBUG - Values array:
+id: fb08a852-2127-4782-859c-7b2e316c069d
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Dec Rent
+date: 2025-12-01
+Final values array: [
+  'fb08a852-2127-4782-859c-7b2e316c069d',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Dec Rent',
+  '2025-12-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  'fb08a852-2127-4782-859c-7b2e316c069d',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Dec Rent',
+  '2025-12-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: 'fb08a852-2127-4782-859c-7b2e316c069d',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Dec Rent',
+      date: 2025-12-01T08:00:00.000Z,
+      created_at: 2026-03-16T18:17:34.227Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: 'fb08a852-2127-4782-859c-7b2e316c069d',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Dec Rent',
+    date: 2025-12-01T08:00:00.000Z,
+    created_at: 2026-03-16T18:17:34.227Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: 'fb08a852-2127-4782-859c-7b2e316c069d',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Dec Rent',
+  date: 2025-12-01T08:00:00.000Z,
+  created_at: 2026-03-16T18:17:34.227Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Jan Rent',
+  date: '2026-01-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: abc44415-476b-4c04-8ad9-7bc3799ae8ab
+Numeric amount: 2500
+DEBUG - Values array:
+id: abc44415-476b-4c04-8ad9-7bc3799ae8ab
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Jan Rent
+date: 2026-01-01
+Final values array: [
+  'abc44415-476b-4c04-8ad9-7bc3799ae8ab',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Jan Rent',
+  '2026-01-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  'abc44415-476b-4c04-8ad9-7bc3799ae8ab',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Jan Rent',
+  '2026-01-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: 'abc44415-476b-4c04-8ad9-7bc3799ae8ab',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Jan Rent',
+      date: 2026-01-01T08:00:00.000Z,
+      created_at: 2026-03-16T18:18:25.170Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: 'abc44415-476b-4c04-8ad9-7bc3799ae8ab',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Jan Rent',
+    date: 2026-01-01T08:00:00.000Z,
+    created_at: 2026-03-16T18:18:25.170Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: 'abc44415-476b-4c04-8ad9-7bc3799ae8ab',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Jan Rent',
+  date: 2026-01-01T08:00:00.000Z,
+  created_at: 2026-03-16T18:18:25.170Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2500,
+  description: 'Feb Rent',
+  date: '2025-02-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 60bd4a95-cd88-468b-953e-ff5d53d9d9d9
+Numeric amount: 2500
+DEBUG - Values array:
+id: 60bd4a95-cd88-468b-953e-ff5d53d9d9d9
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2500
+description: Feb Rent
+date: 2025-02-01
+Final values array: [
+  '60bd4a95-cd88-468b-953e-ff5d53d9d9d9',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Feb Rent',
+  '2025-02-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '60bd4a95-cd88-468b-953e-ff5d53d9d9d9',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2500,
+  'Feb Rent',
+  '2025-02-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '60bd4a95-cd88-468b-953e-ff5d53d9d9d9',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2500.00',
+      description: 'Feb Rent',
+      date: 2025-02-01T08:00:00.000Z,
+      created_at: 2026-03-16T18:18:42.403Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '60bd4a95-cd88-468b-953e-ff5d53d9d9d9',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2500.00',
+    description: 'Feb Rent',
+    date: 2025-02-01T08:00:00.000Z,
+    created_at: 2026-03-16T18:18:42.403Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '60bd4a95-cd88-468b-953e-ff5d53d9d9d9',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2500.00',
+  description: 'Feb Rent',
+  date: 2025-02-01T08:00:00.000Z,
+  created_at: 2026-03-16T18:18:42.403Z
+}
+Received transaction data: {
+  propertyId: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: 2600,
+  description: 'Mar Rent',
+  date: '2026-03-01',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3'
+}
+Generated ID: 3056dbd5-578f-426f-895f-d1e72467cd6a
+Numeric amount: 2600
+DEBUG - Values array:
+id: 3056dbd5-578f-426f-895f-d1e72467cd6a
+property_id: da9d2af9-cc56-4af5-95e3-18f2f709eae3
+type: income
+category: rent
+numericAmount: 2600
+description: Mar Rent
+date: 2026-03-01
+Final values array: [
+  '3056dbd5-578f-426f-895f-d1e72467cd6a',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2600,
+  'Mar Rent',
+  '2026-03-01'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  '3056dbd5-578f-426f-895f-d1e72467cd6a',
+  'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  'income',
+  'rent',
+  2600,
+  'Mar Rent',
+  '2026-03-01'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: '3056dbd5-578f-426f-895f-d1e72467cd6a',
+      property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+      type: 'income',
+      category: 'rent',
+      amount: '2600.00',
+      description: 'Mar Rent',
+      date: 2026-03-01T08:00:00.000Z,
+      created_at: 2026-03-16T18:19:04.853Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: '3056dbd5-578f-426f-895f-d1e72467cd6a',
+    property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+    type: 'income',
+    category: 'rent',
+    amount: '2600.00',
+    description: 'Mar Rent',
+    date: 2026-03-01T08:00:00.000Z,
+    created_at: 2026-03-16T18:19:04.853Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: '3056dbd5-578f-426f-895f-d1e72467cd6a',
+  property_id: 'da9d2af9-cc56-4af5-95e3-18f2f709eae3',
+  type: 'income',
+  category: 'rent',
+  amount: '2600.00',
+  description: 'Mar Rent',
+  date: 2026-03-01T08:00:00.000Z,
+  created_at: 2026-03-16T18:19:04.853Z
+}
+Received transaction data: {
+  propertyId: 'ced72e7a-3931-4ef5-9197-bc62e64bc835',
+  type: 'income',
+  category: 'rent',
+  amount: 500,
+  description: 'Partila Rent ',
+  date: '2026-03-14',
+  property_id: 'ced72e7a-3931-4ef5-9197-bc62e64bc835'
+}
+Generated ID: c7e6a05d-a7ad-485b-894c-8d927c0595a3
+Numeric amount: 500
+DEBUG - Values array:
+id: c7e6a05d-a7ad-485b-894c-8d927c0595a3
+property_id: ced72e7a-3931-4ef5-9197-bc62e64bc835
+type: income
+category: rent
+numericAmount: 500
+description: Partila Rent 
+date: 2026-03-14
+Final values array: [
+  'c7e6a05d-a7ad-485b-894c-8d927c0595a3',
+  'ced72e7a-3931-4ef5-9197-bc62e64bc835',
+  'income',
+  'rent',
+  500,
+  'Partila Rent ',
+  '2026-03-14'
+]
+SQL Query: INSERT INTO transactions (id, property_id, type, category, amount, description, date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, property_id, type, category, amount, description, date, created_at
+Query length: 202
+Query chars: [
+  "0: 'I' (73)",   "1: 'N' (78)",   "2: 'S' (83)",   "3: 'E' (69)",
+  "4: 'R' (82)",   "5: 'T' (84)",   "6: ' ' (32)",   "7: 'I' (73)",
+  "8: 'N' (78)",   "9: 'T' (84)",   "10: 'O' (79)",  "11: ' ' (32)",
+  "12: 't' (116)", "13: 'r' (114)", "14: 'a' (97)",  "15: 'n' (110)",
+  "16: 's' (115)", "17: 'a' (97)",  "18: 'c' (99)",  "19: 't' (116)",
+  "20: 'i' (105)", "21: 'o' (111)", "22: 'n' (110)", "23: 's' (115)",
+  "24: ' ' (32)",  "25: '(' (40)",  "26: 'i' (105)", "27: 'd' (100)",
+  "28: ',' (44)",  "29: ' ' (32)",  "30: 'p' (112)", "31: 'r' (114)",
+  "32: 'o' (111)", "33: 'p' (112)", "34: 'e' (101)", "35: 'r' (114)",
+  "36: 't' (116)", "37: 'y' (121)", "38: '_' (95)",  "39: 'i' (105)",
+  "40: 'd' (100)", "41: ',' (44)",  "42: ' ' (32)",  "43: 't' (116)",
+  "44: 'y' (121)", "45: 'p' (112)", "46: 'e' (101)", "47: ',' (44)",
+  "48: ' ' (32)",  "49: 'c' (99)",  "50: 'a' (97)",  "51: 't' (116)",
+  "52: 'e' (101)", "53: 'g' (103)", "54: 'o' (111)", "55: 'r' (114)",
+  "56: 'y' (121)", "57: ',' (44)",  "58: ' ' (32)",  "59: 'a' (97)",
+  "60: 'm' (109)", "61: 'o' (111)", "62: 'u' (117)", "63: 'n' (110)",
+  "64: 't' (116)", "65: ',' (44)",  "66: ' ' (32)",  "67: 'd' (100)",
+  "68: 'e' (101)", "69: 's' (115)", "70: 'c' (99)",  "71: 'r' (114)",
+  "72: 'i' (105)", "73: 'p' (112)", "74: 't' (116)", "75: 'i' (105)",
+  "76: 'o' (111)", "77: 'n' (110)", "78: ',' (44)",  "79: ' ' (32)",
+  "80: 'd' (100)", "81: 'a' (97)",  "82: 't' (116)", "83: 'e' (101)",
+  "84: ')' (41)",  "85: ' ' (32)",  "86: 'V' (86)",  "87: 'A' (65)",
+  "88: 'L' (76)",  "89: 'U' (85)",  "90: 'E' (69)",  "91: 'S' (83)",
+  "92: ' ' (32)",  "93: '(' (40)",  "94: '$' (36)",  "95: '1' (49)",
+  "96: ',' (44)",  "97: ' ' (32)",  "98: '$' (36)",  "99: '2' (50)",
+  ... 102 more items
+]
+SQL Values: [
+  'c7e6a05d-a7ad-485b-894c-8d927c0595a3',
+  'ced72e7a-3931-4ef5-9197-bc62e64bc835',
+  'income',
+  'rent',
+  500,
+  'Partila Rent ',
+  '2026-03-14'
+]
+Query result: Result {
+  command: 'INSERT',
+  rowCount: 1,
+  oid: 0,
+  rows: [
+    {
+      id: 'c7e6a05d-a7ad-485b-894c-8d927c0595a3',
+      property_id: 'ced72e7a-3931-4ef5-9197-bc62e64bc835',
+      type: 'income',
+      category: 'rent',
+      amount: '500.00',
+      description: 'Partila Rent ',
+      date: 2026-03-14T07:00:00.000Z,
+      created_at: 2026-03-16T18:20:38.367Z
+    }
+  ],
+  fields: [
+    Field {
+      name: 'id',
+      tableID: 16425,
+      columnID: 1,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'property_id',
+      tableID: 16425,
+      columnID: 2,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'type',
+      tableID: 16425,
+      columnID: 3,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 14,
+      format: 'text'
+    },
+    Field {
+      name: 'category',
+      tableID: 16425,
+      columnID: 4,
+      dataTypeID: 1043,
+      dataTypeSize: -1,
+      dataTypeModifier: 54,
+      format: 'text'
+    },
+    Field {
+      name: 'amount',
+      tableID: 16425,
+      columnID: 5,
+      dataTypeID: 1700,
+      dataTypeSize: -1,
+      dataTypeModifier: 786438,
+      format: 'text'
+    },
+    Field {
+      name: 'description',
+      tableID: 16425,
+      columnID: 6,
+      dataTypeID: 25,
+      dataTypeSize: -1,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'date',
+      tableID: 16425,
+      columnID: 7,
+      dataTypeID: 1082,
+      dataTypeSize: 4,
+      dataTypeModifier: -1,
+      format: 'text'
+    },
+    Field {
+      name: 'created_at',
+      tableID: 16425,
+      columnID: 8,
+      dataTypeID: 1114,
+      dataTypeSize: 8,
+      dataTypeModifier: -1,
+      format: 'text'
+    }
+  ],
+  _parsers: [
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: noParse],
+    [Function: parseDate],
+    [Function: parseDate]
+  ],
+  _types: TypeOverrides {
+    _types: {
+      getTypeParser: [Function: getTypeParser],
+      setTypeParser: [Function: setTypeParser],
+      arrayParser: [Object],
+      builtins: [Object]
+    },
+    text: {},
+    binary: {}
+  },
+  RowCtor: null,
+  rowAsArray: false,
+  _prebuiltEmptyResultObject: {
+    id: null,
+    property_id: null,
+    type: null,
+    category: null,
+    amount: null,
+    description: null,
+    date: null,
+    created_at: null
+  }
+}
+Result rows: [
+  {
+    id: 'c7e6a05d-a7ad-485b-894c-8d927c0595a3',
+    property_id: 'ced72e7a-3931-4ef5-9197-bc62e64bc835',
+    type: 'income',
+    category: 'rent',
+    amount: '500.00',
+    description: 'Partila Rent ',
+    date: 2026-03-14T07:00:00.000Z,
+    created_at: 2026-03-16T18:20:38.367Z
+  }
+]
+Result row count: 1
+Row count: 1
+Returning row 0: {
+  id: 'c7e6a05d-a7ad-485b-894c-8d927c0595a3',
+  property_id: 'ced72e7a-3931-4ef5-9197-bc62e64bc835',
+  type: 'income',
+  category: 'rent',
+  amount: '500.00',
+  description: 'Partila Rent ',
+  date: 2026-03-14T07:00:00.000Z,
+  created_at: 2026-03-16T18:20:38.367Z
+}

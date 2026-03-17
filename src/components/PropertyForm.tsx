@@ -15,6 +15,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     purchasePrice: string;
     monthlyRent: string;
     currentRent: number;
+    leaseStartDate?: Date;
     rentHistory: Property['rentHistory'];
   }>({
     name: '',
@@ -22,6 +23,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     purchasePrice: '',
     monthlyRent: '',
     currentRent: 0,
+    leaseStartDate: undefined,
     rentHistory: [],
   });
 
@@ -33,6 +35,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
         purchasePrice: editingProperty.purchasePrice.toString(),
         monthlyRent: editingProperty.monthlyRent.toString(),
         currentRent: editingProperty.currentRent,
+        leaseStartDate: editingProperty.leaseStartDate,
         rentHistory: editingProperty.rentHistory || [],
       });
     }
@@ -45,6 +48,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       purchasePrice: '',
       monthlyRent: '',
       currentRent: 0,
+      leaseStartDate: undefined,
       rentHistory: [],
     });
     onCancel?.();
@@ -64,6 +68,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       purchasePrice: parseFloat(formData.purchasePrice),
       monthlyRent: parseFloat(formData.monthlyRent),
       currentRent: formData.currentRent,
+      leaseStartDate: formData.leaseStartDate,
       rentHistory: formData.rentHistory,
     });
 
@@ -76,7 +81,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'leaseStartDate' && value ? new Date(value) : value,
     }));
   };
 
@@ -114,6 +119,20 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               placeholder="e.g., 123 Main St, City, State 12345"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="leaseStartDate" className="block text-sm font-medium text-gray-700">
+              Lease Start Date
+            </label>
+            <input
+              type="date"
+              id="leaseStartDate"
+              name="leaseStartDate"
+              value={formData.leaseStartDate ? formData.leaseStartDate.toISOString().split('T')[0] : ''}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 

@@ -40,11 +40,11 @@ app.get('/api/properties', async (req, res) => {
 
 app.post('/api/properties', async (req, res) => {
   try {
-    const { name, address, purchase_price, monthly_rent } = req.body;
+    const { name, address, purchase_price, monthly_rent, lease_start_date } = req.body;
     const id = uuidv4();
     const result = await db.query(
-      'INSERT INTO properties (id, name, address, purchase_price, monthly_rent) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [id, name, address, purchase_price, monthly_rent]
+      'INSERT INTO properties (id, name, address, purchase_price, monthly_rent, lease_start_date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [id, name, address, purchase_price, monthly_rent, lease_start_date]
     );
     res.json(result.rows[0]);
   } catch (err) {
@@ -56,10 +56,10 @@ app.post('/api/properties', async (req, res) => {
 app.put('/api/properties/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, address, purchase_price, monthly_rent } = req.body;
+    const { name, address, purchase_price, monthly_rent, lease_start_date } = req.body;
     const result = await db.query(
-      'UPDATE properties SET name = $1, address = $2, purchase_price = $3, monthly_rent = $4 WHERE id = $5 RETURNING *',
-      [name, address, purchase_price, monthly_rent, id]
+      'UPDATE properties SET name = $1, address = $2, purchase_price = $3, monthly_rent = $4, lease_start_date = $5 WHERE id = $6 RETURNING *',
+      [name, address, purchase_price, monthly_rent, lease_start_date, id]
     );
     res.json(result.rows[0]);
   } catch (err) {

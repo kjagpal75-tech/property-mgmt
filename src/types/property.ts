@@ -5,6 +5,7 @@ export interface Property {
   purchasePrice: number;
   monthlyRent: number;
   currentRent: number;
+  leaseStartDate?: Date;
   rentHistory: {
     id: string;
     monthlyRate: number;

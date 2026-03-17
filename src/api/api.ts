@@ -63,6 +63,7 @@ export const propertiesApi = {
       purchasePrice: p.purchase_price,
       monthlyRent: p.monthly_rent,
       currentRent: p.current_rent || p.monthly_rent,
+      leaseStartDate: p.lease_start_date,
       rentHistory: (p.rent_history || []).map((rh: any) => ({
         id: rh.id,
         monthlyRate: rh.monthly_rate,
@@ -85,6 +86,7 @@ export const propertiesApi = {
         purchase_price: property.purchasePrice,
         monthly_rent: property.monthlyRent,
         current_rent: property.currentRent || property.monthlyRent,
+        lease_start_date: property.leaseStartDate,
         rent_history: property.rentHistory || [],
       }),
     });
@@ -95,6 +97,7 @@ export const propertiesApi = {
       purchasePrice: data.purchase_price,
       monthlyRent: data.monthly_rent,
       currentRent: data.current_rent || data.monthly_rent,
+      leaseStartDate: data.lease_start_date,
       rentHistory: data.rent_history || [],
       createdAt: data.created_at,
       updatedAt: data.updated_at
@@ -110,6 +113,7 @@ export const propertiesApi = {
         purchase_price: property.purchasePrice,
         monthly_rent: property.monthlyRent,
         current_rent: property.currentRent || property.monthlyRent,
+        lease_start_date: property.leaseStartDate,
         rent_history: property.rentHistory || [],
       }),
     });
@@ -120,6 +124,7 @@ export const propertiesApi = {
       purchasePrice: data.purchase_price,
       monthlyRent: data.monthly_rent,
       currentRent: data.current_rent || data.monthly_rent,
+      leaseStartDate: data.lease_start_date,
       rentHistory: data.rent_history || [],
       createdAt: data.created_at,
       updatedAt: data.updated_at
