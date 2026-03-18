@@ -221,6 +221,10 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
   };
 
   const parseTransactionFromText = (text: string, selectedPropertyId?: string): ExtractedTransaction | null => {
+    console.log('=== Transaction Parsing Debug ===');
+    console.log('Input text:', text);
+    console.log('Selected Property ID:', selectedPropertyId);
+    
     const lines = text.split('\n');
     const upperText = text.toUpperCase();
     
@@ -229,6 +233,9 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
     const amountMatch = text.match(/\$[\d,]+\.?\d*/);
     if (amountMatch) {
       amount = parseFloat(amountMatch[0].replace('$', '').replace(',', ''));
+      console.log('Amount found:', amount, 'from match:', amountMatch[0]);
+    } else {
+      console.log('No amount found in text');
     }
 
     // Enhanced date extraction with multiple format support including "Month dd, yyyy"
@@ -262,17 +269,22 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
     if (extractedDate) {
       // Handle "Month dd, yyyy" format
       const monthDayYear = extractedDate.match(/(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),?\s+(\d{4})/i);
+      console.log('Month day year match:', monthDayYear);
       if (monthDayYear) {
         const monthMap: { [key: string]: string } = {
-          'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05', 'June': '06',
-          'July': '07', 'August': '08', 'September': '09', 'October': '10', 'November': '11', 'December': '12',
-          'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'Jun': '06',
-          'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+          'january': '01', 'february': '02', 'march': '03', 'april': '04', 'may': '05', 'june': '06',
+          'july': '07', 'august': '08', 'september': '09', 'october': '10', 'november': '11', 'december': '12',
+          'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'jun': '06',
+          'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12'
         };
+        console.log('Month captured:', monthDayYear[1]);
+        console.log('Looking up in monthMap for:', monthDayYear[1].toLowerCase());
         const month = monthMap[monthDayYear[1].toLowerCase()];
+        console.log('Month found:', month);
         const day = monthDayYear[2].padStart(2, '0');
         const year = monthDayYear[3];
         standardizedDate = `${year}-${month}-${day}`;
+        console.log('Standardized date result:', standardizedDate);
       } else if (extractedDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
         // Already in yyyy-MM-dd format
         standardizedDate = extractedDate;
@@ -371,7 +383,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
       }
     }
 
-    return {
+    const result = {
       amount,
       date: standardizedDate,
       description,
@@ -380,6 +392,9 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
       propertyId: suggestedPropertyId,
       confidence: 0.85 // Mock confidence score
     };
+    
+    console.log('Returning transaction result:', result);
+    return result;
   };
 
   const handlePropertyAssignment = () => {
@@ -388,11 +403,21 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
       return;
     }
     
+    console.log('=== Property Assignment Debug ===');
+    console.log('Selected Property ID:', selectedPropertyId);
+    console.log('Extracted Text:', extractedText);
+    
     // Now extract transaction details with the selected property
     const transactionData = parseTransactionFromText(extractedText, selectedPropertyId);
     
+    console.log('Parsed Transaction Data:', transactionData);
+    
     if (transactionData) {
+      console.log('Setting extracted data...');
       setExtractedData(transactionData);
+    } else {
+      console.log('Failed to parse transaction data');
+      alert('Could not extract transaction details from the document. Please check the document content and try again.');
     }
   };
 
@@ -451,7 +476,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
     <div className="bg-white shadow rounded-lg p-6">
       <h2 className="text-lg font-medium text-gray-900 mb-4">Import Receipt/Document</h2>
       
-      {!previewUrl ? (
+      {!extractedText ? (
         <div>
           {/* Upload Area */}
           <div
