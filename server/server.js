@@ -7,7 +7,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001'], // Allow frontend origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+  credentials: true // Allow cookies/authorization headers
+}));
 app.use(express.json());
 
 // Properties endpoints
@@ -76,6 +81,45 @@ app.delete('/api/properties/:id', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// PDF text extraction endpoint
+app.post('/api/extract-pdf-text', async (req, res) => {
+  try {
+    console.log('=== PDF Text Extraction Request ===');
+    console.log('Request headers:', req.headers);
+    
+    if (!req.body || !req.body.pdfData) {
+      return res.status(400).json({ error: 'PDF data is required' });
+    }
+    
+    const { extractPDFText } = require('./pdf-extractor');
+    
+    // Convert base64 back to buffer
+    const pdfBuffer = Buffer.from(req.body.pdfData, 'base64');
+    console.log('PDF buffer size:', pdfBuffer.length);
+    
+    // Extract text from PDF
+    const extractedData = await extractPDFText(pdfBuffer);
+    
+    console.log('Extracted PDF data:', {
+      pages: extractedData.pages,
+      textLength: extractedData.text.length,
+      hasText: extractedData.text.length > 0
+    });
+    
+    res.json({
+      success: true,
+      text: extractedData.text,
+      pages: extractedData.pages,
+      info: extractedData.info,
+      metadata: extractedData.metadata
+    });
+    
+  } catch (error) {
+    console.error('PDF extraction error:', error);
+    res.status(500).json({ error: 'Failed to extract text from PDF' });
   }
 });
 
