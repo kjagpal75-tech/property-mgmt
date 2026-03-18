@@ -341,6 +341,9 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
     } else if (upperText.includes('TAX')) {
       category = 'property_tax';
       description = 'Property tax';
+    } else if (upperText.includes('HOA') || upperText.includes('HOMEOWNERS') || upperText.includes('ASSOCIATION')) {
+      category = 'hoa';
+      description = 'HOA fees';
     } else {
       // Extract merchant name as description
       const merchantMatch = text.match(/^([A-Z\s&]+)$/m);
@@ -664,6 +667,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ properties, onTransacti
                   <option value="insurance">Insurance</option>
                   <option value="property_tax">Property Tax</option>
                   <option value="utilities">Utilities</option>
+                  <option value="hoa">HOA Fees</option>
                   <option value="management_fees">Management Fees</option>
                   <option value="vacancy">Vacancy</option>
                   <option value="repairs">Repairs</option>

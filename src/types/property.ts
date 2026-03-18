@@ -46,6 +46,7 @@ export type TransactionCategory =
   | 'insurance'
   | 'property_tax'
   | 'utilities'
+  | 'hoa'
   | 'management_fees'
   | 'vacancy'
   | 'repairs'
