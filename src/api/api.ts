@@ -55,12 +55,19 @@ export const rentHistoryApi = {
 // Properties API
 export const propertiesApi = {
   getAll: async (): Promise<Property[]> => {
+    console.log('🔍 Fetching properties from:', `${API_BASE_URL}/properties`);
     const response = await fetch(`${API_BASE_URL}/properties`);
-    if (!response.ok) throw new Error('Failed to fetch properties');
+    console.log('🔍 Response status:', response.status);
+    if (!response.ok) {
+      console.error('❌ Failed to fetch properties:', response.statusText);
+      throw new Error('Failed to fetch properties');
+    }
     const data = await response.json();
-    return data.map((p: any) => ({
+    console.log('🔍 Raw data from backend:', data);
+    const mappedData = data.map((p: any) => ({
       ...p,
       purchasePrice: p.purchase_price,
+      marketValue: p.market_value || p.marketValue, // Handle both database column names
       monthlyRent: p.monthly_rent,
       currentRent: p.current_rent || p.monthly_rent,
       leaseStartDate: p.lease_start_date,
@@ -75,6 +82,7 @@ export const propertiesApi = {
       createdAt: p.created_at,
       updatedAt: p.updated_at
     }));
+    return mappedData;
   },
 
   create: async (property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
@@ -200,3 +208,6 @@ export const transactionsApi = {
     if (!response.ok) throw new Error('Failed to delete transaction');
   },
 };
+
+// Export API_BASE_URL for use in other components
+export { API_BASE_URL };

@@ -207,29 +207,20 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
     calculateCashFlow(property, filteredTransactions, selectedYear)
   );
 
-  // Calculate portfolio summary values
+  // Calculate portfolio summary values - SIMPLE MATH
   const portfolioCalculations = useMemo(() => {
-    console.log('Calculating portfolio values...');
+    // Simple direct calculation using database market values FIRST
+    const totalPortfolioValue = properties.reduce((sum, property) => {
+      const marketValue = property.marketValue ? parseFloat(String(property.marketValue)) : (property.redfinMarketValue ? parseFloat(String(property.redfinMarketValue)) : parseFloat(String(property.purchasePrice)));
+      return sum + marketValue;
+    }, 0);
     
-    let totalPortfolioValue = 0;
-    let totalPurchasePrice = 0;
-    
-    properties.forEach(property => {
-      // Use Redfin market value first, then purchase price
-      const currentValue = propertyMarketValues[property.id] || property?.redfinMarketValue || property?.purchasePrice || 0;
-      totalPortfolioValue += currentValue;
-      totalPurchasePrice += property?.purchasePrice || 0;
-    });
+    const totalPurchasePrice = properties.reduce((sum, property) => {
+      return sum + (property.purchasePrice ? parseFloat(String(property.purchasePrice)) : 0);
+    }, 0);
     
     const totalAppreciationAmount = totalPortfolioValue - totalPurchasePrice;
     const totalAppreciation = totalPurchasePrice > 0 ? (totalAppreciationAmount / totalPurchasePrice) * 100 : 0;
-    
-    console.log('Portfolio calculations:', {
-      totalPortfolioValue,
-      totalPurchasePrice,
-      totalAppreciationAmount,
-      totalAppreciation
-    });
     
     return {
       totalPortfolioValue,
@@ -237,7 +228,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
       totalAppreciationAmount,
       totalAppreciation
     };
-  }, [properties, propertyMarketValues]);
+  }, [properties]);
 
   const { totalPortfolioValue, totalPurchasePrice, totalAppreciationAmount, totalAppreciation } = portfolioCalculations;
 
@@ -453,66 +444,6 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         </div>
       </div>
 
-      {/* Portfolio Summary Tile */}
-      <div className="bg-white shadow rounded-lg mb-6">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">Portfolio Summary</h2>
-        </div>
-        <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Total Portfolio Value */}
-            <div className="text-center">
-              <p className="text-sm font-medium text-gray-500">Total Portfolio Value</p>
-            </div>
-            <div className="text-center">
-              <p className="text-sm font-medium text-gray-500">Total Purchase Price</p>
-              <p className="text-3xl font-bold text-gray-600">
-                {formatCurrency(formatValue(totalPurchasePrice))}
-              </p>
-              <p className="text-xs text-gray-500 mt-1">
-                {properties.length} properties
-              </p>
-            </div>
-
-            {/* Appreciation */}
-            <div className="text-center">
-              <p className="text-sm font-medium text-gray-500">Total Appreciation</p>
-              <p className={`text-3xl font-bold ${totalAppreciation >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {totalAppreciation >= 0 ? '+' : ''}{formatValue(totalAppreciation).toFixed(1)}%
-              </p>
-              <p className={`text-xs mt-1 ${totalAppreciationAmount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {totalAppreciationAmount >= 0 ? '+' : ''}{formatCurrency(formatValue(totalAppreciationAmount))}
-              </p>
-            </div>
-          </div>
-
-          {/* Appreciation Bar */}
-          <div className="mt-6">
-            <div className="flex justify-between text-sm text-gray-600 mb-2">
-              <span>Purchase Price</span>
-              <span>Current Value</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-4 relative overflow-hidden">
-              <div 
-                className={`h-full rounded-full transition-all duration-500 ${
-                  totalAppreciation >= 0 ? 'bg-green-500' : 'bg-red-500'
-                }`}
-                style={{ 
-                  width: `${Math.min(Math.max(totalAppreciation + 100, 0), 200)}%`,
-                  marginLeft: totalAppreciation < 0 ? `${totalAppreciation}%` : '0'
-                }}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs font-medium text-gray-700">
-                    {totalAppreciation >= 0 ? '+' : ''}{formatValue(totalAppreciation).toFixed(1)}%
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Rent Tracking Table */}
       <div className="bg-white shadow rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
@@ -527,6 +458,9 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Portfolio Value
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Market Value
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Expected Monthly Rent
@@ -555,12 +489,12 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <div className="flex items-center space-x-2">
-                        <span className={`font-semibold ${hasMarketValue ? 'text-green-600' : 'text-blue-600'}`}>
-                          {formatCurrency(formatValue(portfolioValue))}
+                        <span className={`font-semibold ${property?.marketValue ? 'text-green-600' : 'text-blue-600'}`}>
+                          {formatCurrency(formatValue(property?.marketValue || 0))}
                         </span>
-                        {hasMarketValue && (
+                        {property?.marketValue && (
                           <span className="text-xs text-green-500 bg-green-50 px-1 py-0.5 rounded">
-                            Redfin Market Value
+                            Database Market Value
                           </span>
                         )}
                       </div>
@@ -590,6 +524,40 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
               })}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      {/* Portfolio Summary */}
+      <div className="bg-white shadow rounded-lg mb-6">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="text-lg font-medium text-gray-900">Portfolio Summary</h2>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Total Market Value */}
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-500">Total Market Value</p>
+              <p className="text-3xl font-bold text-blue-600">
+                {formatCurrency(formatValue(totalPortfolioValue))}
+              </p>
+            </div>
+
+            {/* Appreciation Value */}
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-500">Appreciation Value</p>
+              <p className={`text-3xl font-bold ${totalAppreciationAmount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {totalAppreciationAmount >= 0 ? '+' : ''}{formatCurrency(formatValue(totalAppreciationAmount))}
+              </p>
+            </div>
+
+            {/* Appreciation % */}
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-500">Appreciation %</p>
+              <p className={`text-3xl font-bold ${totalAppreciation >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {totalAppreciation >= 0 ? '+' : ''}{totalAppreciation.toFixed(1)}%
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

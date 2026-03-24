@@ -4,33 +4,601 @@
 
 [dotenv@17.3.1] injecting env (7) from .env -- tip: 🛡️ auth for agents: https://vestauth.com
 Server running on port 5000
+
+> property-mgmt@0.1.0 start
+> PORT=3001 react-scripts start
+
+(node:31081) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:31081) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:31081) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view property-mgmt in the browser.
+
+  Local:            http://localhost:3001
+  On Your Network:  http://192.168.68.126:3001
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/components/CashFlowDashboard.tsx
+Syntax error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`? (592:undefined)
+ERROR in ./src/components/CashFlowDashboard.tsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/src/components/CashFlowDashboard.tsx: Unterminated JSX contents. (590:10)
+
+  588 |         </div>
+  589 |       </div>
+> 590 |     </div>
+      |           ^
+  591 |   );
+  592 | };
+  593 |
+    at constructor (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:365:19)
+    at TypeScriptParserMixin.raise (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:6599:19)
+    at TypeScriptParserMixin.jsxReadToken (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4448:20)
+    at TypeScriptParserMixin.getTokenFromCode (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4774:12)
+    at TypeScriptParserMixin.getTokenFromCode (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9987:11)
+    at TypeScriptParserMixin.nextToken (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:5782:10)
+    at TypeScriptParserMixin.next (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:5692:10)
+    at TypeScriptParserMixin.eat (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:5696:12)
+    at TypeScriptParserMixin.expect (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:6898:15)
+    at TypeScriptParserMixin.jsxParseClosingElementAt (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4680:10)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4695:37)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4698:32)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4698:32)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4698:32)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4698:32)
+    at TypeScriptParserMixin.jsxParseElement (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4749:17)
+    at TypeScriptParserMixin.parseExprAtom (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4759:19)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11081:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11066:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11046:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9837:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10899:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10904:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10881:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10831:21)
+    at /Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9775:39
+    at TypeScriptParserMixin.tryParse (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:6907:20)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9775:18)
+    at /Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10800:39
+    at TypeScriptParserMixin.allowInAnd (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12426:12)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10800:17)
+    at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12493:17)
+    at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11675:28)
+    at TypeScriptParserMixin.parseExprAtom (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11331:23)
+    at TypeScriptParserMixin.parseExprAtom (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:4764:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11081:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11066:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:11046:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9837:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10899:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10904:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10881:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10831:21)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9786:20)
+    at TypeScriptParserMixin.parseExpressionBase (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10784:23)
+    at /Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10780:39
+    at TypeScriptParserMixin.allowInAnd (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12421:16)
+    at TypeScriptParserMixin.parseExpression (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10780:17)
+    at TypeScriptParserMixin.parseReturnStatement (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13142:28)
+    at TypeScriptParserMixin.parseStatementContent (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12798:21)
+
+ERROR in [eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 592:  Parsing error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+webpack compiled with 2 errors
+ERROR in src/App.tsx:8:8
+TS1192: Module '"/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/src/components/CashFlowDashboard"' has no default export.
+     6 | import PropertyList from './components/PropertyList';
+     7 | import PropertyForm from './components/PropertyForm';
+  >  8 | import CashFlowDashboard from './components/CashFlowDashboard';
+       |        ^^^^^^^^^^^^^^^^^
+     9 | import TransactionManager from './components/TransactionManager';
+    10 | import BackupManager from './components/BackupManager';
+    11 |
+
+ERROR in src/components/CashFlowDashboard.tsx
+TS1005: '</' expected.
+
+ERROR in src/components/CashFlowDashboard.tsx:351:6
+TS17008: JSX element 'div' has no corresponding closing tag.
+    349 |
+    350 |   return (
+  > 351 |     <div className="space-y-8">
+        |      ^^^
+    352 |       {/* Year Filter */}
+    353 |       <div className="bg-white shadow rounded-lg p-6">
+    354 |         <div className="flex items-center justify-between">
+
+ERROR in src/components/CashFlowDashboard.tsx:388:8
+TS17008: JSX element 'div' has no corresponding closing tag.
+    386 |
+    387 |       {/* Summary Cards */}
+  > 388 |       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        |        ^^^
+    389 |         <div className="bg-white shadow rounded-lg p-6">
+    390 |           <div className="flex items-center">
+    391 |             <div className="flex-shrink-0">
+
+ERROR in src/components/CashFlowDashboard.tsx:439:10
+TS17008: JSX element 'div' has no corresponding closing tag.
+    437 |         </div>
+    438 |
+  > 439 |         <div className="bg-white shadow rounded-lg p-6">
+        |          ^^^
+    440 |           <div className="flex items-center">
+    441 |             <div className="flex-shrink-0">
+    442 |               <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+
+ERROR in src/components/CashFlowDashboard.tsx:440:12
+TS17008: JSX element 'div' has no corresponding closing tag.
+    438 |
+    439 |         <div className="bg-white shadow rounded-lg p-6">
+  > 440 |           <div className="flex items-center">
+        |            ^^^
+    441 |             <div className="flex-shrink-0">
+    442 |               <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+    443 |                 <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+ERROR in src/components/CashFlowDashboard.tsx:592:1
+TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+    590 |     </div>
+    591 |   );
+  > 592 | };
+        | ^
+    593 |
+    594 | export default CashFlowDashboard;
+    595 |
+
 Compiling...
 Compiled with warnings.
 
 [eslint] 
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                         @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 242:11:  'totalPortfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 242:32:  'totalPurchasePrice' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  Line 242:52:  'totalAppreciationAmount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 242:77:  'totalAppreciation' is assigned a value but never used        @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                         @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 242:11:  'totalPortfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 242:32:  'totalPurchasePrice' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  Line 242:52:  'totalAppreciationAmount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 242:77:  'totalAppreciation' is assigned a value but never used        @typescript-eslint/no-unused-vars
 
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
 
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+[eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                         @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 242:11:  'totalPortfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 242:32:  'totalPurchasePrice' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  Line 242:52:  'totalAppreciationAmount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 242:77:  'totalAppreciation' is assigned a value but never used        @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                         @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 242:11:  'totalPortfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 242:32:  'totalPurchasePrice' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  Line 242:52:  'totalAppreciationAmount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 242:77:  'totalAppreciation' is assigned a value but never used        @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 242:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 242:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+No issues found.
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/api/api.ts
+  Line 67:11:  'mappedData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/api/api.ts
+  Line 67:11:  'mappedData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/api/api.ts:57:21
+TS2355: A function whose declared type is neither 'void' nor 'any' must return a value.
+    55 | // Properties API
+    56 | export const propertiesApi = {
+  > 57 |   getAll: async (): Promise<Property[]> => {
+       |                     ^^^^^^^^^^^^^^^^^^^
+    58 |     console.log('🔍 Fetching properties from:', `${API_BASE_URL}/properties`);
+    59 |     const response = await fetch(`${API_BASE_URL}/properties`);
+    60 |     console.log('🔍 Response status:', response.status);
+
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/api/api.ts
+Syntax error: ',' expected (88:16)
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/api/api.ts
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/src/api/api.ts: Missing initializer in const declaration. (88:15)
+
+  86 |   },
+  87 |
+> 88 |   create: async (property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+     |                ^
+  89 |     const response = await fetch(`${API_BASE_URL}/properties`, {
+  90 |       method: 'POST',
+  91 |       headers: { 'Content-Type': 'application/json' },
+    at constructor (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:365:19)
+    at TypeScriptParserMixin.raise (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:6599:19)
+    at TypeScriptParserMixin.parseVar (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13391:16)
+    at TypeScriptParserMixin.parseVarStatement (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13230:10)
+    at TypeScriptParserMixin.parseVarStatement (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9408:31)
+    at TypeScriptParserMixin.parseStatementContent (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12851:23)
+    at TypeScriptParserMixin.parseStatementContent (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9508:18)
+    at TypeScriptParserMixin.parseStatementLike (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12767:17)
+    at TypeScriptParserMixin.parseStatementListItem (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12747:17)
+    at TypeScriptParserMixin.parseExportDeclaration (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13934:17)
+    at TypeScriptParserMixin.parseExportDeclaration (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9629:85)
+    at TypeScriptParserMixin.maybeParseExportDeclaration (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13893:31)
+    at TypeScriptParserMixin.parseExport (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13812:29)
+    at TypeScriptParserMixin.parseExport (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9385:20)
+    at TypeScriptParserMixin.parseStatementContent (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12878:27)
+    at TypeScriptParserMixin.parseStatementContent (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:9508:18)
+    at TypeScriptParserMixin.parseStatementLike (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12767:17)
+    at TypeScriptParserMixin.parseModuleItem (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12744:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13316:36)
+    at TypeScriptParserMixin.parseBlockBody (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:13309:10)
+    at TypeScriptParserMixin.parseProgram (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12622:10)
+    at TypeScriptParserMixin.parseTopLevel (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:12612:25)
+    at TypeScriptParserMixin.parse (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:14488:25)
+    at TypeScriptParserMixin.parse (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:10126:18)
+    at parse (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/parser/lib/index.js:14522:38)
+    at parser (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+    at step (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/gensync/index.js:261:32)
+    at /Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/gensync/index.js:273:13
+    at async.call.result.err.err (/Users/kuljitjagpal/CascadeProjects/property-mgmt/CascadeProjects/windsurf-project/property-mgmt/node_modules/gensync/index.js:223:11)
+
+ERROR in [eslint] 
+src/api/api.ts
+  Line 88:16:  Parsing error: ',' expected
+
+webpack compiled with 2 errors and 1 warning
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/api/api.ts
+TS1102: 'delete' cannot be called on an identifier in strict mode.
+
+ERROR in src/api/api.ts
+TS2703: The operand of a 'delete' operator must be a property reference.
+
+ERROR in src/api/api.ts:88:11
+TS2304: Cannot find name 'async'.
+    86 |   },
+    87 |
+  > 88 |   create: async (property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+       |           ^^^^^
+    89 |     const response = await fetch(`${API_BASE_URL}/properties`, {
+    90 |       method: 'POST',
+    91 |       headers: { 'Content-Type': 'application/json' },
+
+ERROR in src/api/api.ts:88:17
+TS1005: ',' expected.
+    86 |   },
+    87 |
+  > 88 |   create: async (property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+       |                 ^
+    89 |     const response = await fetch(`${API_BASE_URL}/properties`, {
+    90 |       method: 'POST',
+    91 |       headers: { 'Content-Type': 'application/json' },
+
+ERROR in src/api/api.ts:88:17
+TS2695: Left side of comma operator is unused and has no side effects.
+    86 |   },
+    87 |
+  > 88 |   create: async (property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+       |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    89 |     const response = await fetch(`${API_BASE_URL}/properties`, {
+    90 |       method: 'POST',
+    91 |       headers: { 'Content-Type': 'application/json' },
+
+ERROR in src/api/api.ts:115:3
+TS2552: Cannot find name 'update'. Did you mean 'Date'?
+    113 |   },
+    114 |
+  > 115 |   update: async (id: string, property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+        |   ^^^^^^
+    116 |     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
+    117 |       method: 'PUT',
+    118 |       headers: { 'Content-Type': 'application/json' },
+
+ERROR in src/api/api.ts:115:9
+TS1005: ';' expected.
+    113 |   },
+    114 |
+  > 115 |   update: async (id: string, property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+        |         ^
+    116 |     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
+    117 |       method: 'PUT',
+    118 |       headers: { 'Content-Type': 'application/json' },
+
+ERROR in src/api/api.ts:115:11
+TS2695: Left side of comma operator is unused and has no side effects.
+    113 |   },
+    114 |
+  > 115 |   update: async (id: string, property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    116 |     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
+    117 |       method: 'PUT',
+    118 |       headers: { 'Content-Type': 'application/json' },
+
+ERROR in src/api/api.ts:142:9
+TS1109: Expression expected.
+    140 |   },
+    141 |
+  > 142 |   delete: async (id: string): Promise<void> => {
+        |         ^
+    143 |     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
+    144 |       method: 'DELETE',
+    145 |     });
+
+ERROR in src/api/api.ts:142:11
+TS2695: Left side of comma operator is unused and has no side effects.
+    140 |   },
+    141 |
+  > 142 |   delete: async (id: string): Promise<void> => {
+        |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    143 |     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
+    144 |       method: 'DELETE',
+    145 |     });
+
+ERROR in src/api/api.ts:148:1
+TS1109: Expression expected.
+    146 |     if (!response.ok) throw new Error('Failed to delete property');
+    147 |   },
+  > 148 | };
+        | ^
+    149 |
+    150 | // Transactions API
+    151 | export const transactionsApi = {
+
+ERROR in src/App.tsx:42:51
+TS2339: Property 'update' does not exist on type '{ getAll: () => Promise<Property[]>; }'.
+    40 |   try {
+    41 |     if (editingProperty) {
+  > 42 |       const updatedProperty = await propertiesApi.update(editingProperty.id, propertyData);
+       |                                                   ^^^^^^
+    43 |       setProperties(properties.map(p => p.id === editingProperty.id ? updatedProperty : p));
+    44 |       setEditingProperty(null);
+    45 |     } else {
+
+ERROR in src/App.tsx:46:47
+TS2339: Property 'create' does not exist on type '{ getAll: () => Promise<Property[]>; }'.
+    44 |       setEditingProperty(null);
+    45 |     } else {
+  > 46 |       const newProperty = await propertiesApi.create(propertyData);
+       |                                               ^^^^^^
+    47 |       setProperties([...properties, newProperty]);
+    48 |     }
+    49 |   } catch (error) {
+
+ERROR in src/App.tsx:57:27
+TS2339: Property 'delete' does not exist on type '{ getAll: () => Promise<Property[]>; }'.
+    55 |   const deleteProperty = async (id: string) => {
+    56 |     try {
+  > 57 |       await propertiesApi.delete(id);
+       |                           ^^^^^^
+    58 |       setProperties(properties.filter(p => p.id !== id));
+    59 |       setTransactions(transactions.filter(t => t.propertyId !== id));
+    60 |     } catch (error) {
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:   'useEffect' is defined but never used                 @typescript-eslint/no-unused-vars
+  Line 59:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 Files successfully emitted, waiting for typecheck results...
@@ -40,29 +608,25 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -70,29 +634,25 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -100,29 +660,25 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -130,29 +686,25 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -160,29 +712,177 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+webpack compiled with 1 warning
+Compiling...
+ERROR in src/App.tsx:30:47
+TS2304: Cannot find name 'API_BASE_URL'.
+    28 |             try {
+    29 |               console.log(`💾 Storing market value for ${property.name}:`, property.redfinMarketValue);
+  > 30 |               const response = await fetch(`${API_BASE_URL}/properties/${property.id}/market-value`, {
+       |                                               ^^^^^^^^^^^^
+    31 |                 method: 'PUT',
+    32 |                 headers: {
+    33 |                   'Content-Type': 'application/json',
 
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/App.tsx:30:47
+TS2304: Cannot find name 'API_BASE_URL'.
+    28 |             try {
+    29 |               console.log(`💾 Storing market value for ${property.name}:`, property.redfinMarketValue);
+  > 30 |               const response = await fetch(`${API_BASE_URL}/properties/${property.id}/market-value`, {
+       |                                               ^^^^^^^^^^^^
+    31 |                 method: 'PUT',
+    32 |                 headers: {
+    33 |                   'Content-Type': 'application/json',
+
+Compiling...
+Failed to compile.
+
+Attempted import error: 'API_BASE_URL' is not exported from './api/api' (imported as 'API_BASE_URL').
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/App.tsx 32:46-58
+export 'API_BASE_URL' (imported as 'API_BASE_URL') was not found in './api/api' (possible exports: propertiesApi, rentHistoryApi, transactionsApi)
+
+webpack compiled with 1 error and 1 warning
+Compiling...
+ERROR in src/App.tsx:4:42
+TS2459: Module '"./api/api"' declares 'API_BASE_URL' locally, but it is not exported.
+    2 | import { Property, Transaction } from './types/property';
+    3 | import { generateId } from './utils/dataUtils';
+  > 4 | import { propertiesApi, transactionsApi, API_BASE_URL } from './api/api';
+      |                                          ^^^^^^^^^^^^
+    5 | import { getAllPropertiesWithRedfinMarketValues } from './redfin-integration';
+    6 | import PropertyList from './components/PropertyList';
+    7 | import PropertyForm from './components/PropertyForm';
+
+Failed to compile.
+
+Attempted import error: 'API_BASE_URL' is not exported from './api/api' (imported as 'API_BASE_URL').
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/App.tsx 32:46-58
+export 'API_BASE_URL' (imported as 'API_BASE_URL') was not found in './api/api' (possible exports: propertiesApi, rentHistoryApi, transactionsApi)
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/App.tsx:4:42
+TS2459: Module '"./api/api"' declares 'API_BASE_URL' locally, but it is not exported.
+    2 | import { Property, Transaction } from './types/property';
+    3 | import { generateId } from './utils/dataUtils';
+  > 4 | import { propertiesApi, transactionsApi, API_BASE_URL } from './api/api';
+      |                                          ^^^^^^^^^^^^
+    5 | import { getAllPropertiesWithRedfinMarketValues } from './redfin-integration';
+    6 | import PropertyList from './components/PropertyList';
+    7 | import PropertyForm from './components/PropertyForm';
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 243:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 250:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 250:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -190,29 +890,51 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 250:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 250:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+webpack compiled with 1 warning
+Compiling...
+No issues found.
+Compiled with warnings.
 
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 250:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 250:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -220,29 +942,25 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -250,29 +968,55 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:   'generateId' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 38:21:  'responseData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:   'generateId' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 38:21:  'responseData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+webpack compiled with 1 warning
+Compiling...
+No issues found.
+Compiled with warnings.
 
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+[eslint] 
+src/App.tsx
+  Line 3:10:   'generateId' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 38:21:  'responseData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:   'generateId' is defined but never used             @typescript-eslint/no-unused-vars
+  Line 38:21:  'responseData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -280,29 +1024,130 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+webpack compiled with 1 warning
+Compiling...
+ERROR in src/App.tsx:51:131
+TS2551: Property 'market_value' does not exist on type 'Property'. Did you mean 'marketValue'?
+    49 |         // Reload properties from database to get updated market values
+    50 |         const updatedProperties = await propertiesApi.getAll();
+  > 51 |         console.log('🔄 Reloaded properties from database:', updatedProperties.map(p => ({ id: p.id, name: p.name, marketValue: p.market_value })));
+       |                                                                                                                                   ^^^^^^^^^^^^
+    52 |         
+    53 |         // Set enhanced properties directly
+    54 |         setProperties(updatedProperties as Property[]);
 
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/App.tsx:51:131
+TS2551: Property 'market_value' does not exist on type 'Property'. Did you mean 'marketValue'?
+    49 |         // Reload properties from database to get updated market values
+    50 |         const updatedProperties = await propertiesApi.getAll();
+  > 51 |         console.log('🔄 Reloaded properties from database:', updatedProperties.map(p => ({ id: p.id, name: p.name, marketValue: p.market_value })));
+       |                                                                                                                                   ^^^^^^^^^^^^
+    52 |         
+    53 |         // Set enhanced properties directly
+    54 |         setProperties(updatedProperties as Property[]);
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/App.tsx:51:131
+TS2551: Property 'market_value' does not exist on type 'Property'. Did you mean 'marketValue'?
+    49 |         // Reload properties from database to get updated market values
+    50 |         const updatedProperties = await propertiesApi.getAll();
+  > 51 |         console.log('🔄 Reloaded properties from database:', updatedProperties.map(p => ({ id: p.id, name: p.name, marketValue: p.market_value })));
+       |                                                                                                                                   ^^^^^^^^^^^^
+    52 |         
+    53 |         // Set enhanced properties directly
+    54 |         setProperties(updatedProperties as Property[]);
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -310,29 +1155,213 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
-
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
 src/components/CashFlowDashboard.tsx
-  Line 31:11:  'selectedYearEnd' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-src/components/PropertyForm.tsx
-  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
-  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+webpack compiled with 1 warning
+ERROR in src/components/CashFlowDashboard.tsx:214:38
+TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+    212 |     // Simple direct calculation using database market values FIRST
+    213 |     const totalPortfolioValue = properties.reduce((sum, property) => {
+  > 214 |       const marketValue = parseFloat(property.marketValue) || parseFloat(property.redfinMarketValue) || parseFloat(property.purchasePrice) || 0;
+        |                                      ^^^^^^^^^^^^^^^^^^^^
+    215 |       return sum + marketValue;
+    216 |     }, 0);
+    217 |     
 
-src/components/SimpleRateHistory.tsx
-  Line 99:9:  'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+ERROR in src/components/CashFlowDashboard.tsx:214:74
+TS2345: Argument of type 'number | null | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+    212 |     // Simple direct calculation using database market values FIRST
+    213 |     const totalPortfolioValue = properties.reduce((sum, property) => {
+  > 214 |       const marketValue = parseFloat(property.marketValue) || parseFloat(property.redfinMarketValue) || parseFloat(property.purchasePrice) || 0;
+        |                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    215 |       return sum + marketValue;
+    216 |     }, 0);
+    217 |     
+
+ERROR in src/components/CashFlowDashboard.tsx:214:116
+TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+    212 |     // Simple direct calculation using database market values FIRST
+    213 |     const totalPortfolioValue = properties.reduce((sum, property) => {
+  > 214 |       const marketValue = parseFloat(property.marketValue) || parseFloat(property.redfinMarketValue) || parseFloat(property.purchasePrice) || 0;
+        |                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^
+    215 |       return sum + marketValue;
+    216 |     }, 0);
+    217 |     
+
+ERROR in src/components/CashFlowDashboard.tsx:219:32
+TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+    217 |     
+    218 |     const totalPurchasePrice = properties.reduce((sum, property) => {
+  > 219 |       return sum + (parseFloat(property.purchasePrice) || 0);
+        |                                ^^^^^^^^^^^^^^^^^^^^^^
+    220 |     }, 0);
+    221 |     
+    222 |     const totalAppreciationAmount = totalPortfolioValue - totalPurchasePrice;
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+ERROR in src/components/CashFlowDashboard.tsx:214:61
+TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+    212 |     // Simple direct calculation using database market values FIRST
+    213 |     const totalPortfolioValue = properties.reduce((sum, property) => {
+  > 214 |       const marketValue = property.marketValue ? parseFloat(property.marketValue) : (property.redfinMarketValue ? parseFloat(property.redfinMarketValue) : parseFloat(property.purchasePrice));
+        |                                                             ^^^^^^^^^^^^^^^^^^^^
+    215 |       return sum + marketValue;
+    216 |     }, 0);
+    217 |     
+
+ERROR in src/components/CashFlowDashboard.tsx:214:126
+TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+    212 |     // Simple direct calculation using database market values FIRST
+    213 |     const totalPortfolioValue = properties.reduce((sum, property) => {
+  > 214 |       const marketValue = property.marketValue ? parseFloat(property.marketValue) : (property.redfinMarketValue ? parseFloat(property.redfinMarketValue) : parseFloat(property.purchasePrice));
+        |                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    215 |       return sum + marketValue;
+    216 |     }, 0);
+    217 |     
+
+ERROR in src/components/CashFlowDashboard.tsx:214:167
+TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+    212 |     // Simple direct calculation using database market values FIRST
+    213 |     const totalPortfolioValue = properties.reduce((sum, property) => {
+  > 214 |       const marketValue = property.marketValue ? parseFloat(property.marketValue) : (property.redfinMarketValue ? parseFloat(property.redfinMarketValue) : parseFloat(property.purchasePrice));
+        |                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^
+    215 |       return sum + marketValue;
+    216 |     }, 0);
+    217 |     
+
+ERROR in src/components/CashFlowDashboard.tsx:219:57
+TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+    217 |     
+    218 |     const totalPurchasePrice = properties.reduce((sum, property) => {
+  > 219 |       return sum + (property.purchasePrice ? parseFloat(property.purchasePrice) : 0);
+        |                                                         ^^^^^^^^^^^^^^^^^^^^^^
+    220 |     }, 0);
+    221 |     
+    222 |     const totalAppreciationAmount = totalPortfolioValue - totalPurchasePrice;
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.

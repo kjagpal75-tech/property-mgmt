@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Property, Transaction } from './types/property';
 import { generateId } from './utils/dataUtils';
-import { propertiesApi, transactionsApi } from './api/api';
+import { propertiesApi, transactionsApi, API_BASE_URL } from './api/api';
 import { getAllPropertiesWithRedfinMarketValues } from './redfin-integration';
 import PropertyList from './components/PropertyList';
 import PropertyForm from './components/PropertyForm';
@@ -21,8 +21,37 @@ function App() {
         // Load properties with Redfin market values
         const propertiesWithRedfin = await getAllPropertiesWithRedfinMarketValues();
         
-        // Set the enhanced properties directly
-        setProperties(propertiesWithRedfin as Property[]);
+        // Store market values in database for each property
+        for (const property of propertiesWithRedfin) {
+          if (property.redfinMarketValue && property.redfinMarketValue > 0) {
+            try {
+              const response = await fetch(`${API_BASE_URL}/properties/${property.id}/market-value`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  market_value: property.redfinMarketValue
+                })
+              });
+              
+              if (response.ok) {
+                console.log(`✅ Stored market value for ${property.name}:`, property.redfinMarketValue);
+              } else {
+                console.error(`❌ Failed to store market value for ${property.name}:`, response.statusText);
+              }
+            } catch (error) {
+              console.error(`❌ Error storing market value for ${property.name}:`, error);
+            }
+          }
+        }
+        
+        // Reload properties from database to get updated market values
+        const updatedProperties = await propertiesApi.getAll();
+        console.log('🔄 Reloaded properties from database:', updatedProperties.map(p => ({ id: p.id, name: p.name, marketValue: p.marketValue })));
+        
+        // Set enhanced properties directly
+        setProperties(updatedProperties as Property[]);
         
         // Load transactions
         const transactionsData = await transactionsApi.getAll();

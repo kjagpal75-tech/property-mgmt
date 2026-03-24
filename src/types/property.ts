@@ -3,7 +3,7 @@ export interface Property {
   name: string;
   address: string;
   purchasePrice: number;
-  marketValue?: number; // Redfin market value
+  marketValue?: number; // Database market value (from market_value column)
   redfinMarketValue?: number | null; // Redfin market value (explicit)
   redfinValueRange?: { low: number; high: number } | null; // Redfin value range
   redfinRentPrice?: number | null; // Redfin rent price

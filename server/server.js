@@ -15,6 +15,18 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Add market_value column to properties table if it doesn't exist
+db.query(`
+  ALTER TABLE properties 
+  ADD COLUMN IF NOT EXISTS market_value DECIMAL(12,2)
+`).catch(err => {
+  if (err) {
+    console.error('Error adding market_value column:', err);
+  } else {
+    console.log('✅ market_value column ensured in properties table');
+  }
+});
+
 // Properties endpoints
 app.get('/api/properties', async (req, res) => {
   try {
@@ -37,6 +49,24 @@ app.get('/api/properties', async (req, res) => {
     );
     
     res.json(propertiesWithHistory);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Update property market value
+app.put('/api/properties/:id/market-value', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { market_value } = req.body;
+    console.log('Updating market value for property:', { id, market_value });
+    
+    const result = await db.query(
+      'UPDATE properties SET market_value = $1 WHERE id = $2 RETURNING *',
+      [market_value, id]
+    );
+    res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
@@ -279,6 +309,24 @@ app.delete('/api/properties/:id/rent-history/:rentId', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+// Redfin web scraping endpoints
+const redfinScrapeRouter = require('./api/redfin-scrape');
+const redfinSearchRouter = require('./api/redfin-search');
+app.use('/api/redfin', redfinScrapeRouter);
+app.use('/api/redfin', redfinSearchRouter);
+
+// Test AVM endpoint
+const testAVMRouter = require('./api/test-avm');
+app.use('/api/avm', testAVMRouter);
+
+// County Assessor endpoint (real implementation)
+const countyAssessorRouter = require('./api/county-assessor-real');
+app.use('/api/county', countyAssessorRouter);
+
+// Redfin Market Value Integration endpoint
+const redfinMarketValueRouter = require('./api/redfin-market-value-integration');
+app.use('/api/redfin-market-value', redfinMarketValueRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
