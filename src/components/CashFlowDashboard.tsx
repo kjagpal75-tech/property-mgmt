@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Property, Transaction } from '../types/property';
 import { calculateCashFlow, formatCurrency } from '../utils/dataUtils';
 
@@ -9,6 +9,34 @@ interface CashFlowDashboardProps {
 
 const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, transactions }) => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  
+  // Calculate portfolio value using Redfin market values
+  const portfolioValue = useMemo(() => {
+    return properties.reduce((total, property) => {
+      const marketValue = property.redfinMarketValue || property.purchasePrice;
+      return total + (marketValue || 0);
+    }, 0);
+  }, [properties]);
+  
+  // Calculate individual property market values for display
+  const propertyMarketValues = useMemo(() => {
+    return properties.reduce((values, property) => {
+      const marketValue = property.redfinMarketValue || property.purchasePrice;
+      values[property.id] = marketValue || 0;
+      return values;
+    }, {} as {[propertyId: string]: number});
+  }, [properties]);
+  
+  console.log('💰 Portfolio Value Calculation:', {
+    portfolioValue,
+    propertyMarketValues,
+    properties: properties.map(p => ({
+      id: p.id,
+      name: p.name,
+      redfinMarketValue: p.redfinMarketValue,
+      purchasePrice: p.purchasePrice
+    }))
+  });
   
   // Get available years from transactions
   const availableYears = useMemo(() => {
@@ -149,8 +177,8 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
       };
       
       const expectedYearToDateRent = calculateExpectedYearToDateRent(property, 
-  selectedYear === new Date().getFullYear() ? new Date().getMonth() + 1 : 12
-    );
+        selectedYear === new Date().getFullYear() ? new Date().getMonth() + 1 : 12
+      );
       const selectedYearRentNum = Number(selectedYearRent) || 0;
       const pastDue = expectedYearToDateRent - selectedYearRentNum;
       
@@ -174,9 +202,44 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
       };
     });
   }, [properties, transactions, selectedYear]);
+  
   const cashFlowSummaries = properties.map(property => 
     calculateCashFlow(property, filteredTransactions, selectedYear)
   );
+
+  // Calculate portfolio summary values
+  const portfolioCalculations = useMemo(() => {
+    console.log('Calculating portfolio values...');
+    
+    let totalPortfolioValue = 0;
+    let totalPurchasePrice = 0;
+    
+    properties.forEach(property => {
+      // Use Redfin market value first, then purchase price
+      const currentValue = propertyMarketValues[property.id] || property?.redfinMarketValue || property?.purchasePrice || 0;
+      totalPortfolioValue += currentValue;
+      totalPurchasePrice += property?.purchasePrice || 0;
+    });
+    
+    const totalAppreciationAmount = totalPortfolioValue - totalPurchasePrice;
+    const totalAppreciation = totalPurchasePrice > 0 ? (totalAppreciationAmount / totalPurchasePrice) * 100 : 0;
+    
+    console.log('Portfolio calculations:', {
+      totalPortfolioValue,
+      totalPurchasePrice,
+      totalAppreciationAmount,
+      totalAppreciation
+    });
+    
+    return {
+      totalPortfolioValue,
+      totalPurchasePrice,
+      totalAppreciationAmount,
+      totalAppreciation
+    };
+  }, [properties, propertyMarketValues]);
+
+  const { totalPortfolioValue, totalPurchasePrice, totalAppreciationAmount, totalAppreciation } = portfolioCalculations;
 
   const totalYearlyIncome = cashFlowSummaries.reduce((sum, summary) => sum + summary.monthlyIncome, 0) * 12;
   const totalYearlyExpenses = cashFlowSummaries.reduce((sum, summary) => sum + summary.monthlyExpenses, 0) * 12;
@@ -240,17 +303,16 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         
         const monthNet: number = monthIncome - monthExpenses;
         
-        monthlyData.push([months[month], '', '', '', '', 'SUBTOTAL', '', monthNet.toFixed(2)]);
-        monthlyData.push(['', '', '', '', '', '', '', '']); // Empty row
+        monthlyData.push([months[month], '', '', '', 'SUBTOTAL', '', monthNet.toFixed(2)]);
+        monthlyData.push(['', '', '', '', '', '', '']); // Empty row
       }
     }
     
     // Add yearly summary
-    monthlyData.push(['YEARLY SUMMARY', '', '', '', '', '', '', '']);
+    monthlyData.push(['YEARLY SUMMARY', '', '', '', '', '', '']);
     cashFlowSummaries.forEach(summary => {
       monthlyData.push([
         summary.propertyName,
-        '',
         '',
         '',
         '',
@@ -391,42 +453,117 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         </div>
       </div>
 
-      {/* Rent Tracking Section */}
+      {/* Portfolio Summary Tile */}
+      <div className="bg-white shadow rounded-lg mb-6">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="text-lg font-medium text-gray-900">Portfolio Summary</h2>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Total Portfolio Value */}
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-500">Total Portfolio Value</p>
+            </div>
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-500">Total Purchase Price</p>
+              <p className="text-3xl font-bold text-gray-600">
+                {formatCurrency(formatValue(totalPurchasePrice))}
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                {properties.length} properties
+              </p>
+            </div>
+
+            {/* Appreciation */}
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-500">Total Appreciation</p>
+              <p className={`text-3xl font-bold ${totalAppreciation >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {totalAppreciation >= 0 ? '+' : ''}{formatValue(totalAppreciation).toFixed(1)}%
+              </p>
+              <p className={`text-xs mt-1 ${totalAppreciationAmount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {totalAppreciationAmount >= 0 ? '+' : ''}{formatCurrency(formatValue(totalAppreciationAmount))}
+              </p>
+            </div>
+          </div>
+
+          {/* Appreciation Bar */}
+          <div className="mt-6">
+            <div className="flex justify-between text-sm text-gray-600 mb-2">
+              <span>Purchase Price</span>
+              <span>Current Value</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-4 relative overflow-hidden">
+              <div 
+                className={`h-full rounded-full transition-all duration-500 ${
+                  totalAppreciation >= 0 ? 'bg-green-500' : 'bg-red-500'
+                }`}
+                style={{ 
+                  width: `${Math.min(Math.max(totalAppreciation + 100, 0), 200)}%`,
+                  marginLeft: totalAppreciation < 0 ? `${totalAppreciation}%` : '0'
+                }}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-xs font-medium text-gray-700">
+                    {totalAppreciation >= 0 ? '+' : ''}{formatValue(totalAppreciation).toFixed(1)}%
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Rent Tracking Table */}
       <div className="bg-white shadow rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">Monthly Rent Status</h2>
+          <h2 className="text-lg font-medium text-gray-900">Property Details</h2>
         </div>
-        {properties.length === 0 ? (
-          <div className="p-6 text-center text-gray-500">
-            No properties added yet. Add your first property to see rent tracking.
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Property
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Expected Monthly Rent
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    {selectedYear} Rent Collected
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Past Due
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {rentTracking.map((rent) => (
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Property
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Portfolio Value
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Expected Monthly Rent
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  {selectedYear} Rent Collected
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Past Due
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {rentTracking.map((rent) => {
+                const property = properties.find(p => p.id === rent.propertyId);
+                const portfolioValue = propertyMarketValues[rent.propertyId] || property?.redfinMarketValue || property?.purchasePrice || 0;
+                const hasMarketValue = !!propertyMarketValues[rent.propertyId];
+                
+                return (
                   <tr key={rent.propertyId}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {rent.propertyName}
+                      {property?.name || 'Unknown Property'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <div className="flex items-center space-x-2">
+                        <span className={`font-semibold ${hasMarketValue ? 'text-green-600' : 'text-blue-600'}`}>
+                          {formatCurrency(formatValue(portfolioValue))}
+                        </span>
+                        {hasMarketValue && (
+                          <span className="text-xs text-green-500 bg-green-50 px-1 py-0.5 rounded">
+                            Redfin Market Value
+                          </span>
+                        )}
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       {formatCurrency(formatValue(rent.expectedMonthlyRent))}
@@ -449,73 +586,70 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
                       </span>
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      {/* Properties Cash Flow Table */}
+      {/* Cash Flow Summary */}
       <div className="bg-white shadow rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">Property Cash Flow Details</h2>
+          <h2 className="text-lg font-medium text-gray-900">Cash Flow Summary</h2>
         </div>
-        {properties.length === 0 ? (
-          <div className="p-6 text-center text-gray-500">
-            No properties added yet. Add your first property to see cash flow data.
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Property
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Yearly Income
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Yearly Expenses
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Yearly Cash Flow
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ROI
-                  </th>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Property
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Monthly Income
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Monthly Expenses
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Net Cash Flow
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Yearly Cash Flow
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  ROI
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {cashFlowSummaries.map((summary) => (
+                <tr key={summary.propertyId}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {summary.propertyName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
+                    {formatCurrency(formatValue(summary.monthlyIncome * 12))}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">
+                    {formatCurrency(formatValue(summary.monthlyExpenses * 12))}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <span className={formatValue(summary.netCashFlow) >= 0 ? 'text-blue-600' : 'text-red-600'}>
+                      {formatCurrency(formatValue(summary.netCashFlow))}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {formatCurrency(formatValue(summary.yearlyCashFlow))}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-purple-600">
+                    {formatValue(summary.roi).toFixed(1)}%
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {cashFlowSummaries.map((summary) => (
-                  <tr key={summary.propertyId}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {summary.propertyName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
-                      {formatCurrency(formatValue(summary.monthlyIncome * 12))}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">
-                      {formatCurrency(formatValue(summary.monthlyExpenses * 12))}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <span className={formatValue(summary.netCashFlow) >= 0 ? 'text-blue-600' : 'text-red-600'}>
-                        {formatCurrency(formatValue(summary.netCashFlow))}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {formatCurrency(formatValue(summary.yearlyCashFlow))}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-purple-600">
-                      {formatValue(summary.roi).toFixed(1)}%
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

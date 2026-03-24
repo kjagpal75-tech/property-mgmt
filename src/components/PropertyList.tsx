@@ -46,6 +46,68 @@ const PropertyList: React.FC<PropertyListProps> = ({ properties, onEdit, onDelet
                     <span className="text-gray-500">Monthly Rent:</span>
                     <span className="ml-2 font-medium text-green-600">{formatCurrency(property.monthlyRent)}</span>
                   </div>
+                  <div>
+                    <span className="text-gray-500">Market Value:</span>
+                    <span className="ml-2 font-medium text-blue-600">
+                      {property.redfinMarketValue ? formatCurrency(property.redfinMarketValue) : 'Loading...'}
+                    </span>
+                  </div>
+                  {property.redfinConfidence && (
+                    <div>
+                      <span className="text-gray-500">Confidence:</span>
+                      <span className="ml-2 font-medium text-purple-600">
+                        {(property.redfinConfidence * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                  )}
+                  {property.redfinBedrooms && (
+                    <div>
+                      <span className="text-gray-500">Bedrooms:</span>
+                      <span className="ml-2 font-medium text-indigo-600">
+                        {property.redfinBedrooms}
+                      </span>
+                    </div>
+                  )}
+                  {property.redfinBathrooms && (
+                    <div>
+                      <span className="text-gray-500">Bathrooms:</span>
+                      <span className="ml-2 font-medium text-indigo-600">
+                        {property.redfinBathrooms}
+                      </span>
+                    </div>
+                  )}
+                  {property.redfinSquareFootage && (
+                    <div>
+                      <span className="text-gray-500">Square Feet:</span>
+                      <span className="ml-2 font-medium text-indigo-600">
+                        {property.redfinSquareFootage?.toLocaleString()}
+                      </span>
+                    </div>
+                  )}
+                  {property.redfinYearBuilt && (
+                    <div>
+                      <span className="text-gray-500">Year Built:</span>
+                      <span className="ml-2 font-medium text-indigo-600">
+                        {property.redfinYearBuilt}
+                      </span>
+                    </div>
+                  )}
+                  {property.redfinPropertyType && (
+                    <div>
+                      <span className="text-gray-500">Property Type:</span>
+                      <span className="ml-2 font-medium text-indigo-600">
+                        {property.redfinPropertyType}
+                      </span>
+                    </div>
+                  )}
+                  {property.redfinStatus && (
+                    <div>
+                      <span className="text-gray-500">Status:</span>
+                      <span className="ml-2 font-medium text-indigo-600">
+                        {property.redfinStatus}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex space-x-2 ml-4">

@@ -3,6 +3,19 @@ export interface Property {
   name: string;
   address: string;
   purchasePrice: number;
+  marketValue?: number; // Redfin market value
+  redfinMarketValue?: number | null; // Redfin market value (explicit)
+  redfinValueRange?: { low: number; high: number } | null; // Redfin value range
+  redfinRentPrice?: number | null; // Redfin rent price
+  redfinBedrooms?: number | null; // Redfin bedrooms
+  redfinBathrooms?: number | null; // Redfin bathrooms
+  redfinSquareFootage?: number | null; // Redfin square footage
+  redfinYearBuilt?: number | null; // Redfin year built
+  redfinLotSize?: number | null; // Redfin lot size
+  redfinPropertyType?: string | null; // Redfin property type
+  redfinStatus?: string | null; // Redfin status
+  redfinConfidence?: number | null; // Redfin confidence
+  redfinLastUpdated?: string | null; // Redfin last updated
   monthlyRent: number;
   currentRent: number;
   leaseStartDate?: Date;

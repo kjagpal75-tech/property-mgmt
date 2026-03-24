@@ -232,9 +232,19 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
           <DocumentUpload 
             properties={properties}
             onTransactionExtracted={(transaction) => {
-              onAddTransaction(transaction);
-              setShowDocumentUpload(false);
-              resetForm();
+              console.log('=== Transaction Manager: onTransactionExtracted ===');
+              console.log('Transaction received:', transaction);
+              try {
+                onAddTransaction(transaction);
+                console.log('onAddTransaction called successfully');
+                setShowDocumentUpload(false);
+                console.log('Document upload dialog closed');
+                resetForm();
+                console.log('Form reset completed');
+              } catch (error) {
+                console.error('Error in transaction creation flow:', error);
+                alert('Failed to create transaction. Please try again.');
+              }
             }}
           />
         ) : (

@@ -13,6 +13,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     name: string;
     address: string;
     purchasePrice: string;
+    marketValue: string;
     monthlyRent: string;
     currentRent: number;
     leaseStartDate?: Date;
@@ -21,6 +22,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     name: '',
     address: '',
     purchasePrice: '',
+    marketValue: '',
     monthlyRent: '',
     currentRent: 0,
     leaseStartDate: undefined,
@@ -33,6 +35,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
         name: editingProperty.name,
         address: editingProperty.address,
         purchasePrice: editingProperty.purchasePrice.toString(),
+        marketValue: editingProperty.marketValue?.toString() || '',
         monthlyRent: editingProperty.monthlyRent.toString(),
         currentRent: editingProperty.currentRent,
         leaseStartDate: editingProperty.leaseStartDate,
@@ -46,6 +49,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       name: '',
       address: '',
       purchasePrice: '',
+      marketValue: '',
       monthlyRent: '',
       currentRent: 0,
       leaseStartDate: undefined,
@@ -66,6 +70,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       name: formData.name,
       address: formData.address,
       purchasePrice: parseFloat(formData.purchasePrice),
+      marketValue: formData.marketValue ? parseFloat(formData.marketValue) : undefined,
       monthlyRent: parseFloat(formData.monthlyRent),
       currentRent: formData.currentRent,
       leaseStartDate: formData.leaseStartDate,
@@ -130,7 +135,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
               type="date"
               id="leaseStartDate"
               name="leaseStartDate"
-              value={formData.leaseStartDate ? formData.leaseStartDate.toISOString().split('T')[0] : ''}
+              value={formData.leaseStartDate && formData.leaseStartDate instanceof Date ? formData.leaseStartDate.toISOString().split('T')[0] : ''}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
@@ -151,6 +156,24 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               placeholder="250000"
             />
+          </div>
+
+          <div>
+            <label htmlFor="marketValue" className="block text-sm font-medium text-gray-700">
+              Current Market Value
+            </label>
+            <input
+              type="number"
+              id="marketValue"
+              name="marketValue"
+              value={formData.marketValue}
+              onChange={handleChange}
+              step="0.01"
+              min="0"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="300000"
+            />
+            <p className="mt-1 text-xs text-gray-500">Current market value (from Zillow, Redfin, appraisal, etc.)</p>
           </div>
 
           <div>

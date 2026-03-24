@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Property, Transaction } from './types/property';
 import { generateId } from './utils/dataUtils';
 import { propertiesApi, transactionsApi } from './api/api';
+import { getAllPropertiesWithRedfinMarketValues } from './redfin-integration';
 import PropertyList from './components/PropertyList';
 import PropertyForm from './components/PropertyForm';
 import CashFlowDashboard from './components/CashFlowDashboard';
@@ -17,12 +18,14 @@ function App() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [propertiesData, transactionsData] = await Promise.all([
-          propertiesApi.getAll(),
-          transactionsApi.getAll()
-        ]);
+        // Load properties with Redfin market values
+        const propertiesWithRedfin = await getAllPropertiesWithRedfinMarketValues();
         
-        setProperties(propertiesData);
+        // Set the enhanced properties directly
+        setProperties(propertiesWithRedfin as Property[]);
+        
+        // Load transactions
+        const transactionsData = await transactionsApi.getAll();
         setTransactions(transactionsData);
       } catch (error) {
         console.error('Failed to load data:', error);
@@ -68,12 +71,16 @@ function App() {
   };
 
   const addTransaction = async (transactionData: Omit<Transaction, 'id' | 'createdAt'>) => {
+    console.log('=== App: addTransaction ===');
+    console.log('Transaction data received:', transactionData);
     try {
       const newTransaction = await transactionsApi.create(transactionData);
+      console.log('Transaction created successfully:', newTransaction);
       setTransactions([...transactions, newTransaction]);
+      console.log('Transaction added to state');
     } catch (error) {
-      console.error('Failed to save transaction:', error);
-      alert('Failed to save transaction');
+      console.error('Error adding transaction:', error);
+      throw error;
     }
   };
 
