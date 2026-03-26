@@ -1849,3 +1849,279 @@ src/components/SimpleRateHistory.tsx
 
 webpack compiled with 1 warning
 No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+No issues found.
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:10:  'generateId' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CashFlowDashboard.tsx
+  Line 1:36:    'useEffect' is defined but never used                    @typescript-eslint/no-unused-vars
+  Line 59:11:   'selectedYearEnd' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 233:32:  'totalPurchasePrice' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 482:23:  'portfolioValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  Line 483:23:  'hasMarketValue' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+src/components/PropertyForm.tsx
+  Line 1:27:  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 1:38:  'Fragment' is defined but never used   @typescript-eslint/no-unused-vars
+
+src/components/SimpleRateHistory.tsx
+  Line 99:9:    'getCurrentRate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 182:15:  'result' is assigned a value but never used          @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
