@@ -1,4 +1,5 @@
 import { Property, Transaction } from '../types/property';
+import { debug } from '../utils/debug';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -11,7 +12,8 @@ export const rentHistoryApi = {
   },
   
   add: async (propertyId: string, monthlyRate: number, effectiveDate: string, reason?: string) => {
-    console.log('Adding rent history via API:', { propertyId, monthlyRate, effectiveDate, reason });
+    debug.log('🏠 API add rent history:', { propertyId, monthlyRate, effectiveDate, reason });
+    
     const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history`, {
       method: 'POST',
       headers: {
@@ -24,10 +26,15 @@ export const rentHistoryApi = {
       }),
     });
     if (!response.ok) throw new Error('Failed to add rent history');
-    return response.json();
+    
+    const result = await response.json();
+    debug.log('✅ API add rent history result:', result);
+    return result;
   },
   
   update: async (propertyId: string, rentId: string, monthlyRate: number, effectiveDate: string, reason?: string) => {
+    debug.log('🏠 API update rent history:', { propertyId, rentId, monthlyRate, effectiveDate, reason });
+    
     const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history/${rentId}`, {
       method: 'PUT',
       headers: {
@@ -40,10 +47,15 @@ export const rentHistoryApi = {
       }),
     });
     if (!response.ok) throw new Error('Failed to update rent history');
-    return response.json();
+    
+    const result = await response.json();
+    debug.log('✅ API update rent history result:', result);
+    return result;
   },
   
   delete: async (propertyId: string, rentId: string) => {
+    debug.log('🏠 API delete rent history:', { propertyId, rentId });
+    
     const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history/${rentId}`, {
       method: 'DELETE',
     });
@@ -113,6 +125,8 @@ export const propertiesApi = {
   },
 
   update: async (id: string, property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+    console.log('🏠 Frontend updating property:', { id, property: { ...property, leaseStartDate: property.leaseStartDate } });
+    
     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -127,13 +141,21 @@ export const propertiesApi = {
     });
     if (!response.ok) throw new Error('Failed to update property');
     const data = await response.json();
+    console.log('✅ Frontend property updated successfully:', data);
     return {
       ...data,
       purchasePrice: data.purchase_price,
       monthlyRent: data.monthly_rent,
       currentRent: data.current_rent || data.monthly_rent,
       leaseStartDate: data.lease_start_date,
-      rentHistory: data.rent_history || [],
+      rentHistory: (data.rent_history || []).map((rh: any) => ({
+        id: rh.id,
+        monthlyRate: rh.monthly_rate,
+        effectiveDate: rh.effective_date,
+        endDate: rh.end_date,
+        reason: rh.reason,
+        createdAt: rh.created_at
+      })),
       createdAt: data.created_at,
       updatedAt: data.updated_at
     };

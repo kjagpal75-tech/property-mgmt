@@ -31,6 +31,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
 
   React.useEffect(() => {
     if (editingProperty) {
+      console.log('🏠 Editing property data:', { id: editingProperty.id, leaseStartDate: editingProperty.leaseStartDate });
+      
+      // Convert lease start date string to Date object if it exists
+      const leaseStartDate = editingProperty.leaseStartDate ? new Date(editingProperty.leaseStartDate) : undefined;
+      console.log('🏠 Converted lease start date:', leaseStartDate);
+      
       setFormData({
         name: editingProperty.name,
         address: editingProperty.address,
@@ -38,9 +44,10 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
         marketValue: editingProperty.marketValue?.toString() || '',
         monthlyRent: editingProperty.monthlyRent.toString(),
         currentRent: editingProperty.currentRent,
-        leaseStartDate: editingProperty.leaseStartDate,
+        leaseStartDate: leaseStartDate,
         rentHistory: editingProperty.rentHistory || [],
       });
+      console.log('🏠 Form data set:', { leaseStartDate });
     }
   }, [editingProperty]);
 

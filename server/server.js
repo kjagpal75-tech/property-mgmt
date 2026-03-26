@@ -1,7 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 const db = require('./db');
+const { Pool } = require('pg');
 const { v4: uuidv4 } = require('uuid');
+require('dotenv').config();
+
+// Debug utility
+const debug = {
+  log: (...args) => {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(...args);
+    }
+  },
+  error: (...args) => {
+    // Always log errors, even in production
+    console.error(...args);
+  }
+};
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -92,13 +107,17 @@ app.put('/api/properties/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { name, address, purchase_price, monthly_rent, lease_start_date } = req.body;
+    console.log('🏠 Updating property:', { id, name, address, purchase_price, monthly_rent, lease_start_date });
+    
     const result = await db.query(
       'UPDATE properties SET name = $1, address = $2, purchase_price = $3, monthly_rent = $4, lease_start_date = $5 WHERE id = $6 RETURNING *',
       [name, address, purchase_price, monthly_rent, lease_start_date, id]
     );
+    
+    console.log('✅ Property updated successfully:', result.rows[0]);
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(err);
+    console.error('❌ Error updating property:', err);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -286,15 +305,19 @@ app.put('/api/properties/:id/rent-history/:rentId', async (req, res) => {
   try {
     const { id, rentId } = req.params;
     const { monthly_rate, effective_date, reason } = req.body;
-    console.log('Updating rent history:', { property_id: id, rent_id, monthly_rate, effective_date, reason });
+    debug.log('🏠 Backend updating rent history:', { property_id: id, rent_id: rentId, monthly_rate, effective_date, reason });
+    debug.log('🏠 Request params:', { id, rentId });
+    debug.log('🏠 Request body:', req.body);
     
     const result = await db.query(
       'UPDATE rental_rate_history SET monthly_rate = $1, effective_date = $2, reason = $3 WHERE id = $4 AND property_id = $5 RETURNING *',
       [monthly_rate, effective_date, reason || 'Rate update', rentId, id]
     );
+    
+    debug.log('✅ Database update result:', result.rows);
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(err);
+    debug.error('❌ Error updating rent history:', err);
     res.status(500).json({ error: 'Server error' });
   }
 });

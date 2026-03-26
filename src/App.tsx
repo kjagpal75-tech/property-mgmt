@@ -67,8 +67,16 @@ function App() {
   const addProperty = async (propertyData: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>) => {
   try {
     if (editingProperty) {
+      console.log('🏠 Updating property in App.tsx:', { editingProperty: editingProperty.id, propertyData });
       const updatedProperty = await propertiesApi.update(editingProperty.id, propertyData);
-      setProperties(properties.map(p => p.id === editingProperty.id ? updatedProperty : p));
+      console.log('✅ Updated property from API:', updatedProperty);
+      
+      // Refresh all properties from database to get latest values
+      const refreshedProperties = await propertiesApi.getAll();
+      console.log('🔄 Refreshed properties from database:', refreshedProperties.map(p => ({ id: p.id, name: p.name, leaseStartDate: p.leaseStartDate })));
+      
+      setProperties(refreshedProperties);
+      console.log('✅ Properties state updated with fresh data');
       setEditingProperty(null);
     } else {
       const newProperty = await propertiesApi.create(propertyData);

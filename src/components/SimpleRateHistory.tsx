@@ -117,20 +117,12 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
   };
 
   const handleAddRate = async () => {
-    console.log('handleAddRate called with:', { newRate, effectiveDate });
-    console.log('Original effectiveDate value:', effectiveDate);
-    console.log('effectiveDate type:', typeof effectiveDate);
-    console.log('effectiveDate length:', effectiveDate.length);
-    
     if (newRate && effectiveDate) {
       const rate = parseFloat(newRate);
       
       try {
-        console.log('Calling rentHistoryApi.add with:', { propertyId: property.id, rate, effectiveDate, reason: 'Rate update' });
-        
         // Call the actual API to add rent history
         const result = await rentHistoryApi.add(property.id, rate, effectiveDate, 'Rate update');
-        console.log('API result:', result);
         
         // Update local state with the result
         const newEntry = {
@@ -141,23 +133,16 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
           reason: result.reason,
           createdAt: result.created_at
         };
-        console.log('Creating new entry:', newEntry);
-        console.log('newEntry.effectiveDate:', newEntry.effectiveDate);
-        console.log('newEntry.effectiveDate type:', typeof newEntry.effectiveDate);
         
         // Find the current active rate (the one without endDate) and set its endDate to the new effective date
         const updatedHistory = rateHistory.map(item => {
           if (!item.endDate) {
-            console.log('Setting end date on current rate:', { id: item.id, endDate: effectiveDate });
             return { ...item, endDate: effectiveDate };
           }
           return item;
         });
         
-        console.log('Updated history before setting:', updatedHistory);
-        console.log('About to setRateHistory with:', [...updatedHistory, newEntry]);
         setRateHistory([...updatedHistory, newEntry]);
-        console.log('Rate history updated successfully');
         
         // Call the onRateUpdate callback for backward compatibility
         onRateUpdate(property.id, rate, effectiveDate, 'Rate update');
@@ -175,6 +160,9 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
   };
 
   const handleEditRate = (rateId: string, newRate: number, newEffectiveDate: string, newReason?: string) => {
+    // Convert database date format to HTML date input format (YYYY-MM-DD)
+    const formattedDate = newEffectiveDate ? new Date(newEffectiveDate).toISOString().split('T')[0] : '';
+    
     setEditingRate({
       id: rateId,
       monthlyRate: newRate,
@@ -183,21 +171,32 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
       createdAt: new Date().toISOString()
     });
     setNewRate(newRate.toString());
-    setEffectiveDate(newEffectiveDate);
+    setEffectiveDate(formattedDate);
     setShowEditForm(true);
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
     if (editingRate && newRate && effectiveDate) {
-      const updatedHistory = rateHistory.map(item => 
-        item.id === editingRate.id ? { ...item, monthlyRate: parseFloat(newRate), effectiveDate: effectiveDate, reason: editingRate.reason } : item
-      );
-      setRateHistory(updatedHistory);
-      setEditingRate(null);
-      setNewRate('');
-      setEffectiveDate('');
-      setShowEditForm(false);
-      alert('Rate updated successfully');
+      try {
+        // Update database
+        const result = await rentHistoryApi.update(property.id, editingRate.id, parseFloat(newRate), effectiveDate, editingRate.reason);
+        
+        // Update local state
+        const updatedHistory = rateHistory.map(item => 
+          item.id === editingRate.id ? { ...item, monthlyRate: parseFloat(newRate), effectiveDate: effectiveDate, reason: editingRate.reason } : item
+        );
+        setRateHistory(updatedHistory);
+        
+        setEditingRate(null);
+        setNewRate('');
+        setEffectiveDate('');
+        setShowEditForm(false);
+        
+        alert('Rate updated successfully');
+      } catch (error) {
+        console.error('Error updating rent history:', error);
+        alert('Failed to update rate. Please try again.');
+      }
     }
   };
 
@@ -260,13 +259,23 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
                       Edit
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         // Custom confirmation dialog
                         const shouldDelete = window.confirm('Are you sure you want to delete this rate? This action cannot be undone.');
                         if (shouldDelete) {
-                          const updatedHistory = rateHistory.filter(item => item.id !== rate.id);
-                          setRateHistory(updatedHistory);
-                          alert('Rate deleted successfully');
+                          try {
+                            // Delete from database
+                            await rentHistoryApi.delete(property.id, rate.id);
+                            
+                            // Update local state
+                            const updatedHistory = rateHistory.filter(item => item.id !== rate.id);
+                            setRateHistory(updatedHistory);
+                            
+                            alert('Rate deleted successfully');
+                          } catch (error) {
+                            console.error('Error deleting rent history:', error);
+                            alert('Failed to delete rate. Please try again.');
+                          }
                         }
                       }}
                       className="text-red-600 hover:text-red-800 text-xs font-medium"
