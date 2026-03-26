@@ -42,6 +42,18 @@ db.query(`
   }
 });
 
+// Add redfin_url column to properties table if it doesn't exist
+db.query(`
+  ALTER TABLE properties 
+  ADD COLUMN IF NOT EXISTS redfin_url TEXT
+`).catch(err => {
+  if (err) {
+    console.error('Error adding redfin_url column:', err);
+  } else {
+    console.log('✅ redfin_url column ensured in properties table');
+  }
+});
+
 // Properties endpoints
 app.get('/api/properties', async (req, res) => {
   try {
@@ -71,19 +83,36 @@ app.get('/api/properties', async (req, res) => {
 });
 
 // Update property market value
+app.put('/api/properties/:id/redfin-url', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { redfin_url } = req.body;
+    
+    const result = await db.query(
+      'UPDATE properties SET redfin_url = $1 WHERE id = $2 RETURNING *',
+      [redfin_url, id]
+    );
+    
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('❌ Error updating redfin URL:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.put('/api/properties/:id/market-value', async (req, res) => {
   try {
     const { id } = req.params;
     const { market_value } = req.body;
-    console.log('Updating market value for property:', { id, market_value });
     
     const result = await db.query(
       'UPDATE properties SET market_value = $1 WHERE id = $2 RETURNING *',
       [market_value, id]
     );
+    
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(err);
+    console.error('❌ Error updating market value:', err);
     res.status(500).json({ error: 'Server error' });
   }
 });

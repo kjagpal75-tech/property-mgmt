@@ -45,6 +45,29 @@ function App() {
               console.error(`❌ Error storing market value for ${property.name}:`, error);
             }
           }
+          
+          // Store Redfin URL in database for each property
+          if (property.redfinUrl) {
+            try {
+              const response = await fetch(`${API_BASE_URL}/properties/${property.id}/redfin-url`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  redfin_url: property.redfinUrl
+                })
+              });
+              
+              if (response.ok) {
+                console.log(`✅ Stored Redfin URL for ${property.name}:`, property.redfinUrl);
+              } else {
+                console.error(`❌ Failed to store Redfin URL for ${property.name}:`, response.statusText);
+              }
+            } catch (error) {
+              console.error(`❌ Error storing Redfin URL for ${property.name}:`, error);
+            }
+          }
         }
         
         // Reload properties from database to get updated market values

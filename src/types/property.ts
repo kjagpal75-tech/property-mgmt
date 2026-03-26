@@ -4,6 +4,7 @@ export interface Property {
   address: string;
   purchasePrice: number;
   marketValue?: number; // Database market value (from market_value column)
+  redfinUrl?: string; // Redfin URL (from redfin_url column)
   redfinMarketValue?: number | null; // Redfin market value (explicit)
   redfinValueRange?: { low: number; high: number } | null; // Redfin value range
   redfinRentPrice?: number | null; // Redfin rent price

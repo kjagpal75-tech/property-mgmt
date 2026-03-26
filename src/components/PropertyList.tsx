@@ -52,6 +52,19 @@ const PropertyList: React.FC<PropertyListProps> = ({ properties, onEdit, onDelet
                       {property.redfinMarketValue ? formatCurrency(property.redfinMarketValue) : 'Loading...'}
                     </span>
                   </div>
+                  {property.redfinUrl && (
+                    <div className="col-span-2">
+                      <span className="text-gray-500">Redfin URL:</span>
+                      <a 
+                        href={property.redfinUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="ml-2 font-medium text-blue-600 hover:text-blue-800 underline"
+                      >
+                        View on Redfin
+                      </a>
+                    </div>
+                  )}
                   {property.redfinConfidence && (
                     <div>
                       <span className="text-gray-500">Confidence:</span>

@@ -17,6 +17,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     monthlyRent: string;
     currentRent: number;
     leaseStartDate?: Date;
+    redfinUrl?: string;
     rentHistory: Property['rentHistory'];
   }>({
     name: '',
@@ -26,6 +27,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     monthlyRent: '',
     currentRent: 0,
     leaseStartDate: undefined,
+    redfinUrl: '',
     rentHistory: [],
   });
 
@@ -45,9 +47,23 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
         monthlyRent: editingProperty.monthlyRent.toString(),
         currentRent: editingProperty.currentRent,
         leaseStartDate: leaseStartDate,
-        rentHistory: editingProperty.rentHistory || [],
+        redfinUrl: editingProperty.redfinUrl || '',
+        rentHistory: editingProperty.rentHistory || []
       });
       console.log('🏠 Form data set:', { leaseStartDate });
+    } else {
+      // Reset form when not editing
+      setFormData({
+        name: '',
+        address: '',
+        purchasePrice: '',
+        marketValue: '',
+        monthlyRent: '',
+        currentRent: 0,
+        leaseStartDate: undefined,
+        redfinUrl: '',
+        rentHistory: []
+      });
     }
   }, [editingProperty]);
 
@@ -60,6 +76,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       monthlyRent: '',
       currentRent: 0,
       leaseStartDate: undefined,
+      redfinUrl: '',
       rentHistory: [],
     });
     onCancel?.();
@@ -81,6 +98,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       monthlyRent: parseFloat(formData.monthlyRent),
       currentRent: formData.currentRent,
       leaseStartDate: formData.leaseStartDate,
+      redfinUrl: formData.redfinUrl || undefined,
       rentHistory: formData.rentHistory,
     });
 
@@ -146,6 +164,24 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
+          </div>
+
+          <div>
+            <label htmlFor="redfinUrl" className="block text-sm font-medium text-gray-700">
+              Redfin URL (Optional)
+            </label>
+            <input
+              type="url"
+              id="redfinUrl"
+              name="redfinUrl"
+              value={formData.redfinUrl || ''}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="https://www.redfin.com/..."
+            />
+            <p className="mt-1 text-sm text-gray-500">
+              Enter the Redfin URL for this property (optional)
+            </p>
           </div>
 
           <div>

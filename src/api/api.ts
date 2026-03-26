@@ -80,6 +80,7 @@ export const propertiesApi = {
       ...p,
       purchasePrice: p.purchase_price,
       marketValue: p.market_value || p.marketValue, // Handle both database column names
+      redfinUrl: p.redfin_url, // Map redfin_url from database
       monthlyRent: p.monthly_rent,
       currentRent: p.current_rent || p.monthly_rent,
       leaseStartDate: p.lease_start_date,
