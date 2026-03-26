@@ -14,6 +14,7 @@ function App() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [activeView, setActiveView] = useState<'dashboard' | 'properties' | 'transactions' | 'backup'>('dashboard');
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
+  const [showPropertyForm, setShowPropertyForm] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -78,9 +79,11 @@ function App() {
       setProperties(refreshedProperties);
       console.log('✅ Properties state updated with fresh data');
       setEditingProperty(null);
+      setShowPropertyForm(false); // Hide form after updating
     } else {
       const newProperty = await propertiesApi.create(propertyData);
       setProperties([...properties, newProperty]);
+      setShowPropertyForm(false); // Hide form after adding
     }
   } catch (error) {
     console.error('Failed to save property:', error);
@@ -101,10 +104,12 @@ function App() {
 
   const editProperty = (property: Property) => {
     setEditingProperty(property);
+    setShowPropertyForm(true); // Show form when editing
   };
 
   const cancelEdit = () => {
     setEditingProperty(null);
+    setShowPropertyForm(false); // Hide form when canceling
   };
 
   const addTransaction = async (transactionData: Omit<Transaction, 'id' | 'createdAt'>) => {
@@ -207,11 +212,29 @@ function App() {
         )}
         {activeView === 'properties' && (
           <div className="space-y-8">
-            <PropertyForm 
-              onSubmit={addProperty} 
-              editingProperty={editingProperty || undefined}
-              onCancel={cancelEdit}
-            />
+            {/* Add Property Toggle Button */}
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Properties</h2>
+              <button
+                onClick={() => setShowPropertyForm(!showPropertyForm)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                {showPropertyForm ? 'Hide Add Property' : 'Add New Property'}
+              </button>
+            </div>
+            
+            {/* Property Form - Conditionally Rendered */}
+            {showPropertyForm && (
+              <div className="bg-white shadow rounded-lg p-6 border border-gray-200">
+                <PropertyForm 
+                  onSubmit={addProperty} 
+                  editingProperty={editingProperty || undefined}
+                  onCancel={cancelEdit}
+                />
+              </div>
+            )}
+            
+            {/* Property List */}
             <PropertyList 
               properties={properties} 
               onEdit={editProperty}
