@@ -17,6 +17,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     monthlyRent: string;
     currentRent: number;
     leaseStartDate?: Date;
+    redfinUrl: string;
     rentHistory: Property['rentHistory'];
   }>({
     name: '',
@@ -26,6 +27,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
     monthlyRent: '',
     currentRent: 0,
     leaseStartDate: undefined,
+    redfinUrl: '',
     rentHistory: [],
   });
 
@@ -40,11 +42,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       setFormData({
         name: editingProperty.name,
         address: editingProperty.address,
-        purchasePrice: editingProperty.purchasePrice.toString(),
+        purchasePrice: editingProperty.purchasePrice?.toString() || '',
         marketValue: editingProperty.marketValue?.toString() || '',
-        monthlyRent: editingProperty.monthlyRent.toString(),
+        monthlyRent: editingProperty.monthlyRent?.toString() || '',
         currentRent: editingProperty.currentRent,
         leaseStartDate: leaseStartDate,
+        redfinUrl: editingProperty.redfinUrl?.toString() || '',
         rentHistory: editingProperty.rentHistory || [],
       });
       console.log('🏠 Form data set:', { leaseStartDate });
@@ -60,6 +63,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
       monthlyRent: '',
       currentRent: 0,
       leaseStartDate: undefined,
+      redfinUrl: '',
       rentHistory: [],
     });
     onCancel?.();
@@ -181,6 +185,22 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, editingProperty, 
               placeholder="300000"
             />
             <p className="mt-1 text-xs text-gray-500">Current market value (from Zillow, Redfin, appraisal, etc.)</p>
+          </div>
+
+          <div>
+            <label htmlFor="redfinUrl" className="block text-sm font-medium text-gray-700">
+              Redfin URL
+            </label>
+            <input
+              type="text"
+              id="redfinUrl"
+              name="redfinUrl"
+              value={formData.redfinUrl}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="https://www.redfin.com/..."
+            />
+            <p className="mt-1 text-xs text-gray-500">Redfin property URL for automatic market value updates</p>
           </div>
 
           <div>

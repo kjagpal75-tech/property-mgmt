@@ -14,44 +14,16 @@ function App() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [activeView, setActiveView] = useState<'dashboard' | 'properties' | 'transactions' | 'backup'>('dashboard');
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
+  const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        // Load properties with Redfin market values
-        const propertiesWithRedfin = await getAllPropertiesWithRedfinMarketValues();
-        
-        // Store market values in database for each property
-        for (const property of propertiesWithRedfin) {
-          if (property.redfinMarketValue && property.redfinMarketValue > 0) {
-            try {
-              const response = await fetch(`${API_BASE_URL}/properties/${property.id}/market-value`, {
-                method: 'PUT',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  market_value: property.redfinMarketValue
-                })
-              });
-              
-              if (response.ok) {
-                console.log(`✅ Stored market value for ${property.name}:`, property.redfinMarketValue);
-              } else {
-                console.error(`❌ Failed to store market value for ${property.name}:`, response.statusText);
-              }
-            } catch (error) {
-              console.error(`❌ Error storing market value for ${property.name}:`, error);
-            }
-          }
-        }
-        
-        // Reload properties from database to get updated market values
+        // Load properties from database
         const updatedProperties = await propertiesApi.getAll();
-        console.log('🔄 Reloaded properties from database:', updatedProperties.map(p => ({ id: p.id, name: p.name, marketValue: p.marketValue })));
+        console.log('🔄 Loaded properties from database:', updatedProperties.map(p => ({ id: p.id, name: p.name, leaseStartDate: p.leaseStartDate })));
         
-        // Set enhanced properties directly
-        setProperties(updatedProperties as Property[]);
+        setProperties(updatedProperties);
         
         // Load transactions
         const transactionsData = await transactionsApi.getAll();
@@ -71,6 +43,10 @@ function App() {
       const updatedProperty = await propertiesApi.update(editingProperty.id, propertyData);
       console.log('✅ Updated property from API:', updatedProperty);
       
+      // Add small delay to ensure database update completes before refreshing
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      console.log('=== ABOUT TO CALL PROPERTIES API GET ===');
       // Refresh all properties from database to get latest values
       const refreshedProperties = await propertiesApi.getAll();
       console.log('🔄 Refreshed properties from database:', refreshedProperties.map(p => ({ id: p.id, name: p.name, leaseStartDate: p.leaseStartDate })));
@@ -81,6 +57,7 @@ function App() {
     } else {
       const newProperty = await propertiesApi.create(propertyData);
       setProperties([...properties, newProperty]);
+      setShowAddForm(false);
     }
   } catch (error) {
     console.error('Failed to save property:', error);
@@ -105,6 +82,7 @@ function App() {
 
   const cancelEdit = () => {
     setEditingProperty(null);
+    setShowAddForm(false);
   };
 
   const addTransaction = async (transactionData: Omit<Transaction, 'id' | 'createdAt'>) => {
@@ -207,11 +185,23 @@ function App() {
         )}
         {activeView === 'properties' && (
           <div className="space-y-8">
-            <PropertyForm 
-              onSubmit={addProperty} 
-              editingProperty={editingProperty || undefined}
-              onCancel={cancelEdit}
-            />
+            {(editingProperty || showAddForm) && (
+              <div className="bg-white shadow rounded-lg p-6 border border-gray-200">
+                <PropertyForm 
+                  onSubmit={addProperty} 
+                  editingProperty={editingProperty || undefined}
+                  onCancel={cancelEdit}
+                />
+              </div>
+            )}
+            {!editingProperty && !showAddForm && (
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Add New Property
+              </button>
+            )}
             <PropertyList 
               properties={properties} 
               onEdit={editProperty}

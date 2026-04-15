@@ -12,6 +12,20 @@ export const formatCurrency = (amount: number): string => {
 };
 
 export const calculateCashFlow = (property: Property, transactions: Transaction[], selectedYear?: number): CashFlowSummary => {
+  // Add safety check for undefined properties
+  if (!property) {
+    console.error('calculateCashFlow called with undefined property');
+    return {
+      propertyId: '',
+      propertyName: '',
+      monthlyIncome: 0,
+      monthlyExpenses: 0,
+      netCashFlow: 0,
+      yearlyCashFlow: 0,
+      roi: 0,
+    };
+  }
+  
   // Filter transactions for this property AND selected year
   const propertyTransactions = transactions.filter(t => 
     t.propertyId === property.id && 
@@ -23,12 +37,12 @@ export const calculateCashFlow = (property: Property, transactions: Transaction[
   const expenseTransactions = propertyTransactions.filter(t => t.type === 'expense');
 
   // Calculate totals - ONLY use actual transaction data
-  const actualIncome = incomeTransactions.reduce((sum, t) => sum + parseFloat(t.amount.toString()), 0);
-  const actualExpenses = expenseTransactions.reduce((sum, t) => sum + parseFloat(t.amount.toString()), 0);
+  const actualIncome = incomeTransactions.reduce((sum, t) => sum + (t.amount ? parseFloat(String(t.amount)) : 0), 0);
+  const actualExpenses = expenseTransactions.reduce((sum, t) => sum + (t.amount ? parseFloat(String(t.amount)) : 0), 0);
 
   const netCashFlow = actualIncome - actualExpenses;
   const yearlyCashFlow = netCashFlow; // Already based on actual yearly data
-  const purchasePrice = parseFloat(property.purchasePrice.toString());
+  const purchasePrice = property.purchasePrice ? parseFloat(String(property.purchasePrice)) : 0;
   const roi = purchasePrice > 0 ? (yearlyCashFlow / purchasePrice) * 100 : 0;
 
   return {

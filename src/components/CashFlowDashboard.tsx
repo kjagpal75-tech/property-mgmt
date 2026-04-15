@@ -73,7 +73,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         (selectedYear !== new Date().getFullYear() || new Date(t.date).getMonth() + 1 <= currentMonth)
       );
       
-      const selectedYearRent = selectedYearRentTransactions.reduce((sum, t) => sum + parseFloat(t.amount.toString()), 0);
+      const selectedYearRent = selectedYearRentTransactions.reduce((sum, t) => sum + (t.amount ? parseFloat(String(t.amount)) : 0), 0);
       console.log('Selected year rent transactions:', selectedYearRentTransactions);
       console.log('Selected year rent total:', selectedYearRent);
       
@@ -203,9 +203,22 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
     });
   }, [properties, transactions, selectedYear]);
   
-  const cashFlowSummaries = properties.map(property => 
-    calculateCashFlow(property, filteredTransactions, selectedYear)
-  );
+  const cashFlowSummaries = properties.map(property => {
+    try {
+      return calculateCashFlow(property, filteredTransactions, selectedYear);
+    } catch (error) {
+      console.error('Error calculating cash flow for property:', property.name, error);
+      return {
+        propertyId: property.id,
+        propertyName: property.name,
+        monthlyIncome: 0,
+        monthlyExpenses: 0,
+        netCashFlow: 0,
+        yearlyCashFlow: 0,
+        roi: 0,
+      };
+    }
+  });
 
   // Calculate portfolio summary values - SIMPLE MATH
   const portfolioCalculations = useMemo(() => {
@@ -235,7 +248,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
   const totalYearlyIncome = cashFlowSummaries.reduce((sum, summary) => sum + summary.monthlyIncome, 0) * 12;
   const totalYearlyExpenses = cashFlowSummaries.reduce((sum, summary) => sum + summary.monthlyExpenses, 0) * 12;
   const totalYearlyCashFlow = totalYearlyIncome - totalYearlyExpenses;
-  const totalInvestment = properties.reduce((sum, property) => sum + parseFloat(property.purchasePrice.toString()), 0);
+  const totalInvestment = properties.reduce((sum, property) => sum + (property.purchasePrice ? parseFloat(String(property.purchasePrice)) : 0), 0);
   const totalRoi = totalInvestment > 0 ? (totalYearlyCashFlow / totalInvestment) * 100 : 0;
 
   // Export functionality
@@ -264,7 +277,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         monthTransactions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         
         monthTransactions.forEach(transaction => {
-          const amount = parseFloat(transaction.amount.toString());
+          const amount = transaction.amount ? parseFloat(String(transaction.amount)) : 0;
           const transactionType = transaction.type === 'income' ? 'Income' : 'Expense';
           const formattedAmount = transaction.type === 'income' ? amount.toFixed(2) : `-${amount.toFixed(2)}`;
           
@@ -455,9 +468,6 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Property
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Portfolio Value
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Market Value

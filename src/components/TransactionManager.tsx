@@ -50,7 +50,7 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
         propertyId: editingTransaction.propertyId,
         type: editingTransaction.type,
         category: editingTransaction.category as TransactionCategory,
-        amount: editingTransaction.amount.toString(),
+        amount: editingTransaction.amount?.toString() || '0',
         description: editingTransaction.description,
         date: new Date(editingTransaction.date).toISOString().split('T')[0],
       });
@@ -163,7 +163,7 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
         transaction.description.toLowerCase().includes(filters.description.toLowerCase());
       
       const amountMatch = !filters.amount || 
-        parseFloat(transaction.amount.toString()).toString().includes(filters.amount);
+        (transaction.amount ? parseFloat(String(transaction.amount)) : 0).toString().includes(filters.amount);
       
       return dateMatch && propertyMatch && typeMatch && categoryMatch && descriptionMatch && amountMatch;
     });
@@ -183,8 +183,8 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
         aValue = new Date(a.date).getTime();
         bValue = new Date(b.date).getTime();
       } else if (sortConfig.key === 'amount') {
-        aValue = parseFloat(a.amount.toString());
-        bValue = parseFloat(b.amount.toString());
+        aValue = a.amount ? parseFloat(String(a.amount)) : 0;
+        bValue = b.amount ? parseFloat(String(b.amount)) : 0;
       } else {
         aValue = a[sortConfig.key as keyof Transaction];
         bValue = b[sortConfig.key as keyof Transaction];

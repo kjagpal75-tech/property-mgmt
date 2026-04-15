@@ -76,13 +76,11 @@ export const propertiesApi = {
     }
     const data = await response.json();
     console.log('🔍 Raw data from backend:', data);
+    
+    // Server now returns data in correct format, so just return it directly
     const mappedData = data.map((p: any) => ({
       ...p,
-      purchasePrice: p.purchase_price,
-      marketValue: p.market_value || p.marketValue, // Handle both database column names
-      monthlyRent: p.monthly_rent,
-      currentRent: p.current_rent || p.monthly_rent,
-      leaseStartDate: p.lease_start_date,
+      redfinUrl: p.redfin_url || p.redfinUrl, // Handle both naming conventions
       rentHistory: (p.rent_history || []).map((rh: any) => ({
         id: rh.id,
         monthlyRate: rh.monthly_rate,
@@ -90,9 +88,7 @@ export const propertiesApi = {
         endDate: rh.end_date,
         reason: rh.reason,
         createdAt: rh.created_at
-      })),
-      createdAt: p.created_at,
-      updatedAt: p.updated_at
+      }))
     }));
     return mappedData;
   },

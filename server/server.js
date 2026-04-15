@@ -56,10 +56,23 @@ app.get('/api/properties', async (req, res) => {
           [property.id]
         );
         
-        return {
-          ...property,
+        const propertyData = {
+          id: property.id,
+          name: property.name,
+          address: property.address,
+          purchasePrice: parseFloat(property.purchase_price) || 0,
+          marketValue: property.market_value ? parseFloat(property.market_value) : undefined,
+          redfinUrl: property.redfin_url,
+          redfinMarketValue: property.redfin_market_value ? parseFloat(property.redfin_market_value) : null,
+          monthlyRent: parseFloat(property.monthly_rent) || 0,
+          currentRent: parseFloat(property.current_rent) || 0,
+          leaseStartDate: property.lease_start_date ? new Date(property.lease_start_date) : undefined,
+          createdAt: new Date(property.created_at),
+          updatedAt: new Date(property.updated_at),
           rent_history: rentHistoryResult.rows
         };
+        console.log('Server returning property:', { id: property.id, name: property.name, redfinUrl: propertyData.redfinUrl });
+        return propertyData;
       })
     );
     
