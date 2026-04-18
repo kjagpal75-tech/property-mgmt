@@ -1,7 +1,8 @@
 import { Property, Transaction } from '../types/property';
 import { debug } from '../utils/debug';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+export const API_BASE_URL = 'http://localhost:5000/api';
+export const AUTH_BASE_URL = 'http://localhost:5001/api';
 
 // Rent History API
 export const rentHistoryApi = {
@@ -66,9 +67,16 @@ export const rentHistoryApi = {
 
 // Properties API
 export const propertiesApi = {
-  getAll: async (): Promise<Property[]> => {
+  getAll: async (token?: string | null): Promise<Property[]> => {
     console.log('🔍 Fetching properties from:', `${API_BASE_URL}/properties`);
-    const response = await fetch(`${API_BASE_URL}/properties`);
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    const response = await fetch(`${API_BASE_URL}/properties`, { headers });
     console.log('🔍 Response status:', response.status);
     if (!response.ok) {
       console.error('❌ Failed to fetch properties:', response.statusText);
@@ -93,17 +101,25 @@ export const propertiesApi = {
     return mappedData;
   },
 
-  create: async (property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
+  create: async (property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>, token?: string | null): Promise<Property> => {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
     const response = await fetch(`${API_BASE_URL}/properties`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         ...property,
         purchase_price: property.purchasePrice,
+        market_value: property.marketValue,
         monthly_rent: property.monthlyRent,
-        current_rent: property.currentRent || property.monthlyRent,
+        current_rent: property.currentRent,
         lease_start_date: property.leaseStartDate,
-        rent_history: property.rentHistory || [],
+        redfin_url: property.redfinUrl
       }),
     });
     if (!response.ok) throw new Error('Failed to create property');
@@ -111,82 +127,97 @@ export const propertiesApi = {
     return {
       ...data,
       purchasePrice: data.purchase_price,
+      marketValue: data.market_value,
       monthlyRent: data.monthly_rent,
-      currentRent: data.current_rent || data.monthly_rent,
+      currentRent: data.current_rent,
       leaseStartDate: data.lease_start_date,
-      rentHistory: data.rent_history || [],
-      createdAt: data.created_at,
-      updatedAt: data.updated_at
+      redfinUrl: data.redfin_url
     };
   },
 
-  update: async (id: string, property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Promise<Property> => {
-    console.log('🏠 Frontend updating property:', { id, property: { ...property, leaseStartDate: property.leaseStartDate } });
+  update: async (id: string, property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>, token?: string | null): Promise<Property> => {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
     
     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         ...property,
         purchase_price: property.purchasePrice,
+        market_value: property.marketValue,
         monthly_rent: property.monthlyRent,
-        current_rent: property.currentRent || property.monthlyRent,
+        current_rent: property.currentRent,
         lease_start_date: property.leaseStartDate,
-        rent_history: property.rentHistory || [],
+        redfin_url: property.redfinUrl
       }),
     });
     if (!response.ok) throw new Error('Failed to update property');
     const data = await response.json();
-    console.log('✅ Frontend property updated successfully:', data);
     return {
       ...data,
       purchasePrice: data.purchase_price,
+      marketValue: data.market_value,
       monthlyRent: data.monthly_rent,
-      currentRent: data.current_rent || data.monthly_rent,
+      currentRent: data.current_rent,
       leaseStartDate: data.lease_start_date,
-      rentHistory: (data.rent_history || []).map((rh: any) => ({
-        id: rh.id,
-        monthlyRate: rh.monthly_rate,
-        effectiveDate: rh.effective_date,
-        endDate: rh.end_date,
-        reason: rh.reason,
-        createdAt: rh.created_at
-      })),
-      createdAt: data.created_at,
-      updatedAt: data.updated_at
+      redfinUrl: data.redfin_url
     };
   },
 
-  delete: async (id: string): Promise<void> => {
+  delete: async (id: string, token?: string | null) => {
+    const headers: HeadersInit = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
     const response = await fetch(`${API_BASE_URL}/properties/${id}`, {
       method: 'DELETE',
+      headers,
     });
     if (!response.ok) throw new Error('Failed to delete property');
-  },
+    return response.json();
+  }
 };
 
 // Transactions API
 export const transactionsApi = {
-  getAll: async (): Promise<Transaction[]> => {
-    const response = await fetch(`${API_BASE_URL}/transactions`);
+  getAll: async (token?: string | null): Promise<Transaction[]> => {
+    const headers: HeadersInit = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    const response = await fetch(`${API_BASE_URL}/transactions`, { headers });
     if (!response.ok) throw new Error('Failed to fetch transactions');
     const data = await response.json();
     return data.map((t: any) => ({
       ...t,
       propertyId: t.property_id,
-      createdAt: t.created_at,
-      date: new Date(t.date)
+      date: new Date(t.date),
+      amount: parseFloat(t.amount)
     }));
   },
 
-  create: async (transaction: Omit<Transaction, 'id' | 'createdAt'>): Promise<Transaction> => {
+  create: async (transaction: Omit<Transaction, 'id' | 'createdAt'>, token?: string | null): Promise<Transaction> => {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
     const response = await fetch(`${API_BASE_URL}/transactions`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         ...transaction,
         property_id: transaction.propertyId,
-        date: transaction.date.toISOString().split('T')[0],
+        amount: transaction.amount.toString()
       }),
     });
     if (!response.ok) throw new Error('Failed to create transaction');
@@ -194,19 +225,26 @@ export const transactionsApi = {
     return {
       ...data,
       propertyId: data.property_id,
-      createdAt: data.created_at,
-      date: new Date(data.date)
+      date: new Date(data.date),
+      amount: parseFloat(data.amount)
     };
   },
 
-  update: async (id: string, transaction: Omit<Transaction, 'id' | 'createdAt'>): Promise<Transaction> => {
+  update: async (id: string, transaction: Omit<Transaction, 'id' | 'createdAt'>, token?: string | null): Promise<Transaction> => {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
     const response = await fetch(`${API_BASE_URL}/transactions/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         ...transaction,
         property_id: transaction.propertyId,
-        date: transaction.date.toISOString().split('T')[0],
+        amount: transaction.amount.toString()
       }),
     });
     if (!response.ok) throw new Error('Failed to update transaction');
@@ -214,18 +252,21 @@ export const transactionsApi = {
     return {
       ...data,
       propertyId: data.property_id,
-      createdAt: data.created_at,
-      date: new Date(data.date)
+      date: new Date(data.date),
+      amount: parseFloat(data.amount)
     };
   },
 
-  delete: async (id: string): Promise<void> => {
+  delete: async (id: string, token?: string | null): Promise<void> => {
+    const headers: HeadersInit = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
     const response = await fetch(`${API_BASE_URL}/transactions/${id}`, {
       method: 'DELETE',
+      headers,
     });
     if (!response.ok) throw new Error('Failed to delete transaction');
   },
 };
-
-// Export API_BASE_URL for use in other components
-export { API_BASE_URL };

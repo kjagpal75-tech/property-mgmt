@@ -3,7 +3,32 @@ const cors = require('cors');
 const db = require('./db');
 const { Pool } = require('pg');
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
+
+// Authentication configuration
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const SALT_ROUNDS = 10;
+
+// Authentication middleware
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+  
+  if (!token) {
+    return res.status(401).json({ error: 'Access token required' });
+  }
+  
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+    
+    req.user = user;
+    next();
+  });
+};
 
 // Debug utility
 const debug = {
@@ -43,7 +68,7 @@ db.query(`
 });
 
 // Properties endpoints
-app.get('/api/properties', async (req, res) => {
+app.get('/api/properties', authenticateToken, async (req, res) => {
   try {
     // First get all properties
     const propertiesResult = await db.query('SELECT * FROM properties ORDER BY created_at DESC');
@@ -84,7 +109,7 @@ app.get('/api/properties', async (req, res) => {
 });
 
 // Update property market value
-app.put('/api/properties/:id/market-value', async (req, res) => {
+app.put('/api/properties/:id/market-value', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const { market_value } = req.body;
@@ -101,7 +126,7 @@ app.put('/api/properties/:id/market-value', async (req, res) => {
   }
 });
 
-app.post('/api/properties', async (req, res) => {
+app.post('/api/properties', authenticateToken, async (req, res) => {
   try {
     const { name, address, purchase_price, monthly_rent, lease_start_date } = req.body;
     const id = uuidv4();
@@ -116,7 +141,7 @@ app.post('/api/properties', async (req, res) => {
   }
 });
 
-app.put('/api/properties/:id', async (req, res) => {
+app.put('/api/properties/:id', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const { name, address, purchase_price, monthly_rent, lease_start_date } = req.body;
@@ -135,7 +160,7 @@ app.put('/api/properties/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/properties/:id', async (req, res) => {
+app.delete('/api/properties/:id', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     await db.query('DELETE FROM properties WHERE id = $1', [id]);
@@ -186,7 +211,7 @@ app.post('/api/extract-pdf-text', async (req, res) => {
 });
 
 // Transactions endpoints
-app.get('/api/transactions', async (req, res) => {
+app.get('/api/transactions', authenticateToken, async (req, res) => {
   try {
     const result = await db.query(`
       SELECT t.*, p.name as property_name 
@@ -201,7 +226,7 @@ app.get('/api/transactions', async (req, res) => {
   }
 });
 
-app.post('/api/transactions', async (req, res) => {
+app.post('/api/transactions', authenticateToken, async (req, res) => {
   try {
     const { property_id, type, category, amount, description, date } = req.body;
     console.log('Received transaction data:', req.body);
@@ -255,7 +280,7 @@ app.post('/api/transactions', async (req, res) => {
   }
 });
 
-app.put('/api/transactions/:id', async (req, res) => {
+app.put('/api/transactions/:id', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const { property_id, type, category, amount, description, date } = req.body;
@@ -270,7 +295,7 @@ app.put('/api/transactions/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/transactions/:id', async (req, res) => {
+app.delete('/api/transactions/:id', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     await db.query('DELETE FROM transactions WHERE id = $1', [id]);
@@ -282,7 +307,7 @@ app.delete('/api/transactions/:id', async (req, res) => {
 });
 
 // Rental rate history endpoints
-app.get('/api/properties/:id/rent-history', async (req, res) => {
+app.get('/api/properties/:id/rent-history', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await db.query(
@@ -296,7 +321,7 @@ app.get('/api/properties/:id/rent-history', async (req, res) => {
   }
 });
 
-app.post('/api/properties/:id/rent-history', async (req, res) => {
+app.post('/api/properties/:id/rent-history', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const { monthly_rate, effective_date, reason } = req.body;
@@ -314,7 +339,7 @@ app.post('/api/properties/:id/rent-history', async (req, res) => {
   }
 });
 
-app.put('/api/properties/:id/rent-history/:rentId', async (req, res) => {
+app.put('/api/properties/:id/rent-history/:rentId', authenticateToken, async (req, res) => {
   try {
     const { id, rentId } = req.params;
     const { monthly_rate, effective_date, reason } = req.body;
@@ -335,7 +360,7 @@ app.put('/api/properties/:id/rent-history/:rentId', async (req, res) => {
   }
 });
 
-app.delete('/api/properties/:id/rent-history/:rentId', async (req, res) => {
+app.delete('/api/properties/:id/rent-history/:rentId', authenticateToken, async (req, res) => {
   try {
     const { id, rentId } = req.params;
     await db.query('DELETE FROM rental_rate_history WHERE id = $1 AND property_id = $2', [rentId, id]);
@@ -367,3 +392,5 @@ app.use('/api/redfin-market-value', redfinMarketValueRouter);
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+console.log('Server file loaded completely');
