@@ -128,6 +128,47 @@ app.get('/api/auth/me', (req, res) => {
   });
 });
 
+// Password reset endpoint
+app.post('/api/auth/reset-password', async (req, res) => {
+  console.log('Password reset endpoint called');
+  try {
+    const { username, email, newPassword } = req.body;
+    
+    if (!username || !email || !newPassword) {
+      return res.status(400).json({ error: 'Username, email, and new password are required' });
+    }
+    
+    if (newPassword.length < 8) {
+      return res.status(400).json({ error: 'Password must be at least 8 characters long' });
+    }
+    
+    // Find user by username and email
+    const result = await db.query(
+      'SELECT * FROM users WHERE username = $1 AND email = $2',
+      [username, email]
+    );
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found with these credentials' });
+    }
+    
+    // Hash new password
+    const passwordHash = await bcrypt.hash(newPassword, SALT_ROUNDS);
+    
+    // Update password
+    await db.query(
+      'UPDATE users SET password_hash = $1 WHERE username = $2 AND email = $3',
+      [passwordHash, username, email]
+    );
+    
+    res.json({ message: 'Password reset successfully' });
+    
+  } catch (error) {
+    console.error('Password reset error:', error);
+    res.status(500).json({ error: 'Password reset failed' });
+  }
+});
+
 app.listen(5001, () => {
   console.log('Auth test server running on port 5001');
 });

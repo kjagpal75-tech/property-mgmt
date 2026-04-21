@@ -9,6 +9,7 @@ import TransactionManager from './components/TransactionManager';
 import BackupManager from './components/BackupManager';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import PasswordResetForm from './components/PasswordResetForm';
 
 function App() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -20,6 +21,7 @@ function App() {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
   const [showRegister, setShowRegister] = useState(false);
+  const [showPasswordReset, setShowPasswordReset] = useState(false);
 
   useEffect(() => {
     // Check for existing token on mount and validate it
@@ -194,10 +196,15 @@ function App() {
             }}
             onLogin={() => setShowRegister(false)}
           />
+        ) : showPasswordReset ? (
+          <PasswordResetForm
+            onBack={() => setShowPasswordReset(false)}
+          />
         ) : (
           <LoginForm 
             onLogin={handleLogin}
             onRegister={() => setShowRegister(true)}
+            onForgotPassword={() => setShowPasswordReset(true)}
           />
         )
       ) : (

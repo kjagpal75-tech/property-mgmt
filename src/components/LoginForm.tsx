@@ -4,9 +4,10 @@ import { AUTH_BASE_URL } from '../api/api';
 interface LoginFormProps {
   onLogin: (token: string, user: any) => void;
   onRegister: () => void;
+  onForgotPassword: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister, onForgotPassword }) => {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -102,13 +103,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
             </button>
           </div>
 
-          <div className="text-center">
+          <div className="flex items-center justify-between">
             <button
               type="button"
               onClick={onRegister}
               className="text-blue-600 hover:text-blue-500 text-sm font-medium"
             >
               Don't have an account? Register
+            </button>
+            <button
+              type="button"
+              onClick={onForgotPassword}
+              className="text-blue-600 hover:text-blue-500 text-sm font-medium"
+            >
+              Forgot password?
             </button>
           </div>
         </form>
