@@ -46,12 +46,12 @@ const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBack }) => {
         }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
+        const data = await response.json();
         throw new Error(data.error || 'Password reset failed');
       }
 
+      const data = await response.json();
       setSuccess(true);
       // Clear form
       setFormData({
@@ -61,6 +61,7 @@ const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ onBack }) => {
         confirmPassword: ''
       });
     } catch (err: any) {
+      console.error('Password reset error:', err);
       setError(err.message || 'Password reset failed');
     } finally {
       setLoading(false);

@@ -131,36 +131,48 @@ app.get('/api/auth/me', (req, res) => {
 // Password reset endpoint
 app.post('/api/auth/reset-password', async (req, res) => {
   console.log('Password reset endpoint called');
+  console.log('Request body:', req.body);
   try {
     const { username, email, newPassword } = req.body;
     
+    console.log('Processing password reset for:', username, email);
+    
     if (!username || !email || !newPassword) {
+      console.log('Missing required fields');
       return res.status(400).json({ error: 'Username, email, and new password are required' });
     }
     
     if (newPassword.length < 8) {
+      console.log('Password too short');
       return res.status(400).json({ error: 'Password must be at least 8 characters long' });
     }
     
     // Find user by username and email
+    console.log('Querying database for user');
     const result = await db.query(
       'SELECT * FROM users WHERE username = $1 AND email = $2',
       [username, email]
     );
     
+    console.log('Found users:', result.rows.length);
+    
     if (result.rows.length === 0) {
+      console.log('User not found');
       return res.status(404).json({ error: 'User not found with these credentials' });
     }
     
     // Hash new password
+    console.log('Hashing new password');
     const passwordHash = await bcrypt.hash(newPassword, SALT_ROUNDS);
     
     // Update password
+    console.log('Updating password in database');
     await db.query(
       'UPDATE users SET password_hash = $1 WHERE username = $2 AND email = $3',
       [passwordHash, username, email]
     );
     
+    console.log('Password reset successful');
     res.json({ message: 'Password reset successfully' });
     
   } catch (error) {
