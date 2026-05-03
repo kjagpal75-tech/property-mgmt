@@ -15,6 +15,7 @@ BACKEND_DIR="server"
 FRONTEND_DIR="."
 BACKEND_PORT=5000
 FRONTEND_PORT=3001
+AUTH_PORT=5001
 PID_FILE="./.service_pids"
 LOG_FILE="./service.log"
 
@@ -77,6 +78,27 @@ start_service() {
         fi
     fi
     
+    if check_port $AUTH_PORT; then
+        print_warning "Auth server is already running on port $AUTH_PORT"
+    else
+        print_info "Starting Authentication server..."
+        cd $BACKEND_DIR
+        node test-auth.js >> ../$LOG_FILE 2>&1 &
+        local auth_pid=$!
+        echo "AUTH_PID=$auth_pid" >> ../$PID_FILE
+        cd ..
+        print_status "Auth server started with PID: $auth_pid"
+        
+        # Wait for auth server to start
+        sleep 2
+        if check_port $AUTH_PORT; then
+            print_status "Auth server is running on port $AUTH_PORT"
+        else
+            print_error "Auth server failed to start"
+            return 1
+        fi
+    fi
+    
     if check_port $FRONTEND_PORT; then
         print_warning "Frontend is already running on port $FRONTEND_PORT"
     else
@@ -99,6 +121,7 @@ start_service() {
     print_status "Property Management Service is now running!"
     print_info "Frontend: http://localhost:$FRONTEND_PORT"
     print_info "Backend API: http://localhost:$BACKEND_PORT"
+    print_info "Auth API: http://localhost:$AUTH_PORT"
     print_info "Logs: $LOG_FILE"
     print_info "PIDs: $PID_FILE"
 }
@@ -115,6 +138,12 @@ stop_service() {
                 if kill -0 $backend_pid 2>/dev/null; then
                     kill $backend_pid
                     print_status "Backend stopped (PID: $backend_pid)"
+                fi
+            elif [[ $line == AUTH_PID=* ]]; then
+                auth_pid=${line#AUTH_PID=}
+                if kill -0 $auth_pid 2>/dev/null; then
+                    kill $auth_pid
+                    print_status "Auth server stopped (PID: $auth_pid)"
                 fi
             elif [[ $line == FRONTEND_PID=* ]]; then
                 frontend_pid=${line#FRONTEND_PID=}
@@ -136,6 +165,12 @@ stop_service() {
             print_status "Backend stopped (PID: $backend_pid)"
         fi
         
+        auth_pid=$(get_pid_on_port $AUTH_PORT)
+        if [ ! -z "$auth_pid" ]; then
+            kill $auth_pid
+            print_status "Auth server stopped (PID: $auth_pid)"
+        fi
+        
         frontend_pid=$(get_pid_on_port $FRONTEND_PORT)
         if [ ! -z "$frontend_pid" ]; then
             kill $frontend_pid
@@ -151,6 +186,7 @@ check_status() {
     print_status "Checking Property Management Service status..."
     
     backend_running=false
+    auth_running=false
     frontend_running=false
     
     if check_port $BACKEND_PORT; then
@@ -161,6 +197,14 @@ check_status() {
         print_error "Backend is not running"
     fi
     
+    if check_port $AUTH_PORT; then
+        auth_pid=$(get_pid_on_port $AUTH_PORT)
+        print_status "Auth server is running on port $AUTH_PORT (PID: $auth_pid)"
+        auth_running=true
+    else
+        print_error "Auth server is not running"
+    fi
+    
     if check_port $FRONTEND_PORT; then
         frontend_pid=$(get_pid_on_port $FRONTEND_PORT)
         print_status "Frontend is running on port $FRONTEND_PORT (PID: $frontend_pid)"
@@ -169,9 +213,9 @@ check_status() {
         print_error "Frontend is not running"
     fi
     
-    if [ "$backend_running" = true ] && [ "$frontend_running" = true ]; then
+    if [ "$backend_running" = true ] && [ "$auth_running" = true ] && [ "$frontend_running" = true ]; then
         print_status "Service is fully operational"
-    elif [ "$backend_running" = true ] || [ "$frontend_running" = true ]; then
+    elif [ "$backend_running" = true ] || [ "$auth_running" = true ] || [ "$frontend_running" = true ]; then
         print_warning "Service is partially running"
     else
         print_error "Service is not running"
@@ -240,6 +284,7 @@ case "$1" in
         echo ""
         echo "Ports:"
         echo "  Backend:     $BACKEND_PORT"
+        echo "  Auth:        $AUTH_PORT"
         echo "  Frontend:    $FRONTEND_PORT"
         exit 1
         ;;
