@@ -88,6 +88,7 @@ export const propertiesApi = {
     // Server now returns data in correct format, so just return it directly
     const mappedData = data.map((p: any) => ({
       ...p,
+      marketValue: p.market_value || p.marketValue, // Map database field to frontend field
       redfinUrl: p.redfin_url || p.redfinUrl, // Handle both naming conventions
       rentHistory: (p.rent_history || []).map((rh: any) => ({
         id: rh.id,
@@ -167,6 +168,27 @@ export const propertiesApi = {
       leaseStartDate: data.lease_start_date,
       redfinUrl: data.redfin_url
     };
+  },
+
+  updateMarketValue: async (id: string, marketValue: number, redfinData: any, token?: string | null) => {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    const response = await fetch(`${API_BASE_URL}/properties/${id}/market-value`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({
+        market_value: marketValue,
+        redfin_market_value: marketValue,
+        redfin_data: redfinData
+      }),
+    });
+    if (!response.ok) throw new Error('Failed to update market value');
+    return response.json();
   },
 
   delete: async (id: string, token?: string | null) => {

@@ -10,6 +10,7 @@ import BackupManager from './components/BackupManager';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import PasswordResetForm from './components/PasswordResetForm';
+import { getAllPropertiesWithRedfinMarketValues } from './redfin-integration';
 
 function App() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -60,9 +61,15 @@ function App() {
       if (!isAuthenticated) return;
       
       try {
-        // Load properties from database
-        const updatedProperties = await propertiesApi.getAll(token);
-        console.log('🔄 Loaded properties from database:', updatedProperties.map(p => ({ id: p.id, name: p.name, leaseStartDate: p.leaseStartDate })));
+        // Load properties from database with market values
+        console.log('🔄 Loading properties with market values...');
+        const updatedProperties = await getAllPropertiesWithRedfinMarketValues();
+        console.log('✅ Loaded properties with market values:', updatedProperties.map(p => ({ 
+          id: p.id, 
+          name: p.name, 
+          leaseStartDate: p.leaseStartDate,
+          marketValue: p.redfinMarketValue 
+        })));
         
         setProperties(updatedProperties);
         
@@ -94,6 +101,77 @@ function App() {
     setIsAuthenticated(false);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+  };
+
+  const updateMarketValue = async (property: Property) => {
+    try {
+      console.log('🔄 Updating market value for:', property.name);
+      
+      // Get updated properties with fresh market values
+      const updatedProperties = await getAllPropertiesWithRedfinMarketValues();
+      
+      // Find the updated property with market value
+      const updatedProperty = updatedProperties.find(p => p.id === property.id);
+      
+      if (updatedProperty && updatedProperty.redfinMarketValue) {
+        // Save the market value to the database
+        console.log('💾 Saving market value to database:', updatedProperty.redfinMarketValue);
+        console.log('🔍 Property ID:', property.id);
+        console.log('🔍 Token available:', !!token);
+        
+        try {
+          const result = await propertiesApi.updateMarketValue(property.id, updatedProperty.redfinMarketValue, {
+            bedrooms: updatedProperty.redfinBedrooms,
+            bathrooms: updatedProperty.redfinBathrooms,
+            squareFootage: updatedProperty.redfinSquareFootage,
+            yearBuilt: updatedProperty.redfinYearBuilt,
+            propertyType: updatedProperty.redfinPropertyType,
+            status: updatedProperty.redfinStatus,
+            confidence: updatedProperty.redfinConfidence,
+            lastUpdated: updatedProperty.redfinLastUpdated
+          }, token);
+          
+          console.log('✅ Market value saved to database, result:', result);
+        } catch (dbError) {
+          console.error('❌ Failed to save market value to database:', dbError);
+          throw dbError;
+        }
+        
+        // Reload properties from database to get the updated market_value field
+        console.log('🔄 Reloading properties from database...');
+        const dbProperties = await propertiesApi.getAll(token);
+        
+        // Merge with Redfin data for display
+        const mergedProperties = dbProperties.map(dbProp => {
+          const redfinProp = updatedProperties.find(rp => rp.id === dbProp.id);
+          return {
+            ...dbProp,
+            redfinMarketValue: redfinProp?.redfinMarketValue || null,
+            redfinValueRange: redfinProp?.redfinValueRange || null,
+            redfinRentPrice: redfinProp?.redfinRentPrice || null,
+            redfinBedrooms: redfinProp?.redfinBedrooms || null,
+            redfinBathrooms: redfinProp?.redfinBathrooms || null,
+            redfinSquareFootage: redfinProp?.redfinSquareFootage || null,
+            redfinYearBuilt: redfinProp?.redfinYearBuilt || null,
+            redfinLotSize: redfinProp?.redfinLotSize || null,
+            redfinPropertyType: redfinProp?.redfinPropertyType || null,
+            redfinStatus: redfinProp?.redfinStatus || null,
+            redfinConfidence: redfinProp?.redfinConfidence || null,
+            redfinLastUpdated: redfinProp?.redfinLastUpdated || null
+          };
+        });
+        
+        setProperties(mergedProperties);
+        console.log('✅ Properties reloaded from database with updated market values');
+      } else {
+        // Update the properties state with Redfin data even if no market value
+        setProperties(updatedProperties);
+      }
+      
+      console.log('✅ Market values updated successfully');
+    } catch (error) {
+      console.error('❌ Failed to update market values:', error);
+    }
   };
 
   const addProperty = async (propertyData: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>) => {
@@ -299,6 +377,7 @@ function App() {
                   properties={properties} 
                   onEdit={editProperty}
                   onDelete={deleteProperty}
+                  onUpdateMarketValue={updateMarketValue}
                 />
               </div>
             )}

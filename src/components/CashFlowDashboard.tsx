@@ -10,10 +10,10 @@ interface CashFlowDashboardProps {
 const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, transactions }) => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   
-  // Calculate portfolio value using Redfin market values
+  // Calculate portfolio value using database market values (updated by user)
   const portfolioValue = useMemo(() => {
     return properties.reduce((total, property) => {
-      const marketValue = property.redfinMarketValue || property.purchasePrice;
+      const marketValue = property.marketValue || property.redfinMarketValue || property.purchasePrice;
       return total + (marketValue || 0);
     }, 0);
   }, [properties]);
@@ -21,7 +21,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
   // Calculate individual property market values for display
   const propertyMarketValues = useMemo(() => {
     return properties.reduce((values, property) => {
-      const marketValue = property.redfinMarketValue || property.purchasePrice;
+      const marketValue = property.marketValue || property.redfinMarketValue || property.purchasePrice;
       values[property.id] = marketValue || 0;
       return values;
     }, {} as {[propertyId: string]: number});
@@ -33,6 +33,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
     properties: properties.map(p => ({
       id: p.id,
       name: p.name,
+      marketValue: p.marketValue,
       redfinMarketValue: p.redfinMarketValue,
       purchasePrice: p.purchasePrice
     }))

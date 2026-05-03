@@ -6,9 +6,10 @@ interface PropertyListProps {
   properties: Property[];
   onEdit: (property: Property) => void;
   onDelete: (id: string) => void;
+  onUpdateMarketValue?: (property: Property) => void;
 }
 
-const PropertyList: React.FC<PropertyListProps> = ({ properties, onEdit, onDelete }) => {
+const PropertyList: React.FC<PropertyListProps> = ({ properties, onEdit, onDelete, onUpdateMarketValue }) => {
   const handleDelete = (id: string, propertyName: string) => {
     if (window.confirm(`Are you sure you want to delete "${propertyName}"? This will also delete all associated transactions.`)) {
       onDelete(id);
@@ -49,7 +50,8 @@ const PropertyList: React.FC<PropertyListProps> = ({ properties, onEdit, onDelet
                   <div>
                     <span className="text-gray-500">Market Value:</span>
                     <span className="ml-2 font-medium text-blue-600">
-                      {property.redfinMarketValue ? formatCurrency(property.redfinMarketValue) : 'Loading...'}
+                      {property.marketValue ? formatCurrency(property.marketValue) : 
+                       property.redfinMarketValue ? formatCurrency(property.redfinMarketValue) : 'Loading...'}
                     </span>
                   </div>
                   {property.redfinConfidence && (
@@ -117,6 +119,14 @@ const PropertyList: React.FC<PropertyListProps> = ({ properties, onEdit, onDelet
                 >
                   Edit
                 </button>
+                {onUpdateMarketValue && (
+                  <button
+                    onClick={() => onUpdateMarketValue(property)}
+                    className="inline-flex items-center px-3 py-1 border border-blue-300 shadow-sm text-xs font-medium rounded text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Update Market Value
+                  </button>
+                )}
                 <button
                   onClick={() => handleDelete(property.id, property.name)}
                   className="inline-flex items-center px-3 py-1 border border-red-300 shadow-sm text-xs font-medium rounded text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"

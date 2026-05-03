@@ -371,6 +371,31 @@ app.delete('/api/properties/:id/rent-history/:rentId', authenticateToken, async 
   }
 });
 
+app.put('/api/properties/:id/market-value', authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { market_value, redfin_market_value, redfin_data } = req.body;
+    
+    debug.log('🔄 Updating market value for property:', id, { market_value, redfin_market_value });
+    
+    // Update the property's market value in the database
+    const result = await db.query(
+      'UPDATE properties SET market_value = $1, redfin_market_value = $2, updated_at = NOW() WHERE id = $3 RETURNING *',
+      [market_value, redfin_market_value, id]
+    );
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Property not found' });
+    }
+    
+    debug.log('✅ Market value updated successfully:', result.rows[0]);
+    res.json(result.rows[0]);
+  } catch (err) {
+    debug.error('❌ Error updating market value:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // Redfin web scraping endpoints
 const redfinScrapeRouter = require('./api/redfin-scrape');
 const redfinSearchRouter = require('./api/redfin-search');
