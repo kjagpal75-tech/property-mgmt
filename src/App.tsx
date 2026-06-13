@@ -63,7 +63,7 @@ function App() {
       try {
         // Load properties from database with market values
         console.log('🔄 Loading properties with market values...');
-        const updatedProperties = await getAllPropertiesWithRedfinMarketValues();
+        const updatedProperties = await getAllPropertiesWithRedfinMarketValues(token);
         console.log('✅ Loaded properties with market values:', updatedProperties.map(p => ({ 
           id: p.id, 
           name: p.name, 
@@ -108,7 +108,7 @@ function App() {
       console.log('🔄 Updating market value for:', property.name);
       
       // Get updated properties with fresh market values
-      const updatedProperties = await getAllPropertiesWithRedfinMarketValues();
+      const updatedProperties = await getAllPropertiesWithRedfinMarketValues(token);
       
       // Find the updated property with market value
       const updatedProperty = updatedProperties.find(p => p.id === property.id);

@@ -21,12 +21,12 @@ const PROPERTY_REDFIN_URLS = {
 /**
  * Get all properties with Redfin market values using hardcoded URLs
  */
-export const getAllPropertiesWithRedfinMarketValues = async () => {
+export const getAllPropertiesWithRedfinMarketValues = async (token) => {
   try {
     console.log('🏠 Getting properties with Redfin market values using hardcoded URLs...');
     
     // Get existing properties from property management
-    const properties = await propertiesApi.getAll();
+    const properties = await propertiesApi.getAll(token);
     console.log('✅ Loaded properties from backend:', properties);
     
     // For each property, get Redfin data using hardcoded URL
@@ -179,7 +179,7 @@ export const getAllPropertiesWithRedfinMarketValues = async () => {
     console.error('❌ Error getting properties with Redfin market values:', error);
     // Fallback to regular properties if Redfin fails
     try {
-      const properties = await propertiesApi.getAll();
+      const properties = await propertiesApi.getAll(token);
       return properties.map(property => ({
         ...property,
         redfinMarketValue: null,
