@@ -591,7 +591,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
                   Monthly Expenses
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Net Cash Flow
+                  Monthly Net Cash Flow
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Yearly Cash Flow
@@ -608,10 +608,10 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
                     {summary.propertyName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
-                    {formatCurrency(formatValue(summary.monthlyIncome * 12))}
+                    {formatCurrency(formatValue(summary.monthlyIncome))}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">
-                    {formatCurrency(formatValue(summary.monthlyExpenses * 12))}
+                    {formatCurrency(formatValue(summary.monthlyExpenses))}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <span className={formatValue(summary.netCashFlow) >= 0 ? 'text-blue-600' : 'text-red-600'}>

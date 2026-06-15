@@ -40,16 +40,26 @@ export const calculateCashFlow = (property: Property, transactions: Transaction[
   const actualIncome = incomeTransactions.reduce((sum, t) => sum + (t.amount ? parseFloat(String(t.amount)) : 0), 0);
   const actualExpenses = expenseTransactions.reduce((sum, t) => sum + (t.amount ? parseFloat(String(t.amount)) : 0), 0);
 
-  const netCashFlow = actualIncome - actualExpenses;
-  const yearlyCashFlow = netCashFlow; // Already based on actual yearly data
+  // Calculate number of months passed for year-to-date average
+  const currentYear = new Date().getFullYear();
+  const targetYear = selectedYear || currentYear;
+  const monthsPassed = targetYear === currentYear 
+    ? new Date().getMonth() + 1 
+    : 12; // If historical year, use full 12 months
+
+  // Use year-to-date average: divide by months passed, not always 12
+  const monthlyIncome = monthsPassed > 0 ? actualIncome / monthsPassed : 0;
+  const monthlyExpenses = monthsPassed > 0 ? actualExpenses / monthsPassed : 0;
+  const netCashFlow = monthlyIncome - monthlyExpenses; // Monthly average net cash flow
+  const yearlyCashFlow = actualIncome - actualExpenses; // Yearly total net cash flow
   const purchasePrice = property.purchasePrice ? parseFloat(String(property.purchasePrice)) : 0;
   const roi = purchasePrice > 0 ? (yearlyCashFlow / purchasePrice) * 100 : 0;
 
   return {
     propertyId: property.id,
     propertyName: property.name,
-    monthlyIncome: isNaN(actualIncome / 12) ? 0 : actualIncome / 12, // Convert to monthly equivalent for display
-    monthlyExpenses: isNaN(actualExpenses / 12) ? 0 : actualExpenses / 12, // Convert to monthly equivalent
+    monthlyIncome: isNaN(monthlyIncome) ? 0 : monthlyIncome,
+    monthlyExpenses: isNaN(monthlyExpenses) ? 0 : monthlyExpenses,
     netCashFlow: isNaN(netCashFlow) ? 0 : netCashFlow,
     yearlyCashFlow: isNaN(yearlyCashFlow) ? 0 : yearlyCashFlow,
     roi: isNaN(roi) ? 0 : roi,
