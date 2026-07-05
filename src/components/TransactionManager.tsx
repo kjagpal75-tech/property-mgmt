@@ -302,6 +302,7 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
                 <option value="insurance">Insurance</option>
                 <option value="property_tax">Property Tax</option>
                 <option value="utilities">Utilities</option>
+                <option value="hoa">HOA Fees</option>
                 <option value="management_fees">Management Fees</option>
                 <option value="vacancy">Vacancy</option>
                 <option value="repairs">Repairs</option>
