@@ -48,7 +48,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://property-mgmt-frontend.onrender.com'], // Allow frontend origins
+  origin: ['http://localhost:3000', 'http://localhost:3001'], // Allow frontend origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
   credentials: true // Allow cookies/authorization headers

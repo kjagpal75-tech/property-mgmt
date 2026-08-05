@@ -1,8 +1,8 @@
 import { Property, Transaction } from '../types/property';
 import { debug } from '../utils/debug';
 
-export const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-export const AUTH_BASE_URL = process.env.REACT_APP_AUTH_URL || 'http://localhost:5001/api';
+export const API_BASE_URL = 'http://localhost:5000/api';
+export const AUTH_BASE_URL = 'http://localhost:5001/api';
 
 // Rent History API
 export const rentHistoryApi = {
