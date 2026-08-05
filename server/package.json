@@ -22,7 +22,7 @@
     "pdf-parse": "^2.4.5",
     "pg": "^8.20.0",
     "puppeteer": "^24.39.1",
-    "uuid": "^13.0.0"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
