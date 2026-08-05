@@ -47,11 +47,11 @@ services:
   # React Frontend
   - type: web
     name: property-mgmt-frontend
-    env: static
+    env: node
     plan: free
     region: oregon
     buildCommand: npm ci --legacy-peer-deps && npm run build
-    staticPublishPath: build
+    startCommand: npm install -g serve && serve -s build -l 3001
     nodeVersion: 18
     envVars:
       - key: REACT_APP_API_URL
