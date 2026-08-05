@@ -1,0 +1,32 @@
+[dotenv@17.3.1] injecting env (7) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Server running on port 5000
+Real County Assessor API request: 37391 mission blvd, fremont, ca 94536
+Detected county: alameda
+Fetching real Alameda County data...
+Real Alameda County data received: <
+County Assessor response: {
+  address: '37391 mission blvd, fremont, ca 94536',
+  city: 'fremont',
+  state: 'ca',
+  zipCode: '94536',
+  county: 'Alameda',
+  assessedValue: 0,
+  landValue: 0,
+  improvementValue: 0,
+  assessmentDate: '2026-03-19',
+  assessmentRatio: 0.8,
+  marketValue: 0,
+  valueRange: { low: 0, high: 0 },
+  propertyDetails: {
+    beds: 0,
+    baths: 0,
+    sqft: 0,
+    yearBuilt: 0,
+    lotSize: 0,
+    propertyType: 'Single Family Residential'
+  },
+  lastUpdated: '2026-03-19T04:30:03.099Z',
+  dataSource: 'county_assessor',
+  confidence: 0.9,
+  dataQuality: 'real_api_data'
+}
