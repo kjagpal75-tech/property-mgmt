@@ -15,6 +15,7 @@ services:
     region: oregon
     buildCommand: cd server && npm install
     startCommand: cd server && npm start
+    nodeVersion: 18
     envVars:
       - key: NODE_ENV
         value: production
@@ -49,10 +50,13 @@ services:
     env: static
     plan: free
     region: oregon
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --legacy-peer-deps && npm run build
     staticPublishPath: build
+    nodeVersion: 18
     envVars:
       - key: REACT_APP_API_URL
         value: https://property-mgmt-api.onrender.com/api
       - key: REACT_APP_AUTH_URL
         value: https://property-mgmt-api.onrender.com/api
+      - key: NODE_ENV
+        value: production
