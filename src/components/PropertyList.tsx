@@ -1,6 +1,6 @@
 import React from 'react';
 import { Property } from '../types/property';
-import { formatCurrency } from '../utils/dataUtils';
+import { formatCurrency, getCurrentRent } from '../utils/dataUtils';
 
 interface PropertyListProps {
   properties: Property[];
@@ -45,7 +45,7 @@ const PropertyList: React.FC<PropertyListProps> = ({ properties, onEdit, onDelet
                   </div>
                   <div>
                     <span className="text-gray-500">Monthly Rent:</span>
-                    <span className="ml-2 font-medium text-green-600">{formatCurrency(property.monthlyRent)}</span>
+                    <span className="ml-2 font-medium text-green-600">{formatCurrency(getCurrentRent(property))}</span>
                   </div>
                   <div>
                     <span className="text-gray-500">Market Value:</span>

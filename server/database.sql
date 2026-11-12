@@ -9,6 +9,9 @@ CREATE TABLE IF NOT EXISTS properties (
     purchase_price DECIMAL(12,2) NOT NULL,
     monthly_rent DECIMAL(10,2) NOT NULL,
     current_rent DECIMAL(10,2) NOT NULL DEFAULT monthly_rent,
+    lease_start_date TIMESTAMP,
+    lease_end_date TIMESTAMP,
+    lease_rent DECIMAL(10,2),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -38,6 +41,7 @@ CREATE TABLE IF NOT EXISTS rental_rate_history (
     effective_date DATE NOT NULL,
     end_date DATE, -- NULL if current rate
     reason TEXT, -- Optional reason for rate change
+    lease_end_date DATE, -- Optional lease end date for this rate
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

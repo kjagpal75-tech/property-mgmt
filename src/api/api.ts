@@ -6,24 +6,36 @@ export const AUTH_BASE_URL = 'http://localhost:5001/api';
 
 // Rent History API
 export const rentHistoryApi = {
-  getByPropertyId: async (propertyId: string) => {
-    const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history`);
+  getByPropertyId: async (propertyId: string, token?: string | null) => {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history`, { headers });
     if (!response.ok) throw new Error('Failed to fetch rent history');
     return response.json();
   },
   
-  add: async (propertyId: string, monthlyRate: number, effectiveDate: string, reason?: string) => {
-    debug.log('🏠 API add rent history:', { propertyId, monthlyRate, effectiveDate, reason });
+  add: async (propertyId: string, monthlyRate: number, effectiveDate: string, reason?: string, leaseEndDate?: string, token?: string | null) => {
+    debug.log('🏠 API add rent history:', { propertyId, monthlyRate, effectiveDate, reason, leaseEndDate });
+    
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
     
     const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         monthly_rate: monthlyRate,
         effective_date: effectiveDate,
-        reason: reason || 'Rate update'
+        reason: reason || 'Rate update',
+        lease_end_date: leaseEndDate
       }),
     });
     if (!response.ok) throw new Error('Failed to add rent history');
@@ -33,18 +45,24 @@ export const rentHistoryApi = {
     return result;
   },
   
-  update: async (propertyId: string, rentId: string, monthlyRate: number, effectiveDate: string, reason?: string) => {
-    debug.log('🏠 API update rent history:', { propertyId, rentId, monthlyRate, effectiveDate, reason });
+  update: async (propertyId: string, rentId: string, monthlyRate: number, effectiveDate: string, reason?: string, leaseEndDate?: string, token?: string | null) => {
+    debug.log('🏠 API update rent history:', { propertyId, rentId, monthlyRate, effectiveDate, reason, leaseEndDate });
+    
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
     
     const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history/${rentId}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         monthly_rate: monthlyRate,
         effective_date: effectiveDate,
-        reason: reason || 'Rate update'
+        reason: reason || 'Rate update',
+        lease_end_date: leaseEndDate
       }),
     });
     if (!response.ok) throw new Error('Failed to update rent history');
@@ -54,11 +72,17 @@ export const rentHistoryApi = {
     return result;
   },
   
-  delete: async (propertyId: string, rentId: string) => {
+  delete: async (propertyId: string, rentId: string, token?: string | null) => {
     debug.log('🏠 API delete rent history:', { propertyId, rentId });
+    
+    const headers: HeadersInit = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
     
     const response = await fetch(`${API_BASE_URL}/properties/${propertyId}/rent-history/${rentId}`, {
       method: 'DELETE',
+      headers,
     });
     if (!response.ok) throw new Error('Failed to delete rent history');
     return response.json();

@@ -54,15 +54,57 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
     });
   }, [transactions, selectedYear]);
 
+  // Helper function to check if a property is actively in lease
+  const isPropertyInLease = (property: Property | undefined): boolean => {
+    if (!property) return false;
+    
+    const now = new Date();
+    
+    // If there's no lease start date, property is not in an active lease
+    if (!property.leaseStartDate) {
+      return false;
+    }
+    
+    const leaseStartDate = new Date(property.leaseStartDate);
+    const leaseEndDate = property.leaseEndDate ? new Date(property.leaseEndDate) : null;
+    
+    // Check if lease has started
+    const leaseStarted = leaseStartDate <= now;
+    
+    // Check if lease is still active (no end date or end date in the future)
+    const leaseIsActive = !leaseEndDate || leaseEndDate >= now;
+    
+    return leaseStarted && leaseIsActive;
+  };
+  
   // Calculate rent tracking for each property
   const rentTracking = useMemo(() => {
     // Use selected year for rent tracking, not current month
     const selectedYearEnd = new Date(selectedYear, 11, 31); // December 31st of selected year
     
     return properties.map(property => {
+      const isInLease = isPropertyInLease(property);
+      
       console.log(`\n=== Processing property: ${property.name} for year ${selectedYear} ===`);
       console.log('Property rent history raw:', property.rentHistory);
       console.log('Property monthlyRent fallback:', property.monthlyRent);
+      console.log('Is property actively in lease:', isInLease);
+      
+      // If property is not actively in lease, return zero values
+      if (!isInLease) {
+        console.log('Property not actively in lease - rent will not be shown/calculated');
+        return {
+          propertyId: property.id,
+          propertyName: property.name,
+          expectedMonthlyRent: 0,
+          yearToDateCollected: 0,
+          expectedYearToDateRent: 0,
+          pastDue: 0,
+          rentPayments: [],
+          isFullyPaid: true,
+          isNotInLease: true
+        };
+      }
       
       // Get rent transactions for the selected year and current month
       const currentMonth = new Date().getMonth() + 1;
@@ -73,8 +115,27 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         new Date(t.date).getFullYear() === selectedYear &&
         (selectedYear !== new Date().getFullYear() || new Date(t.date).getMonth() + 1 <= currentMonth)
       );
+
+      // Filter rent transactions to only include those within the lease date range
+      const filteredRentTransactions = selectedYearRentTransactions.filter(t => {
+        const transactionDate = new Date(t.date);
+        const leaseStartDate = property.leaseStartDate ? new Date(property.leaseStartDate) : null;
+        const leaseEndDate = property.leaseEndDate ? new Date(property.leaseEndDate) : null;
+        
+        // If there's a lease start date and transaction date is before it, exclude the transaction
+        if (leaseStartDate && transactionDate < leaseStartDate) {
+          return false;
+        }
+        
+        // If there's a lease end date and transaction date is after it, exclude the transaction
+        if (leaseEndDate && transactionDate > leaseEndDate) {
+          return false;
+        }
+        
+        return true;
+      });
       
-      const selectedYearRent = selectedYearRentTransactions.reduce((sum, t) => sum + (t.amount ? parseFloat(String(t.amount)) : 0), 0);
+      const selectedYearRent = filteredRentTransactions.reduce((sum, t) => sum + (t.amount ? parseFloat(String(t.amount)) : 0), 0);
       console.log('Selected year rent transactions:', selectedYearRentTransactions);
       console.log('Selected year rent total:', selectedYearRent);
       
@@ -120,6 +181,7 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         console.log(`=== Calculating expected rent for ${property.name} ===`);
         console.log('Current month:', currentMonth);
         console.log('Lease start date:', property.leaseStartDate);
+        console.log('Lease end date:', property.leaseEndDate);
         console.log('Rent history:', property.rentHistory);
         
         // Determine start month and day based on lease start date
@@ -150,15 +212,21 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
           }
           
           // Find effective rent for this specific month
+          const monthStart = new Date(selectedYear, month - 1, 1); // First day of this month
           const monthEnd = new Date(selectedYear, month, 0); // Last day of this month
           const effectiveRate = property.rentHistory?.find((rate: any) => {
             const effectiveDate = new Date(rate.effectiveDate);
-            return effectiveDate <= monthEnd;
+            const endDate = rate.endDate ? new Date(rate.endDate) : null;
+            // Rate must be effective on or before month end
+            if (effectiveDate > monthEnd) return false;
+            // Rate must not have ended before month start (handles lapses in rental history)
+            if (endDate && endDate < monthStart) return false;
+            return true;
           });
           
-          // If no rent history for this month, use fallback monthlyRent
-          const monthlyRent = effectiveRate ? effectiveRate.monthlyRate : (property.monthlyRent || 0);
-          
+          // If no rent history for this month (lapse in rental history), rent is 0
+          const monthlyRent = effectiveRate ? effectiveRate.monthlyRate : 0;
+
           // Calculate prorated rent for the first month if lease starts mid-month
           let monthlyExpected = Number(monthlyRent) || 0;
           if (month === leaseStartMonth && leaseStartDay > 1) {
@@ -169,15 +237,15 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
           } else {
             console.log(`Month ${month}: Full month rent - $${monthlyExpected}`);
           }
-          
+
           expectedTotal += monthlyExpected;
         }
-        
+
         console.log(`Total expected rent for ${property.name}: ${expectedTotal}`);
         return expectedTotal;
       };
-      
-      const expectedYearToDateRent = calculateExpectedYearToDateRent(property, 
+
+      const expectedYearToDateRent = calculateExpectedYearToDateRent(property,
         selectedYear === new Date().getFullYear() ? new Date().getMonth() + 1 : 12
       );
       const selectedYearRentNum = Number(selectedYearRent) || 0;
@@ -198,11 +266,12 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
         yearToDateCollected: selectedYearRent, // Total rent paid so far this year
         expectedYearToDateRent, // Expected rent up to current month considering rent changes
         pastDue, // Past due amount
-        rentPayments: selectedYearRentTransactions,
-        isFullyPaid: selectedYearRent >= expectedYearToDateRent
+        rentPayments: filteredRentTransactions,
+        isFullyPaid: selectedYearRent >= expectedYearToDateRent,
+        isNotInLease: false
       };
     });
-  }, [properties, transactions, selectedYear]);
+  }, [properties, transactions, selectedYear, isPropertyInLease]);
   
   const cashFlowSummaries = properties.map(property => {
     try {

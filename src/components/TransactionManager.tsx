@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Property, Transaction, TransactionCategory } from '../types/property';
 import { formatCurrency } from '../utils/dataUtils';
 import DocumentUpload from './DocumentUpload';
@@ -25,6 +25,9 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
     amount: '',
     description: '',
     date: new Date().toISOString().split('T')[0],
+    recurrence: 'none' as 'none' | 'monthly' | 'quarterly' | 'annually',
+    nextDueDate: '',
+    reminderEnabled: false,
   });
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
   const [sortConfig, setSortConfig] = useState<{
@@ -40,11 +43,13 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
     type: '',
     category: '',
     description: '',
-    amount: ''
+    amount: '',
+    recurrence: '',
   });
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
+  const [upcomingReminders, setUpcomingReminders] = useState<Transaction[]>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (editingTransaction) {
       setFormData({
         propertyId: editingTransaction.propertyId,
@@ -53,9 +58,27 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
         amount: editingTransaction.amount?.toString() || '0',
         description: editingTransaction.description,
         date: new Date(editingTransaction.date).toISOString().split('T')[0],
+        recurrence: editingTransaction.recurrence || 'none',
+        nextDueDate: editingTransaction.nextDueDate ? new Date(editingTransaction.nextDueDate).toISOString().split('T')[0] : '',
+        reminderEnabled: editingTransaction.reminderEnabled || false,
       });
     }
   }, [editingTransaction]);
+
+  // Calculate upcoming reminders (transactions with nextDueDate within 30 days)
+  useEffect(() => {
+    const now = new Date();
+    const thirtyDaysFromNow = new Date();
+    thirtyDaysFromNow.setDate(now.getDate() + 30);
+    
+    const upcoming = transactions.filter(t => {
+      if (!t.nextDueDate || !t.reminderEnabled) return false;
+      const dueDate = new Date(t.nextDueDate);
+      return dueDate >= now && dueDate <= thirtyDaysFromNow;
+    });
+    
+    setUpcomingReminders(upcoming);
+  }, [transactions]);
 
   const resetForm = () => {
     setFormData({
@@ -65,6 +88,9 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
       amount: '',
       description: '',
       date: new Date().toISOString().split('T')[0],
+      recurrence: 'none',
+      nextDueDate: '',
+      reminderEnabled: false,
     });
     setEditingTransaction(null);
   };
@@ -84,6 +110,9 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
       amount: parseFloat(formData.amount),
       description: formData.description,
       date: new Date(formData.date),
+      recurrence: formData.recurrence,
+      nextDueDate: formData.nextDueDate ? new Date(formData.nextDueDate) : undefined,
+      reminderEnabled: formData.reminderEnabled,
     };
 
     if (editingTransaction) {
@@ -117,6 +146,29 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
     return properties.find(p => p.id === id);
   };
 
+  // Helper function to check if a property is actively in lease
+  const isPropertyInLease = (property: Property | undefined): boolean => {
+    if (!property) return false;
+    
+    const now = new Date();
+    
+    // If there's no lease start date, property is not in an active lease
+    if (!property.leaseStartDate) {
+      return false;
+    }
+    
+    const leaseStartDate = new Date(property.leaseStartDate);
+    const leaseEndDate = property.leaseEndDate ? new Date(property.leaseEndDate) : null;
+    
+    // Check if lease has started
+    const leaseStarted = leaseStartDate <= now;
+    
+    // Check if lease is still active (no end date or end date in the future)
+    const leaseIsActive = !leaseEndDate || leaseEndDate >= now;
+    
+    return leaseStarted && leaseIsActive;
+  };
+
   const handleSort = (key: keyof Transaction | 'propertyName') => {
     let direction: 'asc' | 'desc' = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -139,13 +191,36 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
       type: '',
       category: '',
       description: '',
-      amount: ''
+      amount: '',
+      recurrence: '',
     });
   };
 
   const filteredTransactions = React.useMemo(() => {
     return transactions.filter(transaction => {
       const property = getPropertyById(transaction.propertyId);
+      
+      // Conditionally filter out rent transactions when property is not actively in lease
+      if (transaction.category === 'rent' && transaction.type === 'income') {
+        if (!isPropertyInLease(property)) {
+          return false;
+        }
+        
+        // Additional filter: only show rent transactions that fall within the lease date range
+        const transactionDate = new Date(transaction.date);
+        const leaseStartDate = property!.leaseStartDate ? new Date(property!.leaseStartDate) : null;
+        const leaseEndDate = property!.leaseEndDate ? new Date(property!.leaseEndDate) : null;
+        
+        // If there's a lease start date and transaction date is before it, exclude the transaction
+        if (leaseStartDate && transactionDate < leaseStartDate) {
+          return false;
+        }
+        
+        // If there's a lease end date and transaction date is after it, exclude the transaction
+        if (leaseEndDate && transactionDate > leaseEndDate) {
+          return false;
+        }
+      }
       
       const dateMatch = !filters.date || 
         new Date(transaction.date).toLocaleDateString().toLowerCase().includes(filters.date.toLowerCase());
@@ -165,9 +240,12 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
       const amountMatch = !filters.amount || 
         (transaction.amount ? parseFloat(String(transaction.amount)) : 0).toString().includes(filters.amount);
       
-      return dateMatch && propertyMatch && typeMatch && categoryMatch && descriptionMatch && amountMatch;
+      const recurrenceMatch = !filters.recurrence || 
+        (transaction.recurrence || 'none') === filters.recurrence;
+      
+      return dateMatch && propertyMatch && typeMatch && categoryMatch && descriptionMatch && amountMatch && recurrenceMatch;
     });
-  }, [transactions, filters, properties]);
+  }, [transactions, filters, properties, isPropertyInLease]);
 
   const sortedTransactions = React.useMemo(() => {
     let sortableTransactions = [...filteredTransactions];
@@ -204,6 +282,31 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
 
   return (
     <div className="space-y-8">
+      {/* Upcoming Payment Reminders */}
+      {upcomingReminders.length > 0 && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md">
+          <div className="flex items-center">
+            <svg className="h-5 w-5 text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <p className="font-medium text-yellow-800">Upcoming Payment Reminders</p>
+              <p className="text-sm text-yellow-700">
+                {upcomingReminders.map(t => {
+                  const property = getPropertyById(t.propertyId);
+                  const dueDate = new Date(t.nextDueDate!);
+                  return (
+                    <span key={t.id} className="block">
+                      {property?.name}: {t.description} - {formatCurrency(t.amount)} due {dueDate.toLocaleDateString()}
+                    </span>
+                  );
+                })}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Add Transaction Form */}
       <div className="bg-white shadow rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
@@ -357,6 +460,67 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
             </div>
           </div>
 
+          {/* Recurring Payment Section */}
+          <div className="border-t pt-4 mt-4">
+            <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center">
+              <svg className="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              Recurring Payment
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label htmlFor="recurrence" className="block text-sm font-medium text-gray-700">
+                  Recurrence
+                </label>
+                <select
+                  id="recurrence"
+                  name="recurrence"
+                  value={formData.recurrence}
+                  onChange={handleChange}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="none">One-time</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="annually">Annually</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="nextDueDate" className="block text-sm font-medium text-gray-700">
+                  Next Due Date
+                </label>
+                <input
+                  type="date"
+                  id="nextDueDate"
+                  name="nextDueDate"
+                  value={formData.nextDueDate}
+                  onChange={handleChange}
+                  disabled={formData.recurrence === 'none'}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                />
+              </div>
+
+              <div className="flex items-end">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="reminderEnabled"
+                    name="reminderEnabled"
+                    checked={formData.reminderEnabled}
+                    onChange={(e) => setFormData(prev => ({ ...prev, reminderEnabled: e.target.checked }))}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor="reminderEnabled" className="ml-2 block text-sm font-medium text-gray-700">
+                    Enable Reminder
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="flex space-x-4">
             {editingTransaction && (
               <button
@@ -394,7 +558,7 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
         
         {/* Filter Row */}
         <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-3">
             <div>
               <input
                 type="text"
@@ -450,6 +614,18 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
                 onChange={(e) => handleFilterChange('amount', e.target.value)}
                 className="block w-full text-sm border border-gray-300 rounded-md shadow-sm py-1 px-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
+            </div>
+            <div>
+              <select
+                value={filters.recurrence}
+                onChange={(e) => handleFilterChange('recurrence', e.target.value)}
+                className="block w-full text-sm border border-gray-300 rounded-md shadow-sm py-1 px-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">All Recurrences</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="annually">Annually</option>
+              </select>
             </div>
           </div>
           {Object.values(filters).some(value => value !== '') && (
@@ -546,6 +722,9 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
                     </div>
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Recurrence
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -580,6 +759,20 @@ const TransactionManager: React.FC<TransactionManagerProps> = ({
                         <span className={transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}>
                           {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
                         </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {transaction.recurrence && transaction.recurrence !== 'none' ? (
+                          <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                            {transaction.recurrence}
+                            {transaction.reminderEnabled && (
+                              <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                              </svg>
+                            )}
+                          </span>
+                        ) : (
+                          <span className="text-gray-400">—</span>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         <div className="flex space-x-2">

@@ -21,6 +21,7 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
   const [showEditForm, setShowEditForm] = useState(false);
   const [newRate, setNewRate] = useState('');
   const [effectiveDate, setEffectiveDate] = useState('');
+  const [newReason, setNewReason] = useState('');
   const [editingRate, setEditingRate] = useState<RateEntry | null>(null);
   const [rateHistory, setRateHistory] = useState<RateEntry[]>([]);
 
@@ -29,7 +30,8 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
     const loadRentHistory = async () => {
       try {
         console.log('Loading rent history from database for property:', property.id);
-        const historyData = await rentHistoryApi.getByPropertyId(property.id);
+        const token = localStorage.getItem('token');
+        const historyData = await rentHistoryApi.getByPropertyId(property.id, token);
         console.log('Loaded rent history from database:', historyData);
         
         if (historyData && historyData.length > 0) {
@@ -111,7 +113,7 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
       new Date(b.effectiveDate).getTime() - new Date(a.effectiveDate).getTime()
     );
     
-    const latestRate = sortedHistory[sortedHistory.length - 1];
+    const latestRate = sortedHistory[0];
     console.log('Latest rate found:', latestRate, 'type:', typeof latestRate?.monthlyRate);
     return latestRate ? latestRate.monthlyRate : (property.monthlyRent || 0);
   };
@@ -122,7 +124,8 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
       
       try {
         // Call the actual API to add rent history
-        const result = await rentHistoryApi.add(property.id, rate, effectiveDate, 'Rate update');
+        const token = localStorage.getItem('token');
+        const result = await rentHistoryApi.add(property.id, rate, effectiveDate, newReason || '', undefined, token);
         
         // Update local state with the result
         const newEntry = {
@@ -134,9 +137,11 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
           createdAt: result.created_at
         };
         
-        // Find the current active rate (the one without endDate) and set its endDate to the new effective date
+        // Only expire an existing active rate when the new rate's effective date
+        // is LATER than that rate's effective date. Backdating (adding an earlier
+        // rate) must NOT expire the more recent active rate.
         const updatedHistory = rateHistory.map(item => {
-          if (!item.endDate) {
+          if (!item.endDate && new Date(effectiveDate) > new Date(item.effectiveDate)) {
             return { ...item, endDate: effectiveDate };
           }
           return item;
@@ -145,10 +150,11 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
         setRateHistory([...updatedHistory, newEntry]);
         
         // Call the onRateUpdate callback for backward compatibility
-        onRateUpdate(property.id, rate, effectiveDate, 'Rate update');
+        onRateUpdate(property.id, rate, effectiveDate, newReason || '');
         
         setNewRate('');
         setEffectiveDate('');
+        setNewReason('');
         setShowAddForm(false);
         
         alert('Rate added successfully!');
@@ -178,13 +184,27 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
   const handleSaveEdit = async () => {
     if (editingRate && newRate && effectiveDate) {
       try {
-        // Update database
-        const result = await rentHistoryApi.update(property.id, editingRate.id, parseFloat(newRate), effectiveDate, editingRate.reason);
+        const token = localStorage.getItem('token');
+        const newEffectiveDate = effectiveDate;
         
-        // Update local state
-        const updatedHistory = rateHistory.map(item => 
-          item.id === editingRate.id ? { ...item, monthlyRate: parseFloat(newRate), effectiveDate: effectiveDate, reason: editingRate.reason } : item
-        );
+        // Update database
+        const result = await rentHistoryApi.update(property.id, editingRate.id, parseFloat(newRate), newEffectiveDate, editingRate.reason, undefined, token);
+        
+        // Only expire an existing active rate when the new effective date
+        // is LATER than that rate's effective date. Backdating (editing an earlier
+        // rate) must NOT expire the more recent active rate.
+        const updatedHistory = rateHistory.map(item => {
+          if (item.id === editingRate.id) {
+            return { ...item, monthlyRate: parseFloat(newRate), effectiveDate: newEffectiveDate, reason: editingRate.reason, endDate: item.endDate };
+          }
+          // If this is the currently active rate (no endDate) and it's not the edited one,
+          // set its endDate to the new effective date ONLY if the new date is later
+          if (!item.endDate && item.id !== editingRate.id && new Date(newEffectiveDate) > new Date(item.effectiveDate)) {
+            return { ...item, endDate: newEffectiveDate };
+          }
+          return item;
+        });
+        
         setRateHistory(updatedHistory);
         
         setEditingRate(null);
@@ -264,8 +284,9 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
                         const shouldDelete = window.confirm('Are you sure you want to delete this rate? This action cannot be undone.');
                         if (shouldDelete) {
                           try {
-                            // Delete from database
-                            await rentHistoryApi.delete(property.id, rate.id);
+                        // Delete from database
+                        const token = localStorage.getItem('token');
+                        await rentHistoryApi.delete(property.id, rate.id, token);
                             
                             // Update local state
                             const updatedHistory = rateHistory.filter(item => item.id !== rate.id);
@@ -334,8 +355,8 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
                 </label>
                 <textarea
                   rows={3}
-                  value={editingRate?.reason || ''}
-                  onChange={(e) => setEditingRate(prev => prev ? { ...prev, reason: e.target.value } : null)}
+                  value={newReason}
+                  onChange={(e) => setNewReason(e.target.value)}
                   className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   placeholder="Reason for rate change (e.g., market adjustment, lease renewal, etc.)"
                 />
@@ -345,6 +366,7 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
                   onClick={() => {
                     setNewRate('');
                     setEffectiveDate('');
+                    setNewReason('');
                     setShowAddForm(false);
                   }}
                   className="bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300"

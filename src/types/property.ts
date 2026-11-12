@@ -20,6 +20,8 @@ export interface Property {
   monthlyRent: number;
   currentRent: number;
   leaseStartDate?: Date;
+  leaseEndDate?: Date;
+  leaseRent?: number;
   rentHistory: {
     id: string;
     monthlyRate: number;
@@ -28,8 +30,15 @@ export interface Property {
     reason?: string;
     createdAt: string;
   }[];
+
   createdAt: Date;
   updatedAt: Date;
+  // Expense tracking fields
+  monthlyExpenses?: number;
+  expenseCategories?: string[];
+  expenseRecurrence?: 'none' | 'monthly' | 'quarterly' | 'annually';
+  expenseNextDueDate?: Date;
+  expenseReminderEnabled?: boolean;
 }
 
 export interface Transaction {
@@ -41,6 +50,10 @@ export interface Transaction {
   description: string;
   date: Date;
   createdAt: Date;
+  // Recurring payment fields
+  recurrence?: 'none' | 'monthly' | 'quarterly' | 'annually';
+  nextDueDate?: Date;
+  reminderEnabled?: boolean;
 }
 
 export interface CashFlowSummary {

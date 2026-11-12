@@ -16,6 +16,10 @@ async function createTables() {
         address TEXT NOT NULL,
         purchase_price DECIMAL(12,2) NOT NULL,
         monthly_rent DECIMAL(10,2) NOT NULL,
+        current_rent DECIMAL(10,2) NOT NULL DEFAULT monthly_rent,
+        lease_start_date TIMESTAMP,
+        lease_end_date TIMESTAMP,
+        lease_rent DECIMAL(10,2),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )

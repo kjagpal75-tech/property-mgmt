@@ -11,6 +11,22 @@ export const formatCurrency = (amount: number): string => {
   }).format(amount);
 };
 
+// Returns the latest effective monthly rent from rent history, falling back to
+// the property's monthlyRent/currentRent when no history is available.
+export const getCurrentRent = (property: Property): number => {
+  const history = property?.rentHistory || [];
+  if (history.length > 0) {
+    const sorted = [...history].sort(
+      (a, b) => new Date(b.effectiveDate).getTime() - new Date(a.effectiveDate).getTime()
+    );
+    const latest = sorted[0];
+    if (latest && latest.monthlyRate != null) {
+      return Number(latest.monthlyRate);
+    }
+  }
+  return property?.currentRent || property?.monthlyRent || 0;
+};
+
 export const calculateCashFlow = (property: Property, transactions: Transaction[], selectedYear?: number): CashFlowSummary => {
   // Add safety check for undefined properties
   if (!property) {
