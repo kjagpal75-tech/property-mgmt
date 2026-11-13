@@ -29,6 +29,7 @@ export interface Property {
     endDate?: string;
     reason?: string;
     createdAt: string;
+    leaseEndDate?: string;
   }[];
 
   createdAt: Date;

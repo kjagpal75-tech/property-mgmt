@@ -12,6 +12,7 @@ interface RateEntry {
   monthlyRate: number;
   effectiveDate: string;
   endDate?: string;
+  leaseEndDate?: string;
   reason?: string;
   createdAt: string;
 }
@@ -41,6 +42,7 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
             monthlyRate: item.monthly_rate,
             effectiveDate: item.effective_date,
             endDate: item.end_date,
+            leaseEndDate: item.lease_end_date,
             reason: item.reason,
             createdAt: item.created_at
           }));
@@ -133,6 +135,7 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
           monthlyRate: result.monthly_rate,
           effectiveDate: result.effective_date,
           endDate: undefined,
+          leaseEndDate: result.lease_end_date,
           reason: result.reason,
           createdAt: result.created_at
         };
@@ -165,15 +168,17 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
     }
   };
 
-  const handleEditRate = (rateId: string, newRate: number, newEffectiveDate: string, newReason?: string) => {
+  const handleEditRate = (rateId: string, newRate: number, newEffectiveDate: string, newReason?: string, newLeaseEndDate?: string) => {
     // Convert database date format to HTML date input format (YYYY-MM-DD)
     const formattedDate = newEffectiveDate ? new Date(newEffectiveDate).toISOString().split('T')[0] : '';
+    const formattedLeaseEnd = newLeaseEndDate ? new Date(newLeaseEndDate).toISOString().split('T')[0] : '';
     
     setEditingRate({
       id: rateId,
       monthlyRate: newRate,
       effectiveDate: newEffectiveDate,
       reason: newReason,
+      leaseEndDate: formattedLeaseEnd,
       createdAt: new Date().toISOString()
     });
     setNewRate(newRate.toString());
@@ -186,16 +191,17 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
       try {
         const token = localStorage.getItem('token');
         const newEffectiveDate = effectiveDate;
+        const newLeaseEndDate = editingRate.leaseEndDate;
         
         // Update database
-        const result = await rentHistoryApi.update(property.id, editingRate.id, parseFloat(newRate), newEffectiveDate, editingRate.reason, undefined, token);
+        const result = await rentHistoryApi.update(property.id, editingRate.id, parseFloat(newRate), newEffectiveDate, editingRate.reason, newLeaseEndDate, token);
         
         // Only expire an existing active rate when the new effective date
         // is LATER than that rate's effective date. Backdating (editing an earlier
         // rate) must NOT expire the more recent active rate.
         const updatedHistory = rateHistory.map(item => {
           if (item.id === editingRate.id) {
-            return { ...item, monthlyRate: parseFloat(newRate), effectiveDate: newEffectiveDate, reason: editingRate.reason, endDate: item.endDate };
+            return { ...item, monthlyRate: parseFloat(newRate), effectiveDate: newEffectiveDate, reason: editingRate.reason, endDate: item.endDate, leaseEndDate: editingRate.leaseEndDate };
           }
           // If this is the currently active rate (no endDate) and it's not the edited one,
           // set its endDate to the new effective date ONLY if the new date is later
@@ -273,7 +279,7 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   <div className="flex space-x-2">
                     <button
-                      onClick={() => handleEditRate(rate.id, rate.monthlyRate, rate.effectiveDate, rate.reason)}
+                      onClick={() => handleEditRate(rate.id, rate.monthlyRate, rate.effectiveDate, rate.reason, rate.leaseEndDate)}
                       className="text-blue-600 hover:text-blue-800 text-xs font-medium"
                     >
                       Edit
@@ -412,6 +418,18 @@ const SimpleRateHistory: React.FC<SimpleRateHistoryProps> = ({ property, onRateU
                   value={effectiveDate}
                   onChange={(e) => setEffectiveDate(e.target.value)}
                   className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Lease End Date (Optional)
+                </label>
+                <input
+                  type="date"
+                  value={editingRate?.leaseEndDate || ''}
+                  onChange={(e) => setEditingRate(prev => prev ? { ...prev, leaseEndDate: e.target.value } : null)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Lease end date (optional)"
                 />
               </div>
               <div>

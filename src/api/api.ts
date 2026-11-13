@@ -120,7 +120,8 @@ export const propertiesApi = {
         effectiveDate: rh.effective_date,
         endDate: rh.end_date,
         reason: rh.reason,
-        createdAt: rh.created_at
+        createdAt: rh.created_at,
+        leaseEndDate: rh.lease_end_date
       }))
     }));
     return mappedData;

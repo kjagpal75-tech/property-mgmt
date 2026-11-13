@@ -217,10 +217,14 @@ const CashFlowDashboard: React.FC<CashFlowDashboardProps> = ({ properties, trans
           const effectiveRate = property.rentHistory?.find((rate: any) => {
             const effectiveDate = new Date(rate.effectiveDate);
             const endDate = rate.endDate ? new Date(rate.endDate) : null;
+            const leaseEndDate = rate.leaseEndDate ? new Date(rate.leaseEndDate) : null;
             // Rate must be effective on or before month end
             if (effectiveDate > monthEnd) return false;
             // Rate must not have ended before month start (handles lapses in rental history)
             if (endDate && endDate < monthStart) return false;
+            // If the lease has ended before this month starts, no rent is expected
+            // (accounts for periods of no rent when lease end dates have a lapse)
+            if (leaseEndDate && leaseEndDate < monthStart) return false;
             return true;
           });
           
