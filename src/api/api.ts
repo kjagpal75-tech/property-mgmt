@@ -4,6 +4,31 @@ import { debug } from '../utils/debug';
 export const API_BASE_URL = 'http://localhost:5000/api';
 export const AUTH_BASE_URL = 'http://localhost:5001/api';
 
+// Helper function to handle fetch errors with better error messages
+const handleFetchError = async (response: Response, context: string): Promise<never> => {
+  let errorMessage = `Failed to ${context}`;
+  
+  try {
+    const errorData = await response.json();
+    if (errorData.error) {
+      errorMessage = `${errorMessage}: ${errorData.error}`;
+    }
+  } catch {
+    // If we can't parse the error response, use the status text
+    errorMessage = `${errorMessage}: ${response.status} ${response.statusText}`;
+  }
+  
+  throw new Error(errorMessage);
+};
+
+// Helper function to check if response is ok and handle errors
+const checkResponse = async (response: Response, context: string): Promise<Response> => {
+  if (!response.ok) {
+    await handleFetchError(response, context);
+  }
+  return response;
+};
+
 // Rent History API
 export const rentHistoryApi = {
   getByPropertyId: async (propertyId: string, token?: string | null) => {
